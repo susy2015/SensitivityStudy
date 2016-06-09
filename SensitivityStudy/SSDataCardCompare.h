@@ -22,6 +22,8 @@
 #include "SusyAnaTools/Tools/searchBins.h"
 #include "SBGeometry.h"
 
+SearchBins mySearchBins("SB_45_2015");
+
 class DCComparePlots
 {
  public:
@@ -191,7 +193,7 @@ void DCComparePlots::DCComparePlotsLoop(
 	h_fake->SetFillStyle(3001);
 	h_fake->Draw("P same");
   double maxdrawsb = 1.0; maxdrawsb = *std::max_element(realvalue,realvalue+NSB);
-  drawSBregionDef(0.0, maxdrawsb);
+  mySearchBins.drawSBregionDef(0.0, maxdrawsb);
   title->Draw("same");
   leg->Draw("same");
   c->Update(); 
@@ -215,8 +217,8 @@ void DCComparePlots::DCComparePlotsLoop(
   tl_one->DrawLine(0,1.,NSB,1.);
 
   c->SaveAs( TString("DCPValidation/_") + TString(sample_type) + TString("_") + TString(var_type) + TString(".png") );
-  //c->SaveAs( TString("DCPValidation/") + sample_type + TString("_") + var_type + TString(".pdf") );
-  //c->SaveAs( TString("DCPValidation/") + hist_tag + TString(".C") );
+  c->SaveAs( TString("DCPValidation/_") + TString(sample_type) + TString("_") + TString(var_type) + TString(".pdf") );
+  c->SaveAs( TString("DCPValidation/_") + TString(sample_type) + TString("_") + TString(var_type) + TString(".C") );
 
   return ;
 }

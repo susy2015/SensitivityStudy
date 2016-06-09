@@ -69,7 +69,7 @@ SSPlots: $(ODIR)/SSPlots.o
 SSAUX1DPlots: $(ODIR)/SSAUX1DPlots.o
 	$(LD) $^ $(LIBS)  -o $@
 
-SSDataCardCompare: $(ODIR)/SSDataCardCompare.o
+SSDataCardCompare: $(ODIR)/SSDataCardCompare.o $(ODIR)/searchBins.o
 	$(LD) $^ $(LIBS)  -o $@
 
 clean:
