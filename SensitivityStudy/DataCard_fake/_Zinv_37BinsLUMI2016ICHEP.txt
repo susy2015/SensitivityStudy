@@ -1,0 +1,41 @@
+# The words after "#" are comments. No need to remove them.
+luminosity = 8000     # in pb-1 (FIXED)
+channels = 37     # total number of channels -> following our search bin definition (FIXED)
+sample = zinv     # name of the background: hadtau, lostle, zinv, qcd, ttz
+channel = bin1 bin2 bin3 bin4 bin5 bin6 bin7 bin8 bin9 bin10 bin11 bin12 bin13 bin14 bin15 bin16 bin17 bin18 bin19 bin20 bin21 bin22 bin23 bin24 bin25 bin26 bin27 bin28 bin29 bin30 bin31 bin32 bin33 bin34 bin35 bin36 bin37 
+
+# Predicted central numbers (need from all backgrounds)
+rate = 19.6252 7.24973 3.51495 1.88369 6.68983 7.63229 5.24323 2.92303 1.26906 4.36301 10.0554 5.00169 1.95968 0.940207 0.529688 1.78537 2.00008 1.28298 0.832491 1.32432 2.35338 2.23706 0.685008 0.318733 1.78838 1.26591 0.957917 0.448552 2.77794 0.472904 0.176977 0.075597 0.434753 0.341351 0.185929 0.112127 0.572631 
+
+# Control sample events for lost lepton; Raw MC yields for Zinv and ttZ; No need from had. tau and QCD (will be ignored).
+#cs_event = 4333.32 1690.64 884.936 547.804 1648.84 1693.53 1174.02 789.502 377.622 956.226 2882.85 1075.83 449.609 233.279 163.838 388.233 424.561 298.409 238.828 335.776 703.646 569.412 210.37 104.21 439.234 335.108 292.876 139.905 813.159 123.701 56.7818 26.492 103.951 81.8174 68.1499 38.6688 169.032 
+cs_event = 4333 1691 885 548 1649 1694 1174 790 378 956 2883 1076 450 233 164 388 425 298 239 336 704 569 210 104 439 335 293 140 813 124 57 26 104 82 68 39 169 
+
+# Average weight for lost lepton, Zinv and ttZ: avg_weight x cs_event = rate. Will be ignored for had. tau and QCD.
+avg_weight = 0.0045289 0.00428815 0.00397198 0.00343862 0.0040573 0.00450673 0.00446605 0.00370237 0.00336067 0.00456274 0.003488 0.00464912 0.00435863 0.0040304 0.00323299 0.00459871 0.00471094 0.00429939 0.00348573 0.00394406 0.00334456 0.00392871 0.0032562 0.00305855 0.00407159 0.00377761 0.00327073 0.00320612 0.00341623 0.00382296 0.00311678 0.00285358 0.00418228 0.00417211 0.00272824 0.00289967 0.00338771 
+
+# All the uncertainties in absolute numbers for both stat and syst uncertainties. Needed from QCD and hadronic tau; No need from lost lepton, Zinv and ttZ (will be ignored). For symmetric uncertainties, put the up and dn to be the same.
+stat_unc_up = No Need!! 
+stat_unc_dn = No Need!! 
+
+# List of all the systematical uncertainties. Do not need combine them. The "pdf", "blackhole", "darkmatter", "susy" are keywords to label the different systematic sources (use meaningful names or make comments).
+syst_unc_norm_up = 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 
+syst_unc_norm_dn = 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 
+syst_unc_shape_central_up = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_shape_central_dn = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_shape_stat_up = 0.151911 0.243206 0.336158 0.427255 0.24627 0.242999 0.291852 0.355896 0.514602 0.323385 0.186247 0.304879 0.47161 0.65473 0.781254 0.507521 0.485322 0.578887 0.647079 0.545727 0.376984 0.41907 0.689458 0.97959 0.477147 0.546271 0.58433 0.845442 0.350681 0.899112 0.998 0.998 0.980811 0.998 0.998 0.998 0.769158 
+syst_unc_shape_stat_dn = 0.151911 0.243206 0.336158 0.427255 0.24627 0.242999 0.291852 0.355896 0.514602 0.323385 0.186247 0.304879 0.47161 0.65473 0.781254 0.507521 0.485322 0.578887 0.647079 0.545727 0.376984 0.41907 0.689458 0.97959 0.477147 0.546271 0.58433 0.845442 0.350681 0.899112 0.998 0.998 0.980811 0.998 0.998 0.998 0.769158 
+syst_unc_jeu_up = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_jeu_dn = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_meu_up = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_meu_dn = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_scale_up = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_scale_dn = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_pdf_up = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_pdf_dn = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_trig_up = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_trig_dn = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_btag_up = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_btag_dn = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_bmistag_up = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+syst_unc_bmistag_dn = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 

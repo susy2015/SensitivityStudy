@@ -1,0 +1,16 @@
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_TTJets_TuneCUETP8M1_13TeV-madgraphMLM-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_ST_tW_antitop_5f_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_ST_tW_top_5f_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_WJetsToLNu_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_WJetsToLNu_HT-600ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_ZJetsToNuNu_HT-400To600_13TeV-madgraphstopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_ZJetsToNuNu_HT-600ToInf_13TeV-madgraphstopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_TTWJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_TTWJetsToQQ_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_TTZToLLNuNu_M-10_TuneCUETP8M1_13TeV-amcatnlo-pythia8stopFlatNtuples.root
+root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v4/DeepTrimmd_TTZToQQ_TuneCUETP8M1_13TeV-amcatnlo-pythia8stopFlatNtuples.root

@@ -1,0 +1,22 @@
+# The words after "#" are comments. No need to remove them.
+luminosity = 2262.95     # in pb-1 (FIXED)
+channels = 45     # total number of channels -> following our search bin definition (FIXED)
+sample = qcd     # name of the background: hadtau, lostle, zinv, qcd, ttz
+channel = bin1 bin2 bin3 bin4 bin5 bin6 bin7 bin8 bin9 bin10 bin11 bin12 bin13 bin14 bin15 bin16 bin17 bin18 bin19 bin20 bin21 bin22 bin23 bin24 bin25 bin26 bin27 bin28 bin29 bin30 bin31 bin32 bin33 bin34 bin35 bin36 bin37 bin38 bin39 bin40 bin41 bin42 bin43 bin44 bin45 
+
+# Predicted central numbers (need from all backgrounds)
+rate = 13.2444 2.83479 1.24021 0.210478 3.15051 0.692814 0.105239 0.961385 0.207756 0 0.139411 3.44781 0.0683448 0.102517 0 1.6542 0 0 0 0.173584 0.0341724 0.457849 0 0 3.94192 0.173584 0 4.65427 0.690092 0.0341724 0.0341724 0.13669 0.634155 0.0341724 0.0683448 0.995557 0.105239 0 0.102517 0.0710664 0.695535 0.0683448 0.347167 0 0.0341724 
+
+# Control sample events for lost lepton; Raw MC yields for Zinv and ttZ; No need from had. tau and QCD (will be ignored).
+cs_event = No Need!! 
+
+# Average weight for lost lepton, Zinv and ttZ: avg_weight x cs_event = rate. Will be ignored for had. tau and QCD.
+avg_weight = No Need!! 
+
+# All the uncertainties in absolute numbers for both stat and syst uncertainties. Needed from QCD and hadronic tau; No need from lost lepton, Zinv and ttZ (will be ignored). For symmetric uncertainties, put the up and dn to be the same.
+stat_unc_up = 0.274779 0.593936 0.897951 2.1797 0.563391 1.20141 3.08256 1.01989 2.19393 0 2.67825 0.538553 3.82514 3.12321 0 0.77751 0 0 0 2.40019 5.40956 1.47788 0 0 0.50367 2.40019 0 0.463526 1.20378 5.40956 5.40956 2.70478 1.25575 5.40956 3.82514 1.00223 3.08256 0 3.12321 3.75118 1.19906 3.82514 1.69719 0 5.40956 
+stat_unc_dn = 0.274779 0.593936 0.897951 2.1797 0.563391 1.20141 3.08256 1.01989 2.19393 0 2.67825 0.538553 3.82514 3.12321 0 0.77751 0 0 0 2.40019 5.40956 1.47788 0 0 0.50367 2.40019 0 0.463526 1.20378 5.40956 5.40956 2.70478 1.25575 5.40956 3.82514 1.00223 3.08256 0 3.12321 3.75118 1.19906 3.82514 1.69719 0 5.40956 
+
+# List of all the systematical uncertainties. Do not need combine them. The "pdf", "blackhole", "darkmatter", "susy" are keywords to label the different systematic sources (use meaningful names or make comments).
+syst_unc_all_up = 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 
+syst_unc_all_dn = 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 
