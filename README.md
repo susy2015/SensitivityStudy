@@ -20,6 +20,16 @@ xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensit
 
 xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T2tt_forHua.root SignalScanBeforeBaseline/
 
+0.To produce the SSTree for a quich study:
+
+cd SSTreeMaker
+
+Make
+
+Then run the type of MC you want to get SSTree(In priciple all of them!)
+
+And then hadd and move them into EOS, change the runList files in the SensitivityStudy/SensitivityStudy directory
+
 1.To study Signal/MC in designed search bin:
 
 ./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v6_BG.txt runList_Sensitivity_MC_SSSkimmed_v6_SG.txt runList_Sensitivity_MC_SSSkimmed_v6_MuCS.txt
@@ -51,3 +61,4 @@ and 1D plots to show the signal and BG distribution:
 g++ -std=c++11 SSBinIDTest.cc
 
 ./a.out
+
