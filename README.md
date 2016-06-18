@@ -1,14 +1,14 @@
 #SensitivityStudy
 
-cmsrel CMSSW_7_4_15
+cmsrel CMSSW_8_0_10
 
-cd CMSSW_7_4_15/src/
+cd CMSSW_8_0_10/src/
 
 cmsenv
 
 git clone -b TestMiniAOD git@github.com:susy2015/recipeAUX.git
 
-git clone git@github.com:susy2015/SusyAnaTools.git
+git clone -b Ana_Prod_merged_June17_2016_fix_top_projection_bug_data_topoff git@github.com:susy2015/SusyAnaTools.git
 
 git clone git@github.com:susy2015/SensitivityStudy.git
 
@@ -20,7 +20,7 @@ xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensit
 
 xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T2tt_forHua.root SignalScanBeforeBaseline/
 
-0.To produce the SSTree for a quich study:
+0.To produce the SSTree for a quick study:
 
 cd SSTreeMaker
 
