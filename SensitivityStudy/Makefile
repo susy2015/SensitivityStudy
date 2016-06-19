@@ -60,7 +60,7 @@ $(ODIR)/%.o : $(IDIR)/%.cc
 tupleTest: $(ODIR)/NTupleReader.o $(ODIR)/PDFUncertainty.o $(ODIR)/tupleReadTest.o
 	$(LD) $^ $(LIBS) $(MT2LIB) $(LHAPDFLIB) -o $@
 
-SS: $(ODIR)/SS.o $(ODIR)/NTupleReader.o
+SS: $(ODIR)/SS.o $(ODIR)/NTupleReader.o $(ODIR)/searchBins.o
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
 SSPlots: $(ODIR)/SSPlots.o

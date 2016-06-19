@@ -1,0 +1,7 @@
+luminosity = 8000     # in pb-1 (FIXED)
+channels = 59     # total number of channels -> following our search bin definition (FIXED)
+sample = signal
+channel = bin1 bin2 bin3 bin4 bin5 bin6 bin7 bin8 bin9 bin10 bin11 bin12 bin13 bin14 bin15 bin16 bin17 bin18 bin19 bin20 bin21 bin22 bin23 bin24 bin25 bin26 bin27 bin28 bin29 bin30 bin31 bin32 bin33 bin34 bin35 bin36 bin37 bin38 bin39 bin40 bin41 bin42 bin43 bin44 bin45 bin46 bin47 bin48 bin49 bin50 bin51 bin52 bin53 bin54 bin55 bin56 bin57 bin58 bin59 
+
+# Predicted central numbers (need from all backgrounds)
+rate = 221 28 4 1 27 22 3 1 1 10 8 5 146 19 2 1 9 7 2 0 3 2 2 21 2 1 2 2 71 5 0 0 11 4 1 0 0 2 1 1 47 4 0 6 2 0 0 1 1 6 1 2 1 2 1 2 0 0 0 

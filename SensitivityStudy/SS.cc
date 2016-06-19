@@ -35,6 +35,9 @@
 //#include "TInterpreter.h"
 #include "SS.h"
 
+//SearchBins mySearchBins("SB_69_2016");
+SearchBins mySearchBins("SB_59_2016");
+
 //const double Scale = 591.5/2153.736;
 //                             NJets =      1        2       3        4        5        6       7      >=8
 const double NJetRweightingFactor[8] = {0.926542,1.03995,0.919711,0.723581,0.869969,0.95682,0.584418,0.874059};
@@ -88,8 +91,8 @@ void LoopSSCS( SSSampleWeight& mySSSampleWeight )
       //Get electron and muon for LL study
       int nElectrons = tr.getVar<int>("nElectrons");
       int nMuons = tr.getVar<int>("nMuons");
-      int searchbin_id = mySBGeometry.GetSBID(ntopjets,nbotjets,mt2,met);
-      //int searchbin_id = find_Binning_Index( nbotjets , ntopjets , mt2, met );
+      //int searchbin_id = mySBGeometry.GetSBID(ntopjets,nbotjets,mt2,met);
+      int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
       if(searchbin_id<0) continue;
 
       if( ((*iter_SSSampleInfos).Tag).find("TTJets") != std::string::npos )
@@ -215,8 +218,8 @@ void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
       if(met>=metbins_edge[metsize]) met_fold = (metbins_edge[metsize-1]+metbins_edge[metsize])/2; else met_fold = met;
       if(mt2>=mt2bins_edge[mt2size]) mt2_fold = (mt2bins_edge[mt2size-1]+mt2bins_edge[mt2size])/2; else mt2_fold = mt2;
 
-      int searchbin_id = mySBGeometry.GetSBID(ntopjets,nbotjets,mt2,met);
-      //int searchbin_id = find_Binning_Index( nbotjets , ntopjets , mt2, met );
+      //int searchbin_id = mySBGeometry.GetSBID(ntopjets,nbotjets,mt2,met);
+      int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
       if(searchbin_id<0) { std::cout << "Search bin id problem! Please check!!" << std::endl; continue; }
       //To separate the LL and Hadtau
 
@@ -377,7 +380,8 @@ void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
   //mySSDataCard.printDC_AllFiles("_37BinsLUMI2016Moriond");
   //mySSDataCard.printDC_AllFiles("_37BinsLUMI2016ICHEP");
   //mySSDataCard.printDC_AllFiles("_126BinsLUMI2016ICHEP");
-  mySSDataCard.printDC_AllFiles("_69BinsLUMI2016ICHEP");
+  //mySSDataCard.printDC_AllFiles("_69BinsLUMI2016ICHEP");
+  mySSDataCard.printDC_AllFiles("_59BinsLUMI2016ICHEP");
 
   (mySSHistgram.oFile)->Write();
   (mySSHistgram.oFile)->Close();
@@ -420,8 +424,8 @@ void LoopSignalCard( std::string RunMode )
     int nbotjets = tr.getVar<int>("nBot");
     double mt2 = tr.getVar<double>("mt2");
     double met = tr.getVar<double>("met");
-    int searchbin_id = mySBGeometry.GetSBID(ntopjets,nbotjets,mt2,met);
-    //int searchbin_id = find_Binning_Index( nbotjets , ntopjets , mt2, met );
+    //int searchbin_id = mySBGeometry.GetSBID(ntopjets,nbotjets,mt2,met);
+    int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
     if(searchbin_id<0) continue;
 
     double SusyMotherMass = tr.getVar<double>("SusyMotherMass");

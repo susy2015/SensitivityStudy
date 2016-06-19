@@ -27,7 +27,7 @@
 
 #include "SusyAnaTools/Tools/NTupleReader.h"
 #include "SusyAnaTools/Tools/baselineDef.h"
-//#include "SusyAnaTools/Tools/searchBins.h"
+#include "SusyAnaTools/Tools/searchBins.h"
 
 #include "SBGeometry.h"
 #include "SSReWeighting.h"
@@ -70,7 +70,10 @@ class SSDataCard
 void SSDataCard::fake_avg_uncs()
 {
   std::cout << "Faking syst uncs in Data card!" << std::endl;
-  SBGeometry mySBGeometry;
+  //SBGeometry mySBGeometry;
+  //SearchBins mySearchBins("SB_69_2016");
+  SearchBins mySearchBins("SB_59_2016");
+
   for(int i=0;i<NSB;i++)
   {
     DC_sb_MC_Data[i] = DC_sb_MC_LL[i] + DC_sb_MC_HadTau[i] + DC_sb_MC_Zinv[i] + /*DC_sb_MC_QCD[i] +*/ DC_sb_MC_TTZ[i] /*+ DC_sb_MC_Rare[i]*/; 
@@ -101,10 +104,10 @@ void SSDataCard::fake_avg_uncs()
     //Had Tau
     DC_sb_MC_HadTau_NMCforsystunc[i]>0 ? DC_sb_MC_HadTau_systunc[i] = 1.66/std::sqrt(DC_sb_MC_HadTau_NMCforsystunc[i]) : DC_sb_MC_HadTau_systunc[i] = DC_sb_MC_HadTau_systunc[i-1];
     //if(DC_sb_MC_HadTau_systunc[i]>1) DC_sb_MC_HadTau_systunc[i]=0.998;
-    //searchBinDef outBinDef; find_BinBoundaries( i, outBinDef );
-    //outBinDef.bJet_lo>=3 ? DC_sb_MC_HadTau_systunc_mistag[i] = 0.1 : DC_sb_MC_HadTau_systunc_mistag[i] = 0.05; 
-    SBBoundaries outBinDef; mySBGeometry.SBIDToBinBoundaries( i, outBinDef );
-    outBinDef.nbot_lo>=3 ? DC_sb_MC_HadTau_systunc_mistag[i] = 0.1 : DC_sb_MC_HadTau_systunc_mistag[i] = 0.05; 
+    SearchBins::searchBinDef outBinDef; mySearchBins.find_BinBoundaries( i, outBinDef );
+		outBinDef.bJet_lo_>=3 ? DC_sb_MC_HadTau_systunc_mistag[i] = 0.1 : DC_sb_MC_HadTau_systunc_mistag[i] = 0.05; 
+    //SBBoundaries outBinDef; mySBGeometry.SBIDToBinBoundaries( i, outBinDef );
+    //outBinDef.nbot_lo>=3 ? DC_sb_MC_HadTau_systunc_mistag[i] = 0.1 : DC_sb_MC_HadTau_systunc_mistag[i] = 0.05; 
 
     //Zinv
 		DC_sb_MC_Zinv_cs[i]>0 ? DC_sb_MC_Zinv_systunc[i] = 10*std::sqrt(DC_sb_MC_Zinv_cs[i])/DC_sb_MC_Zinv_cs[i] : DC_sb_MC_Zinv_systunc[i] = 2.0;
