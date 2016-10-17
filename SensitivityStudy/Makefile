@@ -44,11 +44,13 @@ $(ODIR)/samplesPyWrap.o: $(SDIR)/samples.cc $(SDIR)/samples.h
 $(ODIR)/samplesModulePyWrap.o: $(SDIR)/samplesModule.cc
 	$(CXX) --std=c++11 -c -fPIC -o $@ $<
 
-
 $(ODIR)/%.o : $(SDIR)/%.C
 	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
 
 $(ODIR)/%.o : $(SDIR)/%.cc
+	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
+
+$(ODIR)/%.o : $(SDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
 
 $(ODIR)/%.o : $(IDIR)/%.C
@@ -57,10 +59,25 @@ $(ODIR)/%.o : $(IDIR)/%.C
 $(ODIR)/%.o : $(IDIR)/%.cc
 	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
 
-tupleTest: $(ODIR)/NTupleReader.o $(ODIR)/PDFUncertainty.o $(ODIR)/tupleReadTest.o
+$(ODIR)/%.o : $(IDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
+
+$(ODIR)/%.o : $(TTSDIR)/%.cc
+	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -fPIC -o $@ -c $<
+
+$(ODIR)/%.o : $(TTSDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -fPIC -o $@ -c $<
+
+$(ODIR)/%.o : $(TPSDIR)/%.cc
+	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -fPIC -o $@ -c $<
+
+$(ODIR)/%.o : $(TPSDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -fPIC -o $@ -c $<
+
+tupleTest: $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/PDFUncertainty.o $(ODIR)/tupleReadTest.o
 	$(LD) $^ $(LIBS) $(MT2LIB) $(LHAPDFLIB) -o $@
 
-SS: $(ODIR)/SS.o $(ODIR)/NTupleReader.o $(ODIR)/searchBins.o
+SS: $(ODIR)/SS.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/searchBins.o
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
 SSPlots: $(ODIR)/SSPlots.o
