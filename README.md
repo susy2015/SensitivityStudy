@@ -1,14 +1,14 @@
 #SensitivityStudy
 
-cmsrel CMSSW_8_0_10
+cmsrel CMSSW_8_0_12
 
-cd CMSSW_8_0_10/src/
+cd CMSSW_8_0_12/src/
 
 cmsenv
 
 git clone -b TestMiniAOD git@github.com:susy2015/recipeAUX.git
 
-git clone -b Ana_Prod_merged_June17_2016_fix_top_projection_bug_data_topoff git@github.com:susy2015/SusyAnaTools.git
+git clone -b Ana_DataNtpV9_Final_Lumi git@github.com:susy2015/SusyAnaTools.git
 
 git clone git@github.com:susy2015/SensitivityStudy.git
 
