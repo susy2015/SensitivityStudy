@@ -8,7 +8,7 @@ eval `scramv1 runtime -sh`
 
 cd ${_CONDOR_SCRATCH_DIR}
 
-python NTuple_SSTrim.py $2 $3
+python NTuple_SSTrimAndSlim.py $2 $3
 
 #find . -name "*.root" -exec xrdcp {} "root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/" \;
 #find . -name "*.root" -exec rm {} \;

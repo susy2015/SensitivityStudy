@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
   std::size_t idpos = input_str.find("stopFlatNtuples");
   std::string fileid = input_str.substr (idpos);
 
-  output_str = "SSTrimAndSlimmed_" + tag + fileid;
+  output_str = "SSTrimAndSlimmed_" + tag + "_" + fileid;
   std::cout << "Output File Name: " << output_str << std::endl;
 
   TChain *originalTree = new TChain("stopTreeMaker/AUX");
