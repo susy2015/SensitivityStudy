@@ -8,7 +8,7 @@ cmsenv
 
 git clone -b TestMiniAOD git@github.com:susy2015/recipeAUX.git
 
-git clone -b Ana_DataNtpV9_Final_Lumi git@github.com:susy2015/SusyAnaTools.git
+git clone -b prodNtpV10_AK8_QGL_Oct20_2016 git@github.com:susy2015/SusyAnaTools.git
 
 git clone git@github.com:susy2015/SensitivityStudy.git
 
