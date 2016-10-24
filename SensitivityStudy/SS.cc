@@ -564,23 +564,23 @@ int main(int argc, char* argv[])
 
     //sample needed in the basic check loop
     SSSampleWeight mySSSampleWeightAllMC;
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_TTJets_SingleLeptFromT_"   , 831.76*0.5*TTbar_SingleLept_BR, 49576803, LUMI, 1, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_TTJets_SingleLeptFromTbar_", 831.76*0.5*TTbar_SingleLept_BR, 60494823, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_TTJets_SingleLeptFromT_"   , 831.76*0.5*TTbar_SingleLept_BR, 49576803, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_TTJets_SingleLeptFromTbar_", 831.76*0.5*TTbar_SingleLept_BR, 60494823, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTJets_DiLept"           , 831.76*TTbar_DiLept_BR        ,    30682233      , LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "ST_tW_top"               ,   35.6,    998400    , LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "ST_tW_antitop"           ,   35.6,    985000    , LUMI, 1, inputFileList_MC_BG.c_str() );
     //be careful!! WJets and ZJets samples have some tricky part, need to understand!
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "WJetsToLNu_HT-400To600"  ,  48.91,    7432746   , LUMI, 1.21, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_WJetsToLNu_HT-600To800"   ,   12.05,       3722395, LUMI, 1.21, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_WJetsToLNu_HT-800To1200"  ,   5.501,       7854734, LUMI, 1.21, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_WJetsToLNu_HT-1200To2500" ,   1.329,       7063909, LUMI, 1.21, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_WJetsToLNu_HT-2500ToInf"  , 0.03216,        253561, LUMI, 1.21, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-600To800"   ,   12.05,       3722395, LUMI, 1.21, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-800To1200"  ,   5.501,       7854734, LUMI, 1.21, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-1200To2500" ,   1.329,       7063909, LUMI, 1.21, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-2500ToInf"  , 0.03216,        253561, LUMI, 1.21, inputFileList_MC_BG.c_str() );
 
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_ZJetsToNuNu_HT-400To600"  ,    10.73,       1020309, LUMI, 1.23, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_ZJetsToNuNu_HT-600To800"  ,  0.853*3,       5712221, LUMI, 1.23, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_ZJetsToNuNu_HT-800To1200" ,  0.394*3,       1944423, LUMI, 1.23, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_ZJetsToNuNu_HT-1200To2500", 0.0974*3,        513471, LUMI, 1.23, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.QCDSampleInfo_push_back( "_ZJetsToNuNu_HT-2500ToInf" ,0.00230*3,        405752, LUMI, 1.23, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-400To600"  ,    10.73,       1020309, LUMI, 1.23, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-600To800"  ,  0.853*3,       5712221, LUMI, 1.23, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-800To1200" ,  0.394*3,       1944423, LUMI, 1.23, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-1200To2500", 0.0974*3,        513471, LUMI, 1.23, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-2500ToInf" ,0.00230*3,        405752, LUMI, 1.23, inputFileList_MC_BG.c_str() );
 
     //Be careful! TTZ has negative weight issue!!
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTZToLLNuNu"             , 0.2529, 291916 - 106684, LUMI, 1, inputFileList_MC_BG.c_str() );
