@@ -159,6 +159,184 @@ void LoopSSCS( SSSampleWeight& mySSSampleWeight )
   return ;
 }
 
+void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeightSignal)
+{
+
+  //clock to monitor the run time
+  size_t t0 = clock();
+  std::vector<SSSampleInfo>::iterator iter_SSSampleInfos;
+  //use class BaselineVessel in the SusyAnaTools/Tools/baselineDef.h file
+
+  SSDataCard mySSDataCard;
+  //std::cout << "Let's do sensitivity study: " << std::endl;
+  const int nmetbin=14;
+  const int nmt2bin=7;
+  double nBGEvents[nmetbin][nmt2bin]; // met,mt2
+  double nSEvents[nmetbin][nmt2bin];
+
+  for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+  {
+    for (int metbinc=0;metbinc<nmetbin;++metbinc)
+    {
+      nBGEvents[mt2binc][metbinc]=0.0;
+      nSEvents[mt2binc][metbinc]=0.0;
+    }
+  }
+
+  //begin to loop over SM events
+  for(iter_SSSampleInfos = mySSSampleWeight.SSSampleInfos.begin(); iter_SSSampleInfos != mySSSampleWeight.SSSampleInfos.end(); iter_SSSampleInfos++)
+  {    
+    //use class NTupleReader in the SusyAnaTools/Tools/NTupleReader.h file
+    NTupleReader tr((*iter_SSSampleInfos).chain);
+
+    double thisweight = (*iter_SSSampleInfos).weight;
+    std::cout <<"Sample Type: "<< (*iter_SSSampleInfos).Tag << "; Weight: " << thisweight << std::endl;
+
+
+    while(tr.getNextEvent())
+    {
+      if(tr.getEvtNum()%20000 == 0) std::cout << tr.getEvtNum() << "\t" << ((clock() - t0)/1000000.0) << std::endl;
+
+      //searchbin variables
+      int ntopjets = tr.getVar<int>("nTop");
+      int nbotjets = tr.getVar<int>("nBot");
+      double mt2 = tr.getVar<double>("mt2");
+      double met = tr.getVar<double>("met");
+      //closure plots variables
+      //int njets30 = tr.getVar<int>("nJets30");
+      //int njets50 = tr.getVar<int>("nJets50");
+      //double ht = tr.getVar<double>("ht");
+
+ 
+      bool passLeptVeto = tr.getVar<bool>("passLeptVeto");
+      //if(!passLeptVeto) continue;
+
+      //std::cout << "ntopjets = " << ntopjets << std::endl;
+      if (ntopjets==1 && nbotjets==1)
+      {
+	double metcutc=200.0;
+	double mt2cutc=200.0;
+
+	for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+	{
+	  mt2cutc+=mt2binc*50.0;
+	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
+	  {
+	    if (met>metcutc+metbinc*50.0 && mt2>mt2cutc)
+	    {
+	      nBGEvents[metbinc][mt2binc]+=thisweight;
+	    }
+	  }
+	}
+      }
+
+    }//end of inner loop
+  }//end of Samples loop
+
+
+  //begin to loop over signal events
+  std::vector<SSSampleInfo>::iterator iter_SSSampleInfosSignal;
+  for(iter_SSSampleInfosSignal = mySSSampleWeightSignal.SSSampleInfos.begin(); iter_SSSampleInfosSignal != mySSSampleWeightSignal.SSSampleInfos.end(); iter_SSSampleInfosSignal++)
+  {    
+    //use class NTupleReader in the SusyAnaTools/Tools/NTupleReader.h file
+    NTupleReader tr((*iter_SSSampleInfosSignal).chain);
+
+    double thisweight = (*iter_SSSampleInfosSignal).weight;
+    std::cout <<"Sample Type: "<< (*iter_SSSampleInfosSignal).Tag << "; Weight: " << thisweight << std::endl;
+
+
+    while(tr.getNextEvent())
+    {
+      if(tr.getEvtNum()%20000 == 0) std::cout << tr.getEvtNum() << "\t" << ((clock() - t0)/1000000.0) << std::endl;
+
+      //searchbin variables
+      int ntopjets = tr.getVar<int>("nTop");
+      int nbotjets = tr.getVar<int>("nBot");
+      double mt2 = tr.getVar<double>("mt2");
+      double met = tr.getVar<double>("met");
+      //closure plots variables
+      //int njets30 = tr.getVar<int>("nJets30");
+      //int njets50 = tr.getVar<int>("nJets50");
+      //double ht = tr.getVar<double>("ht");
+
+ 
+      bool passLeptVeto = tr.getVar<bool>("passLeptVeto");
+      //if(!passLeptVeto) continue;
+
+      //std::cout << "ntopjets = " << ntopjets << std::endl;
+      if (ntopjets==1 && nbotjets==1)
+      {
+	double metcutc=200.0;
+	double mt2cutc=200.0;
+
+	for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+	{
+	  mt2cutc+=mt2binc*50.0;
+	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
+  	  {
+	    if (met>metcutc+metbinc*50.0 && mt2>mt2cutc)
+  	    {
+	      nSEvents[metbinc][mt2binc]+=thisweight;
+	    }
+  	  }
+  	}
+      }
+
+    }//end of inner loop
+  }//end of Samples loop
+
+
+  //std::cout << "nBGEvents[0] = " << nBGEvents[0] << std::endl;
+  //std::cout << "nSEvents[0] = " << nSEvents[0] << std::endl;
+
+  for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+  {
+    for (int metbinc=0;metbinc<nmetbin;++metbinc)
+    {
+      std::cout << "B[" << metbinc << "] = " << nBGEvents[metbinc][mt2binc] << std::endl;
+    }
+    std::cout << std::endl;
+
+    for (int metbinc=0;metbinc<nmetbin;++metbinc)
+    {
+      std::cout << "S[" << metbinc << "] = " << nSEvents[metbinc][mt2binc] << std::endl;
+    }
+    std::cout << std::endl;
+
+    for (int metbinc=0;metbinc<nmetbin;++metbinc)
+    {
+      if (nBGEvents[metbinc][mt2binc]>0)
+      {
+	const double sb=nSEvents[metbinc][mt2binc]/nBGEvents[metbinc][mt2binc];
+	std::cout << "S/B[" << metbinc << "] = " << sb << std::endl;
+      }
+      else std::cout << "S/B[" << metbinc << "] = 0" << std::endl;
+    }
+  }
+
+  FSLHistgram myFSLHistgram;
+  myFSLHistgram.BookHistgram( (dir_out + "FSLHistgram.root").c_str() );
+  for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+  {
+    for (int metbinc=0;metbinc<nmetbin;++metbinc)
+    {
+      myFSLHistgram.h2_B->SetBinContent(metbinc+1,mt2binc+1,nBGEvents[metbinc][mt2binc]);
+      myFSLHistgram.h2_S->SetBinContent(metbinc+1,mt2binc+1,nSEvents[metbinc][mt2binc]);
+      if (nBGEvents[metbinc][mt2binc]>0)
+      {
+	const double sb=nSEvents[metbinc][mt2binc]/nBGEvents[metbinc][mt2binc];
+	myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,sb);
+      }
+      else myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,0.0);
+    }
+  }
+  (myFSLHistgram.oFile)->Write();
+  (myFSLHistgram.oFile)->Close();
+
+  return ;
+
+}
+
 void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
 {
   SSHistgram mySSHistgram;
@@ -542,7 +720,7 @@ int main(int argc, char* argv[])
   std::string inputFileList_MC_SG = argv[3];
   std::string inputFileList_CS = argv[4];
 
-  std::cout << "The valid run modes are: SSCS SSAllMC SignalCardT1tttt SignalCardT2tt" << std::endl;
+  //std::cout << "The valid run modes are: SSCS SSAllMC SignalCardT1tttt SignalCardT2tt" << std::endl;
   std::cout << "The run mode we have right now is: " << RunMode << std::endl;
 
   if( RunMode == "SSCS" )
@@ -557,6 +735,47 @@ int main(int argc, char* argv[])
     LoopSSCS( mySSSampleWeightCS );
     return 0;
   }
+  else if( RunMode == "DSB" )
+  {
+    double TTbar_SingleLept_BR = 0.43930872; // 2*W_Lept_BR*(1-W_Lept_BR)
+    double TTbar_DiLept_BR = 0.10614564; // W_Lept_BR^2
+    SSSampleWeight mySSSampleWeightAllMC;
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_TTJets_SingleLeptFromT_"   , 831.76*0.5*TTbar_SingleLept_BR, 49576803, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_TTJets_SingleLeptFromTbar_", 831.76*0.5*TTbar_SingleLept_BR, 60494823, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTJets_DiLept"           , 831.76*TTbar_DiLept_BR        ,    30682233      , LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "ST_tW_top"               ,   35.6,    998400    , LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "ST_tW_antitop"           ,   35.6,    985000    , LUMI, 1, inputFileList_MC_BG.c_str() );
+    
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "WJetsToLNu_HT-400To600"  ,  48.91,    7432746   , LUMI, 1.21, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-600To800"   ,   12.05,       3722395, LUMI, 1.21, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-800To1200"  ,   5.501,       7854734, LUMI, 1.21, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-1200To2500" ,   1.329,       7063909, LUMI, 1.21, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-2500ToInf"  , 0.03216,        253561, LUMI, 1.21, inputFileList_MC_BG.c_str() );
+
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-400To600"  ,    10.73,       1020309, LUMI, 1.23, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-600To800"  ,  0.853*3,       5712221, LUMI, 1.23, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-800To1200" ,  0.394*3,       1944423, LUMI, 1.23, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-1200To2500", 0.0974*3,        513471, LUMI, 1.23, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-2500ToInf" ,0.00230*3,        405752, LUMI, 1.23, inputFileList_MC_BG.c_str() );
+
+    //Be careful! TTZ has negative weight issue!!
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTZToLLNuNu"             , 0.2529, 291916 - 106684, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTZToQQ"                 , 0.5297, 550282 - 199118, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTWJetsToLNu"            , 0.2043,  191474 - 61199, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTWJetsToQQ"             , 0.4062, 631804 - 201494, LUMI, 1, inputFileList_MC_BG.c_str() );
+
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT500to700"  , 29370   , 63337753, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT700to1000" , 6524    , 45453945, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT1000to1500", 1064    ,  15316362, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT1500to2000", 121.5   ,  11650581, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT2000toInf" , 25.42   ,  6007777, LUMI, 1, inputFileList_MC_BG.c_str() );
+
+    SSSampleWeight mySSSampleWeightSignal;
+    mySSSampleWeightSignal.SSSampleInfo_push_back( "_TTJets_SingleLeptFromTbar_", 831.76*0.5*TTbar_SingleLept_BR, 60494823, LUMI, 1, inputFileList_MC_SG.c_str() );
+
+    LoopDSB( mySSSampleWeightAllMC, mySSSampleWeightSignal);
+    return 0;
+  }
   else if( RunMode == "SSAllMC" )
   {
     double TTbar_SingleLept_BR = 0.43930872; // 2*W_Lept_BR*(1-W_Lept_BR)
@@ -569,7 +788,7 @@ int main(int argc, char* argv[])
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTJets_DiLept"           , 831.76*TTbar_DiLept_BR        ,    30682233      , LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "ST_tW_top"               ,   35.6,    998400    , LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "ST_tW_antitop"           ,   35.6,    985000    , LUMI, 1, inputFileList_MC_BG.c_str() );
-    //be careful!! WJets and ZJets samples have some tricky part, need to understand!
+    
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "WJetsToLNu_HT-400To600"  ,  48.91,    7432746   , LUMI, 1.21, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-600To800"   ,   12.05,       3722395, LUMI, 1.21, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-800To1200"  ,   5.501,       7854734, LUMI, 1.21, inputFileList_MC_BG.c_str() );
