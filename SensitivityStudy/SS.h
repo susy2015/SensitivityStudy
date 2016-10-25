@@ -609,6 +609,26 @@ void SSHistgram::BookHistgram(const char *outFileName)
 
 #define SSAUXBGBin 5
 
+class FSLHistgram
+{
+ public:
+  void BookHistgram(const char *);
+  
+  TFile *oFile;
+  TH2D *h2_B;
+  TH2D *h2_S;
+  TH2D *h2_SOverB;
+
+};
+void FSLHistgram::BookHistgram(const char *outFileName)
+{
+  oFile = new TFile(outFileName, "recreate");
+
+  h2_B = new TH2D("h2_B","h2_B",14,200.0,900.0,7,200.0,550.0);
+  h2_S = new TH2D("h2_S","h2_B",14,200.0,900.0,7,200.0,550.0);
+  h2_SOverB = new TH2D("h2_SOverB","h2_B",14,200.0,900.0,7,200.0,550.0);
+}
+
 class SSAUX1DHistgram
 {
  public:
@@ -623,6 +643,7 @@ class SSAUX1DHistgram
   TH1D *h_ss_aux_mt2_MC_AllBG[NTOPJETS_BINS][NBOTJETS_BINS][SSAUXBGBin];
   TH1D *h_ss_aux_mt2_MC_T1tttt_mGluino1200_mLSP800[NTOPJETS_BINS][NBOTJETS_BINS], *h_ss_aux_mt2_MC_T1tttt_mGluino1500_mLSP100[NTOPJETS_BINS][NBOTJETS_BINS];
   TH1D *h_ss_aux_mt2_MC_T2tt_mStop500_mLSP325[NTOPJETS_BINS][NBOTJETS_BINS], *h_ss_aux_mt2_MC_T2tt_mStop850_mLSP100[NTOPJETS_BINS][NBOTJETS_BINS];
+
 };
 
 void SSAUX1DHistgram::BookHistgram(const char *outFileName)
