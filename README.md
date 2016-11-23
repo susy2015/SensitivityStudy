@@ -1,24 +1,21 @@
 #SensitivityStudy
 
-cmsrel CMSSW_8_0_12
-
-cd CMSSW_8_0_12/src/
-
+```
+cmsrel CMSSW_8_0_23
+cd CMSSW_8_0_23/src/
 cmsenv
-
+git cms-init
+git cms-merge-topic -u kpedro88:METfix8022
+git cms-merge-topic -u cms-met:CMSSW_8_0_X-METFilterUpdate
 git clone -b TestMiniAOD git@github.com:susy2015/recipeAUX.git
-
-git clone -b prodNtpV10_AK8_QGL_Oct20_2016 git@github.com:susy2015/SusyAnaTools.git
-
+git clone git@github.com:cms-jet/JetToolbox.git JMEAnalysis/JetToolbox -b jetToolbox_80X_V2
+git clone -b Moriond2017 git@github.com:susy2015/SusyAnaTools.git
 git clone git@github.com:susy2015/SensitivityStudy.git
-
 scram b -j9
-
 cd SensitivityStudy/SensitivityStudy
-
 xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T1tttt_forHua.root SignalScanBeforeBaseline/
-
 xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T2tt_forHua.root SignalScanBeforeBaseline/
+```
 
 0.To produce the SSTree for a quick study:
 
