@@ -7,7 +7,7 @@
 
 #include "SusyAnaTools/Tools/NTupleReader.h"
 #include "SusyAnaTools/Tools/baselineDef.h"
-/*
+
 inline size_t find_Nth
 (
   const std::string & str ,   // where to work
@@ -27,5 +27,5 @@ inline size_t find_Nth
   }
   return pos;
 }
-*/
+
 #endif
