@@ -15,7 +15,7 @@
 #include "SusyAnaTools/Tools/samples.h"
 #include "SusyAnaTools/Tools/searchBins.h"
 
-#include "SSTrimAndSlim.h"
+#include "SSTrimAndSlimCommon.h"
 
 int main(int argc, char* argv[])
 {
@@ -70,17 +70,20 @@ int main(int argc, char* argv[])
   selectedTree->Branch("SusyMotherMass",&SusyMotherMass,"SusyMotherMass/D");
   selectedTree->Branch("SusyLSPMass"   ,&SusyLSPMass   ,"SusyLSPMass/D");
 
-  const std::string spec = "lostlept";
-  myBaselineVessel = new BaselineVessel(spec);
-
-  //use class NTupleReader in the SusyAnaTools/Tools/NTupleReader.h file
-  NTupleReader tr(originalTree);
+  std::shared_ptr<topTagger::type3TopTagger>type3Ptr(nullptr);
+  NTupleReader *tr=0;
   //initialize the type3Ptr defined in the customize.h
-  AnaFunctions::prepareTopTagger();
+  AnaFunctions::prepareForNtupleReader();
+  tr = new NTupleReader(originalTree, AnaConsts::activatedBranchNames);
+  const std::string spec = "lostlept";
+  BaselineVessel *myBaselineVessel = 0;
+  myBaselineVessel = new BaselineVessel(*tr, spec, "fastsim");
+  type3Ptr=myBaselineVessel->GetType3Ptr();
+  type3Ptr->setdebug(true);
   //The passBaseline is registered here
-  tr.registerFunction(&mypassBaselineFunc);
+  tr->registerFunction(*myBaselineVessel);
 
-  while(tr.getNextEvent())
+  while(tr->getNextEvent())
   {
     /*
     bool passLeptVeto = tr.getVar<bool>("passLeptVeto"+spec);
@@ -94,7 +97,7 @@ int main(int argc, char* argv[])
     bool passQCDHighMETFilter = tr.getVar<bool>("passQCDHighMETFilter"+spec);
     bool passdPhis = tr.getVar<bool>("passdPhis"+spec);
     */
-    bool passSSTrimAndSlim = tr.getVar<bool>("passBaseline"+spec);
+    bool passSSTrimAndSlim = tr->getVar<bool>("passBaseline"+spec);
     /*
     passSSTrimAndSlim = ( met > 200)
                 && passnJets
@@ -107,23 +110,23 @@ int main(int argc, char* argv[])
     if(passSSTrimAndSlim)
     {
       //searchbin variables
-      met = tr.getVar<double>("met");
-      mt2 = tr.getVar<double>("best_had_brJet_MT2"+spec);       
-      ntopjets = tr.getVar<int>("nTopCandSortedCnt"+spec);
-      nbotjets = tr.getVar<int>("cntCSVS"+spec);
+      met = tr->getVar<double>("met");
+      mt2 = tr->getVar<double>("best_had_brJet_MT2"+spec);       
+      ntopjets = tr->getVar<int>("nTopCandSortedCnt"+spec);
+      nbotjets = tr->getVar<int>("cntCSVS"+spec);
       //Muon and Electron variables
-      nmus = tr.getVar<int>("nMuons_CUT"+spec);
-      nels = tr.getVar<int>("nElectrons_CUT"+spec);
-      passLeptVeto = tr.getVar<bool>("passLeptVeto"+spec);
+      nmus = tr->getVar<int>("nMuons_CUT"+spec);
+      nels = tr->getVar<int>("nElectrons_CUT"+spec);
+      passLeptVeto = tr->getVar<bool>("passLeptVeto"+spec);
 
       //AUX variables
-      njets30 = tr.getVar<int>("cntNJetsPt30Eta24"+spec);
-      njets50 = tr.getVar<int>("cntNJetsPt50Eta24"+spec);
-      ht = tr.getVar<double>("HT"+spec);
-      //double mht = tr.getVar<double>("mht"); 
+      njets30 = tr->getVar<int>("cntNJetsPt30Eta24"+spec);
+      njets50 = tr->getVar<int>("cntNJetsPt50Eta24"+spec);
+      ht = tr->getVar<double>("HT"+spec);
+      //double mht = tr->getVar<double>("mht"); 
  
-      SusyMotherMass = tr.getVar<double>("SusyMotherMass");
-      SusyLSPMass    = tr.getVar<double>("SusyLSPMass");
+      SusyMotherMass = tr->getVar<double>("SusyMotherMass");
+      SusyLSPMass    = tr->getVar<double>("SusyLSPMass");
      
       selectedTree->Fill();
     }
