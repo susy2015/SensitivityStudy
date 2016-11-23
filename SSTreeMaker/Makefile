@@ -1,6 +1,6 @@
 IDIR       = .
 ODIR       = obj
-SDIR       = .
+SDIR       = ../../SusyAnaTools/Tools
 
 CXX        = g++
 
@@ -29,28 +29,17 @@ MT2LIB     = -L$(CMSSW_BASE)/lib/${SCRAM_ARCH}/ -lrecipeAUXOxbridgeMT2 -L$(CMSSW
 LHAPDFLIB  = -L$(LHAPDF_DATA_PATH)/../../lib -lLHAPDF
 FILES = $(wildcard $(SDIR)/*.cc)
 OBJS  := $(FILES:$(SDIR)/%.cc=$(ODIR)/%.o)
-PROGRAMS = tupleTest SSTrimAndSlim_LLHadTau SSTrimAndSlim_ZinvQCD SSTrimAndSlim_TTZ SSTrimAndSlim_Signal
+PROGRAMS = SSTrimAndSlim_LLHadTau SSTrimAndSlim_ZinvQCD SSTrimAndSlim_TTZ SSTrimAndSlim_Signal
 
-all: mkobj $(OBJS) SusyAnaTools sampPyWrap $(PROGRAMS)
+all: mkobj $(OBJS) SusyAnaTools $(PROGRAMS)
 
 mkobj:
 	@mkdir -p obj
 
+#code to compile shared library to link samples to python
 SusyAnaTools : $(OBJS)
 	ar rcs lib$@.a $^
 	gcc -shared -o $(ODIR)/lib$@.so $^
-
-#code to compile shared library to link samples to python
-sampPyWrap: $(ODIR)/samplesModule.so
-
-$(ODIR)/samplesModule.so: $(ODIR)/samplesPyWrap.o $(ODIR)/samplesModulePyWrap.o
-	$(CXX) -shared -o $@ $^
-
-$(ODIR)/samplesPyWrap.o: $(SDIR)/samples.cc $(SDIR)/samples.h
-	$(CXX) --std=c++11 -c -fPIC -o $@ $<
-
-$(ODIR)/samplesModulePyWrap.o: $(SDIR)/samplesModule.cc
-	$(CXX) --std=c++11 -c -fPIC -o $@ $<
 
 $(ODIR)/%.o : $(SDIR)/%.C
 	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
@@ -70,19 +59,17 @@ $(ODIR)/%.o : $(IDIR)/%.cc
 $(ODIR)/%.o : $(IDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
 
-tupleTest: $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/PDFUncertainty.o $(ODIR)/tupleReadTest.o
-	$(LD) $^ $(LIBS) $(MT2LIB) $(LHAPDFLIB) -o $@
 
-SSTrimAndSlim_LLHadTau: $(ODIR)/SSTrimAndSlim_LLHadTau.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/SSTrimAndSlimCommon.o
+SSTrimAndSlim_LLHadTau: $(ODIR)/SSTrimAndSlim_LLHadTau.o
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
-SSTrimAndSlim_ZinvQCD: $(ODIR)/SSTrimAndSlim_ZinvQCD.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/SSTrimAndSlimCommon.o
+SSTrimAndSlim_ZinvQCD: $(ODIR)/SSTrimAndSlim_ZinvQCD.o
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
-SSTrimAndSlim_TTZ: $(ODIR)/SSTrimAndSlim_TTZ.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/SSTrimAndSlimCommon.o
+SSTrimAndSlim_TTZ: $(ODIR)/SSTrimAndSlim_TTZ.o
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
-SSTrimAndSlim_Signal: $(ODIR)/SSTrimAndSlim_Signal.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/SSTrimAndSlimCommon.o
+SSTrimAndSlim_Signal: $(ODIR)/SSTrimAndSlim_Signal.o
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
 clean:
