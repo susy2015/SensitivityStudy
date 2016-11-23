@@ -59,20 +59,19 @@ $(ODIR)/%.o : $(IDIR)/%.cc
 $(ODIR)/%.o : $(IDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
 
-
-SSTrimAndSlim_LLHadTau: $(ODIR)/SSTrimAndSlim_LLHadTau.o
+SSTrimAndSlim_LLHadTau: $(ODIR)/SSTrimAndSlim_LLHadTau.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o 
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
-SSTrimAndSlim_ZinvQCD: $(ODIR)/SSTrimAndSlim_ZinvQCD.o
+SSTrimAndSlim_ZinvQCD: $(ODIR)/SSTrimAndSlim_ZinvQCD.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o 
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
-SSTrimAndSlim_TTZ: $(ODIR)/SSTrimAndSlim_TTZ.o
+SSTrimAndSlim_TTZ: $(ODIR)/SSTrimAndSlim_TTZ.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o 
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
-SSTrimAndSlim_Signal: $(ODIR)/SSTrimAndSlim_Signal.o
+SSTrimAndSlim_Signal: $(ODIR)/SSTrimAndSlim_Signal.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o 
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
 clean:
-	rm -f $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/*.so $(PROGRAMS) core 
+	rm -f $(IDIR)/*.a $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/*.so $(PROGRAMS) core 
 
 -include $(ODIR)/*.d

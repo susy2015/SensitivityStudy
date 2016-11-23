@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
   std::string output_str;
   //here is a little bit tricky when dealing with the slash... need to improve
   //for all the data samples and ttbar leptonic MC samples
-  std::string tag = input_str.substr(find_Nth(input_str,9,"/") + 1,find_Nth(input_str,10,"/")-find_Nth(input_str,9,"/")-1);
+  std::string tag = input_str.substr(find_Nth(input_str,10,"/") + 1,find_Nth(input_str,11,"/")-find_Nth(input_str,10,"/")-1);
   std::size_t idpos = input_str.find("stopFlatNtuples");
   std::string fileid = input_str.substr (idpos);
 
@@ -74,8 +74,6 @@ int main(int argc, char* argv[])
   const std::string spec = "lostlept";
   BaselineVessel *myBaselineVessel = 0;
   myBaselineVessel = new BaselineVessel(*tr, spec);
-  type3Ptr=myBaselineVessel->GetType3Ptr();
-  type3Ptr->setdebug(true);
   //The passBaseline is registered here
   tr->registerFunction(*myBaselineVessel);
 
