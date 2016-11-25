@@ -1,0 +1,445 @@
+#The valid run types for SS are Signal, Background! While the current run type is : Signal
+universe = vanilla
+request_disk   = 50 GB
+request_memory = 1.5 GB
+executable = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/goSSTrimAndSlim.sh
+should_transfer_files = YES
+#when_to_transfer_output = ON_EXIT
+
+##transfer file list for Signal samples
+transfer_input_files = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_LLHadTau, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_ZinvQCD, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_TTZ, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_Signal, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/NTuple_SSTrimAndSlim.py, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/goSSTrimAndSlim.sh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/CSVv2_ichep.csv, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TTbarNoHad_bTagEff.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/PileupHistograms_Nov17.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/ICHEPTaggerConfig.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/Example_TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TrainingOutput.model, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ae, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.af, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ag, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ah, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ai, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aj, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ak, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.al, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.am, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.an, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ao, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ap, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aq, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ar, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.as, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.at, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.au, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.av, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aw, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ax, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ay, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.az, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ba, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bb, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bc, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bd, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.be, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bf, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ae, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.af, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ag, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ah, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ai, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aj, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ak, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.al, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.am, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.an, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ao, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ap, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ae, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.af, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ag, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ah, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ai, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aj, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ak, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.al, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.am, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.an, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ao, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ap, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aq, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ar, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.as, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.at, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.au, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.av, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aw, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ax, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ay, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.az, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ba, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bb, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bc, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bd, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.be, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bf, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bi, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bj, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ae, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.af, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ag, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ah, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ai, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aj, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ak, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.al, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.am, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.an, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ao, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ap, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aq, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ar, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.as, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.at, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.au, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.av, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aw, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ax, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ay, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.az, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ba, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bb, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bc, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bd, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.be, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bf, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bi, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bj, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bk, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ae, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.af, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ag, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ah, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ai, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aj, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ak, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.al, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.am, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.an, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ao, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ap, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aq, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ar, 
+
+Output = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/res/Trim_$(Process).stdout
+Error = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/res/Trim_$(Process).stderr
+Log = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/res/Trim_$(Process).log
+notify_user = hua.wei@cern.ch
+
+#### T1tttt ####
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ae
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.af
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ag
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ah
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ai
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aj
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ak
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.al
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.am
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.an
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ao
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ap
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aq
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ar
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.as
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.at
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.au
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.av
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aw
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ax
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ay
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.az
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ba
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bb
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bc
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bd
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.be
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bf
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bg
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T1tttt_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bh
+Queue
+
+#### T2tt ####
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ae
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.af
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ag
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ah
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ai
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aj
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ak
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.al
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.am
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.an
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ao
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-150to250_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ap
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ae
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.af
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ag
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ah
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ai
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aj
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ak
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.al
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.am
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.an
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ao
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ap
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aq
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ar
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.as
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.at
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.au
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.av
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aw
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ax
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ay
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.az
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ba
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bb
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bc
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bd
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.be
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bf
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bg
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bh
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bi
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bj
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ae
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.af
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ag
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ah
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ai
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aj
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ak
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.al
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.am
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.an
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ao
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ap
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aq
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ar
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.as
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.at
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.au
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.av
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aw
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ax
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ay
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.az
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ba
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bb
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bc
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bd
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.be
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bf
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bg
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bh
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bi
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bj
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.bk
+Queue
+
+#### T5ttcc ####
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ae
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.af
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ag
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ah
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ai
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aj
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ak
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.al
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.am
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.an
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ao
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ap
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aq
+Queue
+
+arguments = $ENV(CMSSW_BASE) Signal SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ar
+Queue
+

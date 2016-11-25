@@ -61,10 +61,11 @@ int main(int argc, char* argv[])
   selectedTree->Branch("nElectrons",&nels,"nElectrons/I");
   selectedTree->Branch("passLeptVeto",&passLeptVeto,"passLeptVeto/O");
   //AUX variables maybe useful for research
-  Int_t njets30,njets50; Double_t ht;
+  Int_t njets30,njets50; Double_t ht,htTops;
   selectedTree->Branch("nJets30",&njets30,"nJets30/I");
   selectedTree->Branch("nJets50",&njets50,"nJets50/I");
   selectedTree->Branch("ht",&ht,"ht/D");
+  selectedTree->Branch("htTops",&htTops,"htTops/D");
   //LL information for TTJets Wjets and singleTop
   Bool_t isLL;
   selectedTree->Branch("isLL",&isLL,"isLL/O");
@@ -77,6 +78,7 @@ int main(int argc, char* argv[])
   const std::string spec = "lostlept";
   BaselineVessel *myBaselineVessel = 0;
   myBaselineVessel = new BaselineVessel(*tr, spec);
+  myBaselineVessel->toptaggerCfgFile = "Example_TopTagger.cfg";
   //type3Ptr=myBaselineVessel->GetType3Ptr();
   //type3Ptr->setdebug(true);
   //The passBaseline is registered here
@@ -97,6 +99,7 @@ int main(int argc, char* argv[])
     bool passdPhis = tr->getVar<bool>("passdPhis"+spec);
     */
     bool passSSTrimAndSlim = tr->getVar<bool>("passBaseline"+spec);
+
     /*
     passSSTrimAndSlim = ( met > 200)
                 && passnJets
@@ -122,6 +125,7 @@ int main(int argc, char* argv[])
       njets30 = tr->getVar<int>("cntNJetsPt30Eta24"+spec);
       njets50 = tr->getVar<int>("cntNJetsPt50Eta24"+spec);
       ht = tr->getVar<double>("HT"+spec);
+      htTops = GetHTTops( tr->getVec<TLorentzVector>("vTops"+spec) );
       //double mht = tr->getVar<double>("mht"); 
       
       //determine if LL or HadTau. be careful! we need to set passLeptVeto first
@@ -146,8 +150,8 @@ int main(int argc, char* argv[])
   if (originalTree) delete originalTree;
 
   std::string d = "root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15";
-  //std::system(("xrdcp " + output_str + " " + d).c_str());
-  //std::system(("rm " + output_str).c_str());
+  std::system(("xrdcp " + output_str + " " + d).c_str());
+  std::system(("rm " + output_str).c_str());
 
   return 0;
 }

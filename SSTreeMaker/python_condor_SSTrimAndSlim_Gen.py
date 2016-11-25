@@ -12,7 +12,7 @@ def PrintCondorHeaderLine():
 
 def PrintTransferFileLine(directory, sampletype, isfirst, islast):
   if(isfirst):
-    sys.stdout.write('transfer_input_files = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_LLHadTau, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_ZinvQCD, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_TTZ, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_Signal, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/NTuple_SSTrimAndSlim.py, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/goSSTrimAndSlim.sh, ')
+    sys.stdout.write('transfer_input_files = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_LLHadTau, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_ZinvQCD, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_TTZ, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_Signal, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/NTuple_SSTrimAndSlim.py, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/goSSTrimAndSlim.sh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/CSVv2_ichep.csv, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TTbarNoHad_bTagEff.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/PileupHistograms_Nov17.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/ICHEPTaggerConfig.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/Example_TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TrainingOutput.model, ')
   for dirname, dirnames, filenames in os.walk(directory):
     for filename in filenames:
       if ( sampletype in filename ):
@@ -42,16 +42,20 @@ def PrintCondorSubmitLine(directory, runoption, sampletype):
       else:
         continue
 
-d = "/uscms_data/d3/hwei/stop/SS/CMSSW_8_0_12/src/SensitivityStudy/SSTreeMaker/SensitivityTxt"
+d = "/uscms_data/d3/hwei/stop/SS/CMSSW_8_0_23/src/SensitivityStudy/SSTreeMaker/SensitivityTxt"
 runtype = sys.argv[1]
 print ("#The valid run types for SS are Signal, Background! While the current run type is : " + runtype)
 
 if(runtype == "Signal"):
   PrintCondorHeaderLine()
   print("##transfer file list for " + runtype + " samples")
-  PrintTransferFileLine(d, "T2tt", True, True)
+  PrintTransferFileLine(d, "T1tttt", True, False)
+  PrintTransferFileLine(d, "T2tt", False, False)
+  PrintTransferFileLine(d, "T5ttcc", False, True)
   PrintCondorLogLine()
+  PrintCondorSubmitLine(d, "Signal", "T1tttt")
   PrintCondorSubmitLine(d, "Signal", "T2tt")
+  PrintCondorSubmitLine(d, "Signal", "T5ttcc")
 
 elif(runtype == "Background"):
   PrintCondorHeaderLine()

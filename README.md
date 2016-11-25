@@ -16,7 +16,7 @@ cd SensitivityStudy/SensitivityStudy
 xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T1tttt_forHua.root SignalScanBeforeBaseline/
 xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T2tt_forHua.root SignalScanBeforeBaseline/
 source rmsetup.csh
-source $CMSSW_BASE/src/SusyAnaTools/Tools/setup.csh
+source setup.csh
 ```
 
 To Checkout TopTagger Code:

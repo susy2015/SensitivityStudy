@@ -17,8 +17,8 @@ if (-f ICHEPTaggerConfig.cfg) then
   rm ICHEPTaggerConfig.cfg
 endif
 
-if (-f TopTaggerConfig.cfg) then
-  rm TopTaggerConfig.cfg
+if (-f Example_TopTagger.cfg) then
+  rm Example_TopTagger.cfg
 endif
 
 if (-f TrainingOutput.model) then

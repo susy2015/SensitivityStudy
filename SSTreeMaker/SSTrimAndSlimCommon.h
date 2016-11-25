@@ -28,4 +28,16 @@ inline size_t find_Nth
   return pos;
 }
 
+inline double GetHTTops( std::vector<TLorentzVector> vTops )
+{
+  int HTTops = 0;
+
+  for(auto Top : vTops)
+  {
+    HTTops += Top.Pt();
+  }
+  return HTTops;
+}       // -----  end of function VarPerEvent::GetnTops  -----
+
+
 #endif
