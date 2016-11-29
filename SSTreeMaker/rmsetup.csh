@@ -7,18 +7,18 @@ if (-f TTbarNoHad_bTagEff.root) then
   rm TTbarNoHad_bTagEff.root
 endif
 
-## Pileup Reweighting
+## Delete Pileup Reweighting file
 if (-f PileupHistograms_Nov17.root) then
   rm PileupHistograms_Nov17.root
 endif
 
 ## Delete the Top tagger files
-if (-f ICHEPTaggerConfig.cfg) then
-  rm ICHEPTaggerConfig.cfg
-endif
-
 if (-f Example_TopTagger.cfg) then
   rm Example_TopTagger.cfg
+endif
+
+if (-f Example_Legacy_TopTagger.cfg) then
+  rm Example_Legacy_TopTagger.cfg
 endif
 
 if (-f TrainingOutput.model) then

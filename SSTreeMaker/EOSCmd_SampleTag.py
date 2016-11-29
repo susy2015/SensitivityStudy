@@ -4,7 +4,7 @@ d_hadd_source = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15"
 #d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/QCD_Data_2016ICHEPv9"
 #d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/LL_Data_2016ICHEPv9"
 #d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/SFCheckTrim_2016Sep"
-d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11"
+d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p0"
 
 MGM = "root://cmseos.fnal.gov/"
 
