@@ -1,5 +1,5 @@
-#ifndef _SSTrimCommon_H_
-#define _SSTrimCommon_H_
+#ifndef _SSTrimAndSlimCommon_H_
+#define _SSTrimAndSlimCommon_H_
 
 #include <string>
 #include <iostream>
@@ -38,6 +38,4 @@ inline double GetHTTops( std::vector<TLorentzVector> vTops )
   }
   return HTTops;
 }       // -----  end of function VarPerEvent::GetnTops  -----
-
-
 #endif
