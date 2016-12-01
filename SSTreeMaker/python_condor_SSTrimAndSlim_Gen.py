@@ -67,6 +67,10 @@ elif(runtype == "Background"):
   PrintTransferFileLine(d, "QCD_HT", False, False)
   PrintTransferFileLine(d, "TTWJets", False, False)
   PrintTransferFileLine(d, "TTZ", False, True)
+  #PrintTransferFileLine(d, "WJetsToLNu_HT-200To400", True, False)
+  #PrintTransferFileLine(d, "ZJetsToNuNu_HT-200To400", False, False)
+  #PrintTransferFileLine(d, "QCD_HT300to500", False, True)
+
   PrintCondorLogLine()
   PrintCondorSubmitLine(d, "LLHadTau", "TTJets_")
   PrintCondorSubmitLine(d, "LLHadTau", "WJetsToLNu_HT-")
@@ -75,5 +79,8 @@ elif(runtype == "Background"):
   PrintCondorSubmitLine(d, "ZinvQCD", "QCD_HT")
   PrintCondorSubmitLine(d, "TTZ", "TTWJets")
   PrintCondorSubmitLine(d, "TTZ", "TTZ")
+  #PrintCondorSubmitLine(d, "LLHadTau", "WJetsToLNu_HT-200To400")
+  #PrintCondorSubmitLine(d, "ZinvQCD", "ZJetsToNuNu_HT-200To400")
+  #PrintCondorSubmitLine(d, "ZinvQCD", "QCD_HT300to500")
 else:
   print ("#Invalid run type for SSTrimAndSlim! What the fuck is going on ??!!")
