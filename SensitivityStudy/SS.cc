@@ -96,7 +96,7 @@ void LoopSSCS( SSSampleWeight& mySSSampleWeight )
       if(searchbin_id<0) continue;
 
       if( ((*iter_SSSampleInfos).Tag).find("TTJets") != std::string::npos )
-			{
+      {
         double TTJetsSF = 0.8;
         //Counting the muon control sample
         if (nElectrons == 0 && nMuons == 1)
@@ -260,55 +260,55 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       //if (nElectrons==0 && met>250.0 && ntopjets>=ntopcut && nbotjets==nbcut)
       //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut)
       if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0 && HT<1000.0)
-	//if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0)
-	//if (nElectrons==0 && met>250.0 && ntopjets>=ntopcut && nbotjets>=nbcut)
+      //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0)
+      //if (nElectrons==0 && met>250.0 && ntopjets>=ntopcut && nbotjets>=nbcut)
       {
-	double metcutc=250.0;
-	double mt2cutc=200.0;
-	double HTcutc=300.0;
-	double HTtopcutc=0.0;
+      double metcutc=250.0;
+      double mt2cutc=200.0;
+      double HTcutc=300.0;
+      double HTtopcutc=0.0;
 
-	for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
-	{
-	  mt2cutc=minmt2cut+mt2binc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-	  {
-	    if (met>metcutc+metbinc*50.0 && mt2>mt2cutc)
-	    {
-	      if (passLeptVeto) nBGEvents[metbinc][mt2binc]+=thisweight;
-	      if (nMuons==1) nmuCSEvents[metbinc][mt2binc]+=thisweight;
-	    }
-	  }
-	}
+      for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+      {
+        mt2cutc=minmt2cut+mt2binc*50.0;
+        for (int metbinc=0;metbinc<nmetbin;++metbinc)
+        {
+          if (met>metcutc+metbinc*50.0 && mt2>mt2cutc)
+          {
+            if (passLeptVeto) nBGEvents[metbinc][mt2binc]+=thisweight;
+            if (nMuons==1) nmuCSEvents[metbinc][mt2binc]+=thisweight;
+          }
+        }
+      }
 
-	for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
-	{
-	  HTcutc=minHTcut+HTbinc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-	  {
-	    if (met>metcutc+metbinc*50.0 && HT>HTcutc)
-	    //if (met<metcutc+metbinc*50.0 && HT<HTcutc)
-	    //if (met>metcutc+metbinc*50.0 && HT<HTcutc)
-	    //if (met<metcutc+metbinc*50.0 && HT>HTcutc)
-	    {
-	      if (passLeptVeto) nBGEventsMETHT[metbinc][HTbinc]+=thisweight;
-	      if (nMuons==1) nmuCSEventsMETHT[metbinc][HTbinc]+=thisweight;
-	    }
-	  }
-	}
+      for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
+      {
+        HTcutc=minHTcut+HTbinc*50.0;
+        for (int metbinc=0;metbinc<nmetbin;++metbinc)
+        {
+          if (met>metcutc+metbinc*50.0 && HT>HTcutc)
+          //if (met<metcutc+metbinc*50.0 && HT<HTcutc)
+          //if (met>metcutc+metbinc*50.0 && HT<HTcutc)
+          //if (met<metcutc+metbinc*50.0 && HT>HTcutc)
+          {
+            if (passLeptVeto) nBGEventsMETHT[metbinc][HTbinc]+=thisweight;
+            if (nMuons==1) nmuCSEventsMETHT[metbinc][HTbinc]+=thisweight;
+          }
+        }
+      }
 
-	for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
-	{
-	  HTtopcutc=minHTtopcut+HTbinc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-	  {
-	    if (met>metcutc+metbinc*50.0 && HTtop>HTtopcutc)
-	    {
-	      if (passLeptVeto) nBGEventsMETHTtop[metbinc][HTbinc]+=thisweight;
-	      if (nMuons==1) nmuCSEventsMETHTtop[metbinc][HTbinc]+=thisweight;
-	    }
-	  }
-	}
+      for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
+      {
+        HTtopcutc=minHTtopcut+HTbinc*50.0;
+        for (int metbinc=0;metbinc<nmetbin;++metbinc)
+        {
+          if (met>metcutc+metbinc*50.0 && HTtop>HTtopcutc)
+          {
+            if (passLeptVeto) nBGEventsMETHTtop[metbinc][HTbinc]+=thisweight;
+            if (nMuons==1) nmuCSEventsMETHTtop[metbinc][HTbinc]+=thisweight;
+          }
+        }
+      }
 
 
       }
@@ -361,57 +361,57 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       //std::cout << "ntopjets = " << ntopjets << std::endl;
       //if (StopMass==1900.0 && LSPMass==50.0 && nMuons==0 && nElectrons==0 && ntopjets==ntopcut && nbotjets==nbcut)
       //if (StopMass==1300.0 && LSPMass==1000.0 && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets==nbcut)
-	//if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets>=nbcut)
+      //if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets>=nbcut)
       //if (StopMass==1300.0 && LSPMass==1000.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut)
       if (StopMass==1300.0 && LSPMass==1000.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0 && HT<1000.0)
-	//if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0)
-	//if (StopMass==1300.0 && LSPMass==1000.0 && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets>=nbcut)
+      //if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0)
+      //if (StopMass==1300.0 && LSPMass==1000.0 && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets>=nbcut)
       {
-	double metcutc=250.0;
-	double mt2cutc=200.0;
-	double HTcutc=300.0;
-	double HTtopcutc=0.0;
+      double metcutc=250.0;
+      double mt2cutc=200.0;
+      double HTcutc=300.0;
+      double HTtopcutc=0.0;
 
-	for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
-	{
-	  mt2cutc=minmt2cut+mt2binc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-  	  {
-	    if (met>metcutc+metbinc*50.0 && mt2>mt2cutc)
-  	    {
-	      nSEvents[metbinc][mt2binc]+=thisweight;
-	      //if (thisweight>10.0) std::cout << "Warning: thisweight = " << thisweight << std::endl;
-	      //if (nSEvents[metbinc][mt2binc]>1000.0) std::cout << "Warning: nSEvents[" << metbinc << "][" << mt2binc << "] = " << nSEvents[metbinc][mt2binc] << std::endl;
-	    }
-  	  }
-  	}
+      for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+      {
+        mt2cutc=minmt2cut+mt2binc*50.0;
+        for (int metbinc=0;metbinc<nmetbin;++metbinc)
+          {
+          if (met>metcutc+metbinc*50.0 && mt2>mt2cutc)
+            {
+            nSEvents[metbinc][mt2binc]+=thisweight;
+            //if (thisweight>10.0) std::cout << "Warning: thisweight = " << thisweight << std::endl;
+            //if (nSEvents[metbinc][mt2binc]>1000.0) std::cout << "Warning: nSEvents[" << metbinc << "][" << mt2binc << "] = " << nSEvents[metbinc][mt2binc] << std::endl;
+          }
+          }
+        }
 
-	for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
-	{
-	  HTcutc=minHTcut+HTbinc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-	  {
-	    if (met>metcutc+metbinc*50.0 && HT>HTcutc)
-	    //if (met<metcutc+metbinc*50.0 && HT<HTcutc)
-	    //if (met>metcutc+metbinc*50.0 && HT<HTcutc)
-	    //if (met<metcutc+metbinc*50.0 && HT>HTcutc)
-	    {
-	      nSEventsMETHT[metbinc][HTbinc]+=thisweight;
-	    }
-	  }
-	}
+      for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
+      {
+        HTcutc=minHTcut+HTbinc*50.0;
+        for (int metbinc=0;metbinc<nmetbin;++metbinc)
+        {
+          if (met>metcutc+metbinc*50.0 && HT>HTcutc)
+          //if (met<metcutc+metbinc*50.0 && HT<HTcutc)
+          //if (met>metcutc+metbinc*50.0 && HT<HTcutc)
+          //if (met<metcutc+metbinc*50.0 && HT>HTcutc)
+          {
+            nSEventsMETHT[metbinc][HTbinc]+=thisweight;
+          }
+        }
+      }
 
-	for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
-	{
-	  HTtopcutc=minHTtopcut+HTbinc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-	  {
-	    if (met>metcutc+metbinc*50.0 && HTtop>HTtopcutc)
-	    {
-	      nSEventsMETHTtop[metbinc][HTbinc]+=thisweight;
-	    }
-	  }
-	}
+      for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
+      {
+        HTtopcutc=minHTtopcut+HTbinc*50.0;
+        for (int metbinc=0;metbinc<nmetbin;++metbinc)
+        {
+          if (met>metcutc+metbinc*50.0 && HTtop>HTtopcutc)
+          {
+            nSEventsMETHTtop[metbinc][HTbinc]+=thisweight;
+          }
+        }
+      }
 
 
       }
@@ -442,8 +442,8 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
 //    {
 //      if (nBGEvents[metbinc][mt2binc]>0)
 //      {
-//	const double sb=nSEvents[metbinc][mt2binc]/nBGEvents[metbinc][mt2binc];
-//	std::cout << "S/B[" << metbinc << "] = " << sb << std::endl;
+//      const double sb=nSEvents[metbinc][mt2binc]/nBGEvents[metbinc][mt2binc];
+//      std::cout << "S/B[" << metbinc << "] = " << sb << std::endl;
 //      }
 //      else std::cout << "S/B[" << metbinc << "] = 0" << std::endl;
 //    }
@@ -461,16 +461,16 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       const double sb=nSEvents[metbinc][mt2binc]/std::sqrt(nSEvents[metbinc][mt2binc]+nBGEvents[metbinc][mt2binc]+0.1*0.1*nSEvents[metbinc][mt2binc]*nSEvents[metbinc][mt2binc]+0.3*0.3*nBGEvents[metbinc][mt2binc]*nBGEvents[metbinc][mt2binc]+1.5);
       if (nBGEvents[metbinc][mt2binc]>0)
       {
-	//const double sb=nSEvents[metbinc][mt2binc]/nBGEvents[metbinc][mt2binc];
-	const double qstat=2.0*(std::sqrt(nSEvents[metbinc][mt2binc]+nBGEvents[metbinc][mt2binc])-std::sqrt(nBGEvents[metbinc][mt2binc]));
-	myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,sb);
-	myFSLHistgram.h2_Q->SetBinContent(metbinc+1,mt2binc+1,qstat);
+      //const double sb=nSEvents[metbinc][mt2binc]/nBGEvents[metbinc][mt2binc];
+      const double qstat=2.0*(std::sqrt(nSEvents[metbinc][mt2binc]+nBGEvents[metbinc][mt2binc])-std::sqrt(nBGEvents[metbinc][mt2binc]));
+      myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,sb);
+      myFSLHistgram.h2_Q->SetBinContent(metbinc+1,mt2binc+1,qstat);
       }
       else
       {
-	//myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,0.0);
-	myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,sb);
-	myFSLHistgram.h2_Q->SetBinContent(metbinc+1,mt2binc+1,0.0);
+      //myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,0.0);
+      myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,sb);
+      myFSLHistgram.h2_Q->SetBinContent(metbinc+1,mt2binc+1,0.0);
       }
     }
   }
@@ -485,16 +485,16 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       const double sb=nSEventsMETHT[metbinc][HTbinc]/std::sqrt(nSEventsMETHT[metbinc][HTbinc]+nBGEventsMETHT[metbinc][HTbinc]+0.1*0.1*nSEventsMETHT[metbinc][HTbinc]*nSEventsMETHT[metbinc][HTbinc]+0.3*0.3*nBGEventsMETHT[metbinc][HTbinc]*nBGEventsMETHT[metbinc][HTbinc]+1.5);
       if (nBGEventsMETHT[metbinc][HTbinc]>0)
       {
-	//const double sb=nSEventsMETHT[metbinc][HTbinc]/nBGEventsMETHT[metbinc][HTbinc];
-	const double qstat=2.0*(std::sqrt(nSEventsMETHT[metbinc][HTbinc]+nBGEventsMETHT[metbinc][HTbinc])-std::sqrt(nBGEventsMETHT[metbinc][HTbinc]));
-	myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,sb);
-	myFSLHistgram.h2_QMETHT->SetBinContent(metbinc+1,HTbinc+1,qstat);
+      //const double sb=nSEventsMETHT[metbinc][HTbinc]/nBGEventsMETHT[metbinc][HTbinc];
+      const double qstat=2.0*(std::sqrt(nSEventsMETHT[metbinc][HTbinc]+nBGEventsMETHT[metbinc][HTbinc])-std::sqrt(nBGEventsMETHT[metbinc][HTbinc]));
+      myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,sb);
+      myFSLHistgram.h2_QMETHT->SetBinContent(metbinc+1,HTbinc+1,qstat);
       }
       else
       {
-	//myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,0.0);
-	myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,sb);
-	myFSLHistgram.h2_QMETHT->SetBinContent(metbinc+1,HTbinc+1,0.0);
+      //myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,0.0);
+      myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,sb);
+      myFSLHistgram.h2_QMETHT->SetBinContent(metbinc+1,HTbinc+1,0.0);
       }
     }
   }
@@ -510,17 +510,17 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       const double sb=nSEventsMETHTtop[metbinc][HTbinc]/std::sqrt(nSEventsMETHTtop[metbinc][HTbinc]+nBGEventsMETHTtop[metbinc][HTbinc]+0.1*nSEventsMETHTtop[metbinc][HTbinc]*0.1*nSEventsMETHTtop[metbinc][HTbinc]+0.3*0.3*nBGEventsMETHTtop[metbinc][HTbinc]*nBGEventsMETHTtop[metbinc][HTbinc]+1.5);
       if (nBGEventsMETHTtop[metbinc][HTbinc]>0)
       {
-	//S/B
-	//const double sb=nSEventsMETHTtop[metbinc][HTbinc]/nBGEventsMETHTtop[metbinc][HTbinc];
-	const double qstat=2.0*(std::sqrt(nSEventsMETHTtop[metbinc][HTbinc]+nBGEventsMETHTtop[metbinc][HTbinc])-std::sqrt(nBGEventsMETHTtop[metbinc][HTbinc]));
-	myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,sb);
-	myFSLHistgram.h2_QMETHTtop->SetBinContent(metbinc+1,HTbinc+1,qstat);
+      //S/B
+      //const double sb=nSEventsMETHTtop[metbinc][HTbinc]/nBGEventsMETHTtop[metbinc][HTbinc];
+      const double qstat=2.0*(std::sqrt(nSEventsMETHTtop[metbinc][HTbinc]+nBGEventsMETHTtop[metbinc][HTbinc])-std::sqrt(nBGEventsMETHTtop[metbinc][HTbinc]));
+      myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,sb);
+      myFSLHistgram.h2_QMETHTtop->SetBinContent(metbinc+1,HTbinc+1,qstat);
       }
       else
       {
-	myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,sb);
-	//myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,0.0);
-	myFSLHistgram.h2_QMETHTtop->SetBinContent(metbinc+1,HTbinc+1,0.0);
+      myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,sb);
+      //myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,0.0);
+      myFSLHistgram.h2_QMETHTtop->SetBinContent(metbinc+1,HTbinc+1,0.0);
       }
     }
   }
@@ -772,8 +772,8 @@ void LoopSignalCard( std::string RunMode )
   else { std::cout << "bad RunMode for signal card!" << std::endl; return ; }
 
   TFile *pre_trim_file = 0;
-  if(RunMode.find("T1tttt") != std::string::npos) pre_trim_file = new TFile("SignalScanBeforeBaseline/signalScan_SMS-T1tttt_forHua.root");
-  else if(RunMode.find("T2tt") != std::string::npos) pre_trim_file = new TFile("SignalScanBeforeBaseline/signalScan_SMS-T2tt_forHua.root");
+  if(RunMode.find("T1tttt") != std::string::npos) pre_trim_file = new TFile("SignalScanBeforeBaseline/SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T1tttt_FastSim_scan_stopFlatNtuples.root");
+  else if(RunMode.find("T2tt") != std::string::npos) pre_trim_file = new TFile("SignalScanBeforeBaseline/SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_stopFlatNtuples.root");
   else { std::cout<<"pre_trim file NOT provided for RunMode : "<<RunMode.c_str()<<std::endl; return; }
 
   //clock to monitor the run time
@@ -786,6 +786,7 @@ void LoopSignalCard( std::string RunMode )
   std::vector<SignalDataCard> mySignalDataCardVec;
   std::vector<SignalDataCard>::iterator iter_mySignalDataCardVec;
   std::cout << RunMode << "; NEvent: " << nevents << std::endl;
+  //begin loop of events in SSTree
   while(tr.getNextEvent())
   {
     if(tr.getEvtNum()%20000 == 0) std::cout << tr.getEvtNum() << "\t" << ((clock() - t0)/1000000.0) << std::endl;
@@ -799,48 +800,20 @@ void LoopSignalCard( std::string RunMode )
     double mt2 = tr.getVar<double>("mt2");
     double met = tr.getVar<double>("met");
     //int searchbin_id = mySBGeometry.GetSBID(ntopjets,nbotjets,mt2,met);
+    //define the search bin id
     int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
     if(searchbin_id<0) continue;
 
     double SusyMotherMass = tr.getVar<double>("SusyMotherMass");
     double SusyLSPMass    = tr.getVar<double>("SusyLSPMass");
-/*
-    double xsec = 0, xsec_err = 0;
-    if(RunMode.find("T1tttt") != std::string::npos)
-    {
-      if( xSecMap_glgl.find((int)SusyMotherMass) != xSecMap_glgl.end() )
-      {
-         xsec = xSecMap_glgl.find((int)SusyMotherMass)->second;
-         xsec_err = xSecErrMap_glgl.find((int)SusyMotherMass)->second * xsec;
-      }
-    }
-    else if(RunMode.find("T2tt") != std::string::npos)
-    {
-      if( xSecMap.find((int)SusyMotherMass) != xSecMap.end() )
-      {
-         xsec = xSecMap.find((int)SusyMotherMass)->second;
-         xsec_err = xSecErrMap.find((int)SusyMotherMass)->second * xsec;
-      }
-    }
-    if(!(xsec>0)){ std::cout << "mass point not in the xSec Map, strange!" << std::endl; continue; }
-
-    char tmpStr[100];
-    sprintf(tmpStr, "totEntries_%d_%d", (int)SusyMotherMass, (int)SusyLSPMass);
-    TH1D * h1_thisSig_totEntries = (TH1D*) pre_trim_file->Get(tmpStr);
-
-    double thisSig_totEntries = h1_thisSig_totEntries->GetBinContent(1);
-
-    double thisweight = xsec*lumi/thisSig_totEntries;
-
-    if( h1_thisSig_totEntries ) delete h1_thisSig_totEntries;
-*/
+    
     bool thisMassPoint = false;
     for(iter_mySignalDataCardVec = mySignalDataCardVec.begin(); iter_mySignalDataCardVec != mySignalDataCardVec.end(); iter_mySignalDataCardVec++)
     {
       thisMassPoint = ((*iter_mySignalDataCardVec).MMass == (int) SusyMotherMass) && ((*iter_mySignalDataCardVec).DMass == (int) SusyLSPMass);
       if(thisMassPoint)
       {
-//        (*iter_mySignalDataCardVec).DC_sb_MC_Signal[searchbin_id]+=thisweight;
+        //(*iter_mySignalDataCardVec).DC_sb_MC_Signal[searchbin_id]+=thisweight;
         (*iter_mySignalDataCardVec).DC_sb_MC_Signal_cs[searchbin_id]++;
         break;
       }
@@ -849,25 +822,27 @@ void LoopSignalCard( std::string RunMode )
     {
       SignalDataCard oneSignalDataCard;
       oneSignalDataCard.MMass = (int)SusyMotherMass; oneSignalDataCard.DMass = (int)SusyLSPMass;
-//      oneSignalDataCard.DC_sb_MC_Signal[searchbin_id]+=thisweight;
+      //oneSignalDataCard.DC_sb_MC_Signal[searchbin_id]+=thisweight;
       oneSignalDataCard.DC_sb_MC_Signal_cs[searchbin_id]++;
       mySignalDataCardVec.push_back(oneSignalDataCard);
     }
-  }
+  }//end of event loop in SSTree
   
+  //begin loop of mass point
   for(iter_mySignalDataCardVec = mySignalDataCardVec.begin(); iter_mySignalDataCardVec != mySignalDataCardVec.end(); iter_mySignalDataCardVec++)
   {
     int SusyMotherMass = (*iter_mySignalDataCardVec).MMass;
     int SusyLSPMass = (*iter_mySignalDataCardVec).DMass;
 
+    //get xsec from xSec.h
     double xsec = 0, xsec_err = 0;
     if(RunMode.find("T1tttt") != std::string::npos)
     {
       (*iter_mySignalDataCardVec).DC_SignalType = "T1tttt";
       if( xSecMap_glgl.find(SusyMotherMass) != xSecMap_glgl.end() )
       {
-         xsec = xSecMap_glgl.find(SusyMotherMass)->second;
-         xsec_err = xSecErrMap_glgl.find(SusyMotherMass)->second * xsec;
+        xsec = xSecMap_glgl.find(SusyMotherMass)->second;
+        xsec_err = xSecErrMap_glgl.find(SusyMotherMass)->second * xsec;
       }
     }
     else if(RunMode.find("T2tt") != std::string::npos)
@@ -875,17 +850,19 @@ void LoopSignalCard( std::string RunMode )
       (*iter_mySignalDataCardVec).DC_SignalType = "T2tt";
       if( xSecMap.find(SusyMotherMass) != xSecMap.end() )
       {
-         xsec = xSecMap.find(SusyMotherMass)->second;
-         xsec_err = xSecErrMap.find(SusyMotherMass)->second * xsec;
+        xsec = xSecMap.find(SusyMotherMass)->second;
+        xsec_err = xSecErrMap.find(SusyMotherMass)->second * xsec;
       }
     }
     if(!(xsec>0)){ std::cout << "mass point not in the xSec Map, strange!" << std::endl; continue; }
 
-    char tmpStr[100];
-    sprintf(tmpStr, "totEntries_%d_%d", SusyMotherMass, SusyLSPMass);
-    TH1D * h1_thisSig_totEntries = (TH1D*) pre_trim_file->Get(tmpStr);
+    //get total event from signal scan file
+    //char tmpStr[100];
+    //sprintf(tmpStr, "totEntries_%d_%d", SusyMotherMass, SusyLSPMass);
+    TH2D * h2_thisSig_totEntries = (TH2D*) pre_trim_file->Get("h_totEvt_xSusyMotherMass_ySusyLSPMass");
+    double thisSig_totEntries = h2_thisSig_totEntries->GetBinContent(SusyMotherMass/25,SusyLSPMass/25);
 
-    double thisSig_totEntries = h1_thisSig_totEntries->GetBinContent(1);
+    //calculate average weight
     double thisweight = xsec*lumi/thisSig_totEntries;
     (*iter_mySignalDataCardVec).DC_all_MC_Signal_avgweight = thisweight;
     
@@ -895,7 +872,7 @@ void LoopSignalCard( std::string RunMode )
       (*iter_mySignalDataCardVec).DC_sb_MC_Signal[i] = (*iter_mySignalDataCardVec).DC_sb_MC_Signal_cs[i] * thisweight;    
     }
 
-    if( h1_thisSig_totEntries ) delete h1_thisSig_totEntries;
+    if( h2_thisSig_totEntries ) delete h2_thisSig_totEntries;
 
     (*iter_mySignalDataCardVec).print_thisSignalDC();
   }

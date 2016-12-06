@@ -26,7 +26,6 @@
 #include "TMath.h"
 
 #include "SusyAnaTools/Tools/NTupleReader.h"
-#include "SusyAnaTools/Tools/baselineDef.h"
 #include "SusyAnaTools/Tools/searchBins.h"
 
 #include "SBGeometry.h"
@@ -34,14 +33,6 @@
 
 #include "DC_sb_LL_Header.h"
 std::string dir_out = "";
-
-//############finish the definition of class AccRecoEffs######################
-//baseline cut function definition
-static BaselineVessel *myBaselineVessel;
-void mypassBaselineFunc(NTupleReader& tr)
-{
-  (*myBaselineVessel)(tr);
-}
 
 SBGeometry mySBGeometry;
 
@@ -105,12 +96,12 @@ void SSDataCard::fake_avg_uncs()
     DC_sb_MC_HadTau_NMCforsystunc[i]>0 ? DC_sb_MC_HadTau_systunc[i] = 1.66/std::sqrt(DC_sb_MC_HadTau_NMCforsystunc[i]) : DC_sb_MC_HadTau_systunc[i] = DC_sb_MC_HadTau_systunc[i-1];
     //if(DC_sb_MC_HadTau_systunc[i]>1) DC_sb_MC_HadTau_systunc[i]=0.998;
     SearchBins::searchBinDef outBinDef; mySearchBins.find_BinBoundaries( i, outBinDef );
-		outBinDef.bJet_lo_>=3 ? DC_sb_MC_HadTau_systunc_mistag[i] = 0.1 : DC_sb_MC_HadTau_systunc_mistag[i] = 0.05; 
+    outBinDef.bJet_lo_>=3 ? DC_sb_MC_HadTau_systunc_mistag[i] = 0.1 : DC_sb_MC_HadTau_systunc_mistag[i] = 0.05; 
     //SBBoundaries outBinDef; mySBGeometry.SBIDToBinBoundaries( i, outBinDef );
     //outBinDef.nbot_lo>=3 ? DC_sb_MC_HadTau_systunc_mistag[i] = 0.1 : DC_sb_MC_HadTau_systunc_mistag[i] = 0.05; 
 
     //Zinv
-		DC_sb_MC_Zinv_cs[i]>0 ? DC_sb_MC_Zinv_systunc[i] = 10*std::sqrt(DC_sb_MC_Zinv_cs[i])/DC_sb_MC_Zinv_cs[i] : DC_sb_MC_Zinv_systunc[i] = 2.0;
+    DC_sb_MC_Zinv_cs[i]>0 ? DC_sb_MC_Zinv_systunc[i] = 10*std::sqrt(DC_sb_MC_Zinv_cs[i])/DC_sb_MC_Zinv_cs[i] : DC_sb_MC_Zinv_systunc[i] = 2.0;
     if(DC_sb_MC_Zinv_systunc[i]>2.0) DC_sb_MC_Zinv_systunc[i]=2.0; 
     //if( DC_sb_MC_Zinv_systunc[i]>1 ) DC_sb_MC_Zinv_systunc[i]=0.998;
     //QCD, 150% of prediction
@@ -700,7 +691,7 @@ void SSAUX1DHistgram::BookHistgram(const char *outFileName)
         else if (k == 3) smalltag = "QCD";
         else smalltag = "TTZ";
         
-				h_ss_aux_met_MC_AllBG[i][j][k] = new TH1D(("h_ss_aux_met_MC_AllBG"+ntnbtag+"_"+smalltag).c_str(),"",(metbins_edge[metsize]+500-metbins_edge[0])/50,metbins_edge[0],metbins_edge[metsize]+500);
+        h_ss_aux_met_MC_AllBG[i][j][k] = new TH1D(("h_ss_aux_met_MC_AllBG"+ntnbtag+"_"+smalltag).c_str(),"",(metbins_edge[metsize]+500-metbins_edge[0])/50,metbins_edge[0],metbins_edge[metsize]+500);
         h_ss_aux_mt2_MC_AllBG[i][j][k] = new TH1D(("h_ss_aux_mt2_MC_AllBG"+ntnbtag+"_"+smalltag).c_str(),"",(mt2bins_edge[mt2size]+500-mt2bins_edge[0])/50,mt2bins_edge[0],mt2bins_edge[mt2size]+500);
 
         h_ss_aux_met_MC_AllBG[i][j][k]->SetFillColor(k+2);
