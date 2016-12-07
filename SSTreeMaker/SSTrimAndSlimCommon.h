@@ -38,4 +38,6 @@ inline double GetHTTops( std::vector<TLorentzVector> vTops )
   }
   return HTTops;
 }       // -----  end of function VarPerEvent::GetnTops  -----
+
+bool useLegacycfg = true;
 #endif

@@ -75,25 +75,21 @@ And then hadd and move them into EOS, change the runList files in the Sensitivit
 
 ```
 cd SensitivityStudy/SensitivityStudy
-xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T1tttt_forHua.root SignalScanBeforeBaseline/
-xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T2tt_forHua.root SignalScanBeforeBaseline/
-./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v6_BG.txt runList_Sensitivity_MC_SSSkimmed_v6_SG.txt runList_Sensitivity_MC_SSSkimmed_v6_MuCS.txt
+./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
 ```
 
 2.To study the CS in designed search bin:
 
 ```
-./SS SSCS runList_Sensitivity_MC_SSSkimmed_v6_BG.txt runList_Sensitivity_MC_SSSkimmed_v6_SG.txt runList_Sensitivity_MC_SSSkimmed_v6_MuCS.txt
+./SS SSCS runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
 ```
 
 3.To generate Signal Data Card
 
 ```
 cd SensitivityStudy/SensitivityStudy
-xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T1tttt_forHua.root SignalScanBeforeBaseline/
-xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T2tt_forHua.root SignalScanBeforeBaseline/
-./SS SignalCardT2tt runList_Sensitivity_MC_SSSkimmed_v6_BG.txt runList_Sensitivity_MC_SSSkimmed_v6_SG.txt runList_Sensitivity_MC_SSSkimmed_v6_MuCS.txt
-./SS SignalCardT1tttt runList_Sensitivity_MC_SSSkimmed_v6_BG.txt runList_Sensitivity_MC_SSSkimmed_v6_SG.txt runList_Sensitivity_MC_SSSkimmed_v6_MuCS.txt
+./SS SignalCardT2tt runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
+./SS SignalCardT1tttt runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
 ```
 
 3.To make 2D plots in designed search bin:

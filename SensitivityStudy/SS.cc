@@ -40,7 +40,8 @@ SearchBins mySearchBins("SB_59_2016");
 
 //const double Scale = 591.5/2153.736;
 //                             NJets =      1        2       3        4        5        6       7      >=8
-const double NJetRweightingFactor[8] = {0.926542,1.03995,0.919711,0.723581,0.869969,0.95682,0.584418,0.874059};
+const double NJetRweightingFactor[8] = {1.02845,1.08559,1.06879,0.922173,0.871796,0.99674,0.993756,0.539612};//2016 ICHEP, v8 MC and v9 data, 12.9 fb-1
+//const double NJetRweightingFactor[8] = {0.926542,1.03995,0.919711,0.723581,0.869969,0.95682,0.584418,0.874059};//2016 Moriond
 
 void LoopSSCS( SSSampleWeight& mySSSampleWeight )
 {
@@ -755,7 +756,8 @@ void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
   //mySSDataCard.printDC_AllFiles("_37BinsLUMI2016ICHEP");
   //mySSDataCard.printDC_AllFiles("_126BinsLUMI2016ICHEP");
   //mySSDataCard.printDC_AllFiles("_69BinsLUMI2016ICHEP");
-  mySSDataCard.printDC_AllFiles("_59BinsLUMI2016ICHEP");
+  //mySSDataCard.printDC_AllFiles("_59BinsLUMI2016ICHEP");
+  mySSDataCard.printDC_AllFiles("_59BinsLUMI2017Moriond");
 
   (mySSHistgram.oFile)->Write();
   (mySSHistgram.oFile)->Close();
@@ -767,13 +769,27 @@ void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
 void LoopSignalCard( std::string RunMode )
 {
   TChain *chain= new TChain("stopTreeMaker/SSTree");
-  if(RunMode.find("T1tttt") != std::string::npos){ chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/SSTrimmed_SMS-T1tttt_mGluino.root"); }
-  else if(RunMode.find("T2tt") != std::string::npos){ chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/SSTrimmed_SMS-T2tt_mStop.root"); }
+  if(RunMode.find("T1tttt") != std::string::npos)
+  { 
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T1tttt_FastSim_scan_stopFlatNtuples.root"); 
+  }
+  else if(RunMode.find("T2tt") != std::string::npos)
+  { 
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_150to250_stopFlatNtuples.root");
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_250to350_stopFlatNtuples.root"); 
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_350to400_stopFlatNtuples.root"); 
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_400to1200_stopFlatNtuples.root"); 
+  }
+  else if(RunMode.find("T5ttcc") != std::string::npos)
+  {
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T5ttcc_FastSim_scan_stopFlatNtuples.root");
+  }
   else { std::cout << "bad RunMode for signal card!" << std::endl; return ; }
 
   TFile *pre_trim_file = 0;
   if(RunMode.find("T1tttt") != std::string::npos) pre_trim_file = new TFile("SignalScanBeforeBaseline/SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T1tttt_FastSim_scan_stopFlatNtuples.root");
   else if(RunMode.find("T2tt") != std::string::npos) pre_trim_file = new TFile("SignalScanBeforeBaseline/SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_stopFlatNtuples.root");
+  else if(RunMode.find("T5ttcc") != std::string::npos) pre_trim_file = new TFile("SignalScanBeforeBaseline/SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T5ttcc_FastSim_scan_stopFlatNtuples.root");
   else { std::cout<<"pre_trim file NOT provided for RunMode : "<<RunMode.c_str()<<std::endl; return; }
 
   //clock to monitor the run time
@@ -806,7 +822,8 @@ void LoopSignalCard( std::string RunMode )
 
     double SusyMotherMass = tr.getVar<double>("SusyMotherMass");
     double SusyLSPMass    = tr.getVar<double>("SusyLSPMass");
-    
+    //if((int)SusyMotherMass%25>1.1 || (int)SusyLSPMass%25>1.1){ std::cout << "Werid mass point not in 25 interveral GeV range!" << " SusyMotherMass : " << SusyMotherMass << "; SusyLSPMass : " << SusyLSPMass << std::endl; }
+
     bool thisMassPoint = false;
     for(iter_mySignalDataCardVec = mySignalDataCardVec.begin(); iter_mySignalDataCardVec != mySignalDataCardVec.end(); iter_mySignalDataCardVec++)
     {
@@ -854,13 +871,15 @@ void LoopSignalCard( std::string RunMode )
         xsec_err = xSecErrMap.find(SusyMotherMass)->second * xsec;
       }
     }
-    if(!(xsec>0)){ std::cout << "mass point not in the xSec Map, strange!" << std::endl; continue; }
+    if(!(xsec>0)){ std::cout << "mass point not in the xSec Map, strange!" << " SusyMotherMass : " << SusyMotherMass << "; SusyLSPMass : " << SusyLSPMass << std::endl; continue; }
 
     //get total event from signal scan file
     //char tmpStr[100];
     //sprintf(tmpStr, "totEntries_%d_%d", SusyMotherMass, SusyLSPMass);
     TH2D * h2_thisSig_totEntries = (TH2D*) pre_trim_file->Get("h_totEvt_xSusyMotherMass_ySusyLSPMass");
-    double thisSig_totEntries = h2_thisSig_totEntries->GetBinContent(SusyMotherMass/25,SusyLSPMass/25);
+    int binx = h2_thisSig_totEntries->GetXaxis()->FindBin(SusyMotherMass); int biny = h2_thisSig_totEntries->GetYaxis()->FindBin(SusyLSPMass);
+    double thisSig_totEntries = h2_thisSig_totEntries->GetBinContent(binx,biny);
+    if(!(thisSig_totEntries>0)){ std::cout << "mass point do not have entry in signal scan, strange!" << " SusyMotherMass : " << SusyMotherMass << "; SusyLSPMass : " << SusyLSPMass << std::endl; continue; }
 
     //calculate average weight
     double thisweight = xsec*lumi/thisSig_totEntries;
@@ -876,6 +895,7 @@ void LoopSignalCard( std::string RunMode )
 
     (*iter_mySignalDataCardVec).print_thisSignalDC();
   }
+  pre_trim_file->Close();
 }
 
 int main(int argc, char* argv[])
@@ -902,8 +922,9 @@ int main(int argc, char* argv[])
     double TTbar_DiLept_BR = 0.10614564; // W_Lept_BR^2
 
     SSSampleWeight mySSSampleWeightCS;
-    mySSSampleWeightCS.SSSampleInfo_push_back( "TTJets_SingleLept", 831.76*0.5*TTbar_SingleLept_BR, 59816364+60144642, LUMI, 1, inputFileList_CS.c_str() );
-    mySSSampleWeightCS.SSSampleInfo_push_back( "TTJets_DiLept"    , 831.76*TTbar_DiLept_BR        , 30498962         , LUMI, 1, inputFileList_CS.c_str() );
+    mySSSampleWeightCS.SSSampleInfo_push_back( "_TTJets_SingleLeptFromT_"   , 831.76*0.5*TTbar_SingleLept_BR, 53057043, LUMI, 1, inputFileList_CS.c_str() );
+    mySSSampleWeightCS.SSSampleInfo_push_back( "_TTJets_SingleLeptFromTbar_", 831.76*0.5*TTbar_SingleLept_BR, 60494823, LUMI, 1, inputFileList_CS.c_str() );
+    mySSSampleWeightCS.SSSampleInfo_push_back( "TTJets_DiLept"              , 831.76*TTbar_DiLept_BR        , 30498962, LUMI, 1, inputFileList_CS.c_str() );
     
     LoopSSCS( mySSSampleWeightCS );
     return 0;
@@ -1002,10 +1023,10 @@ int main(int argc, char* argv[])
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT1500to2000", 121.5   ,  7803965, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT2000toInf" , 25.42   ,  6007777, LUMI, 1, inputFileList_MC_BG.c_str() );
 
-    mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T1tttt_mGluino-1200_mLSP-800",  0.0856418,  147194, LUMI, 1, inputFileList_MC_SG.c_str() );
-    mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T1tttt_mGluino-1500_mLSP-100",  0.0141903,  103140, LUMI, 1, inputFileList_MC_SG.c_str() );
-    mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T2tt_mStop-500_mLSP-325"     ,  0.51848  ,  388207, LUMI, 1, inputFileList_MC_SG.c_str() );
-    mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T2tt_mStop-850_mLSP-100"     ,  0.0189612,  240685, LUMI, 1, inputFileList_MC_SG.c_str() );
+    //mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T1tttt_mGluino-1200_mLSP-800",  0.0856418,  147194, LUMI, 1, inputFileList_MC_SG.c_str() );
+    //mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T1tttt_mGluino-1500_mLSP-100",  0.0141903,  103140, LUMI, 1, inputFileList_MC_SG.c_str() );
+    //mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T2tt_mStop-500_mLSP-325"     ,  0.51848  ,  388207, LUMI, 1, inputFileList_MC_SG.c_str() );
+    //mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T2tt_mStop-850_mLSP-100"     ,  0.0189612,  240685, LUMI, 1, inputFileList_MC_SG.c_str() );
 
     LoopSSAllMC( mySSSampleWeightAllMC );
     return 0;

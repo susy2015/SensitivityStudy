@@ -108,7 +108,14 @@ int main(int argc, char* argv[])
   const std::string spec = "lostlept";
   BaselineVessel *myBaselineVessel = 0;
   myBaselineVessel = new BaselineVessel(*tr, spec);
-  myBaselineVessel->toptaggerCfgFile = "Example_TopTagger.cfg";
+  if( useLegacycfg )
+  {
+    myBaselineVessel->toptaggerCfgFile = "Example_Legacy_TopTagger.cfg";
+  }
+  else
+  {
+    myBaselineVessel->toptaggerCfgFile = "Example_TopTagger.cfg";
+  }
   //The passBaseline is registered here
   tr->registerFunction(*myBaselineVessel);
 
