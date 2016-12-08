@@ -110,11 +110,11 @@ int main(int argc, char* argv[])
   myBaselineVessel = new BaselineVessel(*tr, spec);
   if( useLegacycfg )
   {
-    myBaselineVessel->toptaggerCfgFile = "Example_Legacy_TopTagger.cfg";
+    myBaselineVessel->SetupTopTagger(true, "Example_Legacy_TopTagger.cfg" );
   }
   else
   {
-    myBaselineVessel->toptaggerCfgFile = "Example_TopTagger.cfg";
+    myBaselineVessel->SetupTopTagger(true, "Example_TopTagger.cfg" );
   }
   //The passBaseline is registered here
   tr->registerFunction(*myBaselineVessel);

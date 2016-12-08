@@ -80,11 +80,11 @@ int main(int argc, char* argv[])
   myBaselineVessel = new BaselineVessel(*tr, spec);
   if( useLegacycfg )
   {
-    myBaselineVessel->toptaggerCfgFile = "Example_Legacy_TopTagger.cfg";
+    myBaselineVessel->SetupTopTagger(true, "Example_Legacy_TopTagger.cfg" );
   }
   else
   {
-    myBaselineVessel->toptaggerCfgFile = "Example_TopTagger.cfg";
+    myBaselineVessel->SetupTopTagger(true, "Example_TopTagger.cfg" );
   }
   //type3Ptr=myBaselineVessel->GetType3Ptr();
   //type3Ptr->setdebug(true);
