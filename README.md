@@ -18,10 +18,7 @@ cmake .
 make -j 8
 ## Checkout Tagtagger
 cd $CMSSW_BASE/src
-git clone git@github.com:susy2015/TopTagger.git
-cd $CMSSW_BASE/src/TopTagger
-git fetch origin
-git checkout HadStopAnaDevel_Moriond2017_Nov28_2016
+git clone -b HadStopAnaDevel_v3_Moriond2017_Dec8_2016 git@github.com:susy2015/TopTagger.git
 ```
 
 SusyAnaTools:
@@ -32,9 +29,7 @@ git cms-merge-topic -u cms-met:CMSSW_8_0_X-METFilterUpdate
 git clone -b TestMiniAOD git@github.com:susy2015/recipeAUX.git
 git clone git@github.com:cms-jet/JetToolbox.git JMEAnalysis/JetToolbox -b jetToolbox_80X_V2
 git clone git@github.com:susy2015/SusyAnaTools.git
-cd $CMSSW_BASE/src/SusyAnaTools
-git fetch origin
-git checkout Ana_BugFix1_Nov30_2016_Moriond_new_code_baseline_and_tagger
+git clone -b Ana_Dec9_2016_Moriond2017_updatesForSBStudies_v2 git@github.com:susy2015/SusyAnaTools.git
 ```
 
 CMS Build application:
@@ -62,9 +57,11 @@ git clone git@github.com:susy2015/SensitivityStudy.git
 
 ```
 cd SensitivityStudy/SSTreeMaker
-make
-source rmsetup.csh
+source reset.csh
 source $CMSSW_BASE/src/SusyAnaTools/Tools/setup.csh
+$CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t DESIRED_TAG -d /uscms_data/d3/hwei/stop
+$CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t Legacy_AK4Only_v0.0.0 -f Legacy_TopTagger.cfg -d /uscms_data/d3/hwei/stop
+make
 ```
 
 Then run the type of MC you want to get SSTree(In priciple all of them!)

@@ -12,7 +12,7 @@ def PrintCondorHeaderLine():
 
 def PrintTransferFileLine(directory, sampletype, isfirst, islast):
   if(isfirst):
-    sys.stdout.write('transfer_input_files = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSSignalScan, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/NTuple_SSSignalScan.py, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/goSSSignalScan.sh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/CSVv2_ichep.csv, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TTbarNoHad_bTagEff.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/PileupHistograms_Nov17.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/Example_Legacy_TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/Example_TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TrainingOutput.model, ')
+    sys.stdout.write('transfer_input_files = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSSignalScan, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/NTuple_SSSignalScan.py, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/goSSSignalScan.sh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/CSVv2_ichep.csv, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TTbarNoHad_bTagEff.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/PileupHistograms_Nov17.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/Legacy_TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TrainingOutput_dR20_pt30_depth14_2016_Dec2.model, ')
   for dirname, dirnames, filenames in os.walk(directory):
     for filename in filenames:
       if ( sampletype in filename ):
