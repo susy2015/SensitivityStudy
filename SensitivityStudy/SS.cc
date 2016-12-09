@@ -75,8 +75,6 @@ void LoopSSCS( SSSampleWeight& mySSSampleWeight )
 
       int ntopjetsbin_number = mySBGeometry.GetTopID(ntopjets);
       int nbotjetsbin_number = mySBGeometry.GetBotID(nbotjets);
-      //int metbin_number = Set_metbin_number(met);
-      //int mt2bin_number = Set_mt2bin_number(mt2);
 
       int ij=ntopjetsbin_number*NBOTJETS_BINS+nbotjetsbin_number;
       int metsize = mySBGeometry.NMETBINS[ij], mt2size = mySBGeometry.NMT2BINS[ij];
@@ -93,7 +91,6 @@ void LoopSSCS( SSSampleWeight& mySSSampleWeight )
       //Get electron and muon for LL study
       int nElectrons = tr.getVar<int>("nElectrons");
       int nMuons = tr.getVar<int>("nMuons");
-      //int searchbin_id = mySBGeometry.GetSBID(ntopjets,nbotjets,mt2,met);
       int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
       //int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met, ht );
       //if( searchbin_id > 61 ) std::cout << "Get it!" << std::endl;
@@ -579,8 +576,6 @@ void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
 
       int ntopjetsbin_number = mySBGeometry.GetTopID(ntopjets);
       int nbotjetsbin_number = mySBGeometry.GetBotID(nbotjets);
-      //int metbin_number = Set_metbin_number(met);
-      //int mt2bin_number = Set_mt2bin_number(mt2);
 
       bool passLeptVeto = tr.getVar<bool>("passLeptVeto");
       if(!passLeptVeto) continue;
@@ -597,7 +592,6 @@ void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
       if(met>=metbins_edge[metsize]) met_fold = (metbins_edge[metsize-1]+metbins_edge[metsize])/2; else met_fold = met;
       if(mt2>=mt2bins_edge[mt2size]) mt2_fold = (mt2bins_edge[mt2size-1]+mt2bins_edge[mt2size])/2; else mt2_fold = mt2;
 
-      //int searchbin_id = mySBGeometry.GetSBID(ntopjets,nbotjets,mt2,met);
       int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
       //int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met, ht );
 
@@ -828,7 +822,6 @@ void LoopSignalCard( std::string RunMode )
     double mt2 = tr.getVar<double>("mt2");
     double met = tr.getVar<double>("met");
     double ht = tr.getVar<double>("ht");
-    //int searchbin_id = mySBGeometry.GetSBID(ntopjets,nbotjets,mt2,met);
     //define the search bin id
     int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
     //int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met, ht );

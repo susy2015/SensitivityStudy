@@ -2,10 +2,7 @@ IDIR       = .
 ODIR       = obj
 SDIR       = ../../SusyAnaTools/Tools
 
-#CXX       = ~/.vim/bundle/ClangComplete/bin/cc_args.py g++
 CXX        = g++
-
-#CXXFLAGS  += -Iinc -std=c++0x -I${CMSSW_BASE}/src/
 CXXFLAGS  += -I. -std=c++0x -I$(CMSSW_BASE)/src/ -I$(LHAPDF_DATA_PATH)/../../include
 
 ## Optimization flag
@@ -22,27 +19,13 @@ LD       = g++
 LDFLAGS  =
 
 LIBS     = $(shell root-config --glibs)
-MT2LIB     = -L$(CMSSW_BASE)/lib/${SCRAM_ARCH}/ -lrecipeAUXOxbridgeMT2
-LHAPDFLIB  = -L$(LHAPDF_DATA_PATH)/../../lib -lLHAPDF
 
 PROGRAMS = SS SSPlots SSAUX1DPlots SSDataCardCompare
 
-all: mkobj sampPyWrap $(PROGRAMS)
+all: mkobj $(PROGRAMS)
 
 mkobj:
 	@mkdir -p obj
-
-#code to compile shared library to link samples to python
-sampPyWrap: $(ODIR)/samplesModule.so
-
-$(ODIR)/samplesModule.so: $(ODIR)/samplesPyWrap.o $(ODIR)/samplesModulePyWrap.o
-	$(CXX) -shared -o $@ $^
-
-$(ODIR)/samplesPyWrap.o: $(SDIR)/samples.cc $(SDIR)/samples.h
-	$(CXX) --std=c++11 -c -fPIC -o $@ $<
-
-$(ODIR)/samplesModulePyWrap.o: $(SDIR)/samplesModule.cc
-	$(CXX) --std=c++11 -c -fPIC -o $@ $<
 
 $(ODIR)/%.o : $(SDIR)/%.C
 	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
@@ -62,20 +45,8 @@ $(ODIR)/%.o : $(IDIR)/%.cc
 $(ODIR)/%.o : $(IDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
 
-$(ODIR)/%.o : $(TTSDIR)/%.cc
-	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -fPIC -o $@ -c $<
-
-$(ODIR)/%.o : $(TTSDIR)/%.cpp
-	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -fPIC -o $@ -c $<
-
-$(ODIR)/%.o : $(TPSDIR)/%.cc
-	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -fPIC -o $@ -c $<
-
-$(ODIR)/%.o : $(TPSDIR)/%.cpp
-	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -fPIC -o $@ -c $<
-
 SS: $(ODIR)/SS.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/searchBins.o
-	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
+	$(LD) $^ $(LIBS)  -o $@
 
 SSPlots: $(ODIR)/SSPlots.o
 	$(LD) $^ $(LIBS)  -o $@

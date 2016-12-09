@@ -108,10 +108,3 @@ and 1D plots to show the signal and BG distribution:
 ```
 ./SSDataCardCompare
 ```
-
-5.To test the SBGeometry.h(Need to be improved!)
-
-g++ -std=c++11 SSBinIDTest.cc
-
-./a.out
-
