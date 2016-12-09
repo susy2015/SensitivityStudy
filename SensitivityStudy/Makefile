@@ -20,7 +20,7 @@ LDFLAGS  =
 
 LIBS     = $(shell root-config --glibs)
 
-PROGRAMS = SS SSPlots SSAUX1DPlots SSDataCardCompare
+PROGRAMS = SS SSDataCardCompare
 
 all: mkobj $(PROGRAMS)
 
@@ -45,13 +45,7 @@ $(ODIR)/%.o : $(IDIR)/%.cc
 $(ODIR)/%.o : $(IDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
 
-SS: $(ODIR)/SS.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/searchBins.o
-	$(LD) $^ $(LIBS)  -o $@
-
-SSPlots: $(ODIR)/SSPlots.o
-	$(LD) $^ $(LIBS)  -o $@
-
-SSAUX1DPlots: $(ODIR)/SSAUX1DPlots.o
+SS: $(ODIR)/SS.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/searchBins.o $(ODIR)/SSReWeighting.o $(ODIR)/SSDataCard.o $(ODIR)/SignalDataCard.o
 	$(LD) $^ $(LIBS)  -o $@
 
 SSDataCardCompare: $(ODIR)/SSDataCardCompare.o $(ODIR)/searchBins.o

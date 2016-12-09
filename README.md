@@ -68,7 +68,13 @@ Then run the type of MC you want to get SSTree(In priciple all of them!)
 
 And then hadd and move them into EOS, change the runList files in the SensitivityStudy/SensitivityStudy directory
 
-1.To study Signal/MC in designed search bin:
+1.To study the CS in designed search bin:
+
+```
+./SS SSCS runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
+```
+
+2.To generate data card for all background:
 
 ```
 cd SensitivityStudy/SensitivityStudy
@@ -77,30 +83,12 @@ cd SensitivityStudy/SensitivityStudy
 ./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v11p2b_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2b_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2b_MuCS.txt
 ```
 
-2.To study the CS in designed search bin:
-
-```
-./SS SSCS runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
-```
-
-3.To generate Signal Data Card
+3.To generate data card for all signal points:
 
 ```
 cd SensitivityStudy/SensitivityStudy
 ./SS SignalCardT2tt runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
 ./SS SignalCardT1tttt runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
-```
-
-3.To make 2D plots in designed search bin:
-
-```
-./SSPlots SSPlots20160504
-```
-
-and 1D plots to show the signal and BG distribution:
-
-```
-./SSAUX1DPlots SSAUX1DPlots20160517
 ```
 
 4.To compare the real data card and fake data card
