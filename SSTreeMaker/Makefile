@@ -29,7 +29,7 @@ MT2LIB     = -L$(CMSSW_BASE)/lib/${SCRAM_ARCH}/ -lrecipeAUXOxbridgeMT2 -L$(CMSSW
 LHAPDFLIB  = -L$(LHAPDF_DATA_PATH)/../../lib -lLHAPDF
 FILES = $(wildcard $(SDIR)/*.cc)
 OBJS  := $(FILES:$(SDIR)/%.cc=$(ODIR)/%.o)
-PROGRAMS = SSTrimAndSlim_LLHadTau SSTrimAndSlim_ZinvQCD SSTrimAndSlim_TTZ SSTrimAndSlim_Signal
+PROGRAMS = SSTrimAndSlim_LLHadTau SSTrimAndSlim_ZinvQCD SSTrimAndSlim_TTZ SSTrimAndSlim_Signal SSSignalScan
 
 all: mkobj $(OBJS) SusyAnaTools $(PROGRAMS)
 
@@ -69,6 +69,9 @@ SSTrimAndSlim_TTZ: $(ODIR)/SSTrimAndSlim_TTZ.o $(ODIR)/NTupleReader.o $(ODIR)/SA
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
 SSTrimAndSlim_Signal: $(ODIR)/SSTrimAndSlim_Signal.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o 
+	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
+
+SSSignalScan: $(ODIR)/SSSignalScan.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/SignalScanHistogram.o
 	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
 
 clean:

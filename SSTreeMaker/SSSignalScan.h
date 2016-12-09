@@ -8,6 +8,8 @@
 #include "SusyAnaTools/Tools/NTupleReader.h"
 #include "SusyAnaTools/Tools/baselineDef.h"
 
+#include "SignalScanHistogram.h"
+
 inline size_t find_Nth
 (
   const std::string & str ,   // where to work
@@ -39,6 +41,4 @@ inline double GetHTTops( std::vector<TLorentzVector> vTops )
   return HTTops;
 }       // -----  end of function VarPerEvent::GetnTops  -----
 
-bool useNewTagger = true;
-bool useLegacycfg = false;
 #endif

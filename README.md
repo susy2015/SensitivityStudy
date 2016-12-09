@@ -18,10 +18,7 @@ cmake .
 make -j 8
 ## Checkout Tagtagger
 cd $CMSSW_BASE/src
-git clone git@github.com:susy2015/TopTagger.git
-cd $CMSSW_BASE/src/TopTagger
-git fetch origin
-git checkout HadStopAnaDevel_Moriond2017_Nov28_2016
+git clone -b HadStopAnaDevel_v3_Moriond2017_Dec8_2016 git@github.com:susy2015/TopTagger.git
 ```
 
 SusyAnaTools:
@@ -32,9 +29,7 @@ git cms-merge-topic -u cms-met:CMSSW_8_0_X-METFilterUpdate
 git clone -b TestMiniAOD git@github.com:susy2015/recipeAUX.git
 git clone git@github.com:cms-jet/JetToolbox.git JMEAnalysis/JetToolbox -b jetToolbox_80X_V2
 git clone git@github.com:susy2015/SusyAnaTools.git
-cd $CMSSW_BASE/src/SusyAnaTools
-git fetch origin
-git checkout Ana_BugFix1_Nov30_2016_Moriond_new_code_baseline_and_tagger
+git clone -b Ana_Dec9_2016_Moriond2017_updatesForSBStudies_v2 git@github.com:susy2015/SusyAnaTools.git
 ```
 
 CMS Build application:
@@ -62,50 +57,38 @@ git clone git@github.com:susy2015/SensitivityStudy.git
 
 ```
 cd SensitivityStudy/SSTreeMaker
-make
-source rmsetup.csh
+source reset.csh
 source $CMSSW_BASE/src/SusyAnaTools/Tools/setup.csh
+$CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t DESIRED_TAG -d /uscms_data/d3/hwei/stop
+$CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t Legacy_AK4Only_v0.0.0 -f Legacy_TopTagger.cfg -d /uscms_data/d3/hwei/stop
+make
 ```
 
 Then run the type of MC you want to get SSTree(In priciple all of them!)
 
 And then hadd and move them into EOS, change the runList files in the SensitivityStudy/SensitivityStudy directory
 
-1.To study Signal/MC in designed search bin:
+1.To study the CS in designed search bin:
+
+```
+./SS SSCS runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
+```
+
+2.To generate data card for all background:
 
 ```
 cd SensitivityStudy/SensitivityStudy
-xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T1tttt_forHua.root SignalScanBeforeBaseline/
-xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T2tt_forHua.root SignalScanBeforeBaseline/
-./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v6_BG.txt runList_Sensitivity_MC_SSSkimmed_v6_SG.txt runList_Sensitivity_MC_SSSkimmed_v6_MuCS.txt
+./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
+./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v11p2a_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2a_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2a_MuCS.txt
+./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v11p2b_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2b_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2b_MuCS.txt
 ```
 
-2.To study the CS in designed search bin:
-
-```
-./SS SSCS runList_Sensitivity_MC_SSSkimmed_v6_BG.txt runList_Sensitivity_MC_SSSkimmed_v6_SG.txt runList_Sensitivity_MC_SSSkimmed_v6_MuCS.txt
-```
-
-3.To generate Signal Data Card
+3.To generate data card for all signal points:
 
 ```
 cd SensitivityStudy/SensitivityStudy
-xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T1tttt_forHua.root SignalScanBeforeBaseline/
-xrdcp root://cmseos.fnal.gov//store/user/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v6/signalScan_SMS-T2tt_forHua.root SignalScanBeforeBaseline/
-./SS SignalCardT2tt runList_Sensitivity_MC_SSSkimmed_v6_BG.txt runList_Sensitivity_MC_SSSkimmed_v6_SG.txt runList_Sensitivity_MC_SSSkimmed_v6_MuCS.txt
-./SS SignalCardT1tttt runList_Sensitivity_MC_SSSkimmed_v6_BG.txt runList_Sensitivity_MC_SSSkimmed_v6_SG.txt runList_Sensitivity_MC_SSSkimmed_v6_MuCS.txt
-```
-
-3.To make 2D plots in designed search bin:
-
-```
-./SSPlots SSPlots20160504
-```
-
-and 1D plots to show the signal and BG distribution:
-
-```
-./SSAUX1DPlots SSAUX1DPlots20160517
+./SS SignalCardT2tt runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
+./SS SignalCardT1tttt runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
 ```
 
 4.To compare the real data card and fake data card
@@ -113,10 +96,3 @@ and 1D plots to show the signal and BG distribution:
 ```
 ./SSDataCardCompare
 ```
-
-5.To test the SBGeometry.h(Need to be improved!)
-
-g++ -std=c++11 SSBinIDTest.cc
-
-./a.out
-

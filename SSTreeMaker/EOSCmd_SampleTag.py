@@ -4,7 +4,8 @@ d_hadd_source = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15"
 #d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/QCD_Data_2016ICHEPv9"
 #d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/LL_Data_2016ICHEPv9"
 #d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/SFCheckTrim_2016Sep"
-d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2"
+d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p3"
+#d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/SignalScan_v11"
 
 MGM = "root://cmseos.fnal.gov/"
 
@@ -163,6 +164,16 @@ sample_tag_list_SSTrimAndSlim = [
 "SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_TTZToLLNuNu_ext1_stopFlatNtuples_",
 "SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_TTZToQQ_stopFlatNtuples_",
                                 ]
+
+sample_tag_list_SSSignalScan = [
+"SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T1tttt_FastSim_scan_stopFlatNtuples_",
+"SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_150to250_stopFlatNtuples_",
+"SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_250to350_stopFlatNtuples_",
+"SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_350to400_stopFlatNtuples_",
+"SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_400to1200_stopFlatNtuples_",
+"SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T5ttcc_FastSim_scan_stopFlatNtuples_",
+                                ]
+
 #example of sample tag: SSTrimmed_SMS-T2tt_mStop-850_mLSP-100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_stopFlatNtuples_, always end with "_"
 sample_tag = sys.argv[1]
 
@@ -184,6 +195,8 @@ elif(sample_tag == 'SFCheckTrim') :
   sample_tag_list = sample_tag_list_SFCheckTrim
 elif(sample_tag == 'SSTrimAndSlim') :
   sample_tag_list = sample_tag_list_SSTrimAndSlim
+elif(sample_tag == 'SSSignalScan') :
+  sample_tag_list = sample_tag_list_SSSignalScan
 else:
   print "wrong run type!"
 

@@ -20,7 +20,8 @@
 #include "TLine.h"
 
 #include "SusyAnaTools/Tools/searchBins.h"
-#include "SBGeometry.h"
+
+#include "ConstantsSnippet.h"
 
 SearchBins mySearchBins("SB_45_2015");
 
