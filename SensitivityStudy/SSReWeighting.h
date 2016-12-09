@@ -22,7 +22,7 @@
 //#define LUMI 8000
 //2016 End of year Exp
 #define LUMI 35000
-
+//#define LUMI 12918.140703927
 //Fill chain from txt file
 bool FillChain(TChain *chain, const TString &inputFileList, std::string tag)
 {

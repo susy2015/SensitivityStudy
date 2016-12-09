@@ -3,8 +3,8 @@
 
 //#define NSB 45
 //#define NSB 37
-//#define NSB 126
 #define NSB 59
+//#define NSB 84
 
 #define NTOPJETS_BINS 3
 #define NBOTJETS_BINS 3

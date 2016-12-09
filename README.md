@@ -76,6 +76,8 @@ And then hadd and move them into EOS, change the runList files in the Sensitivit
 ```
 cd SensitivityStudy/SensitivityStudy
 ./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
+./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v11p2a_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2a_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2a_MuCS.txt
+./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v11p2b_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2b_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2b_MuCS.txt
 ```
 
 2.To study the CS in designed search bin:

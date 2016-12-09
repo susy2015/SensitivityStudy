@@ -80,13 +80,11 @@ int main(int argc, char* argv[])
   const std::string spec = "lostlept";
   BaselineVessel *myBaselineVessel = 0;
   myBaselineVessel = new BaselineVessel(*tr, spec, "fastsim");
-  if( useLegacycfg )
-  {
-    myBaselineVessel->SetupTopTagger(true, "Example_Legacy_TopTagger.cfg" );
-  }
+  if( !useNewTagger ){ myBaselineVessel->SetupTopTagger(false, "Example_Legacy_TopTagger.cfg" ); }
   else
   {
-    myBaselineVessel->SetupTopTagger(true, "Example_TopTagger.cfg" );
+    if( useLegacycfg ){ myBaselineVessel->SetupTopTagger(true, "Example_Legacy_TopTagger.cfg" ); }
+    else{ myBaselineVessel->SetupTopTagger(true, "Example_TopTagger.cfg" ); }
   }
   //The passBaseline is registered here
   tr->registerFunction(*myBaselineVessel);
