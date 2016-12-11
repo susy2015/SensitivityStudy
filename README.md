@@ -7,6 +7,17 @@ cmsenv
 ```
 Download source code from github and compile plugins:
 
+SusyAnaTools:
+```
+git cms-init
+git cms-merge-topic -u kpedro88:METfix8022
+git cms-merge-topic -u cms-met:CMSSW_8_0_X-METFilterUpdate
+git clone -b TestMiniAOD git@github.com:susy2015/recipeAUX.git
+git clone git@github.com:cms-jet/JetToolbox.git JMEAnalysis/JetToolbox -b jetToolbox_80X_V2
+git clone git@github.com:susy2015/SusyAnaTools.git
+git clone -b Ana_Dec9_2016_Moriond2017_updatesForSBStudies_v2 git@github.com:susy2015/SusyAnaTools.git
+```
+
 TopTagger:
 ```
 ## Checkout and build OpenCV library for Toptagger
@@ -19,17 +30,6 @@ make -j 8
 ## Checkout Tagtagger
 cd $CMSSW_BASE/src
 git clone -b HadStopAnaDevel_v3_Moriond2017_Dec8_2016 git@github.com:susy2015/TopTagger.git
-```
-
-SusyAnaTools:
-```
-git cms-init
-git cms-merge-topic -u kpedro88:METfix8022
-git cms-merge-topic -u cms-met:CMSSW_8_0_X-METFilterUpdate
-git clone -b TestMiniAOD git@github.com:susy2015/recipeAUX.git
-git clone git@github.com:cms-jet/JetToolbox.git JMEAnalysis/JetToolbox -b jetToolbox_80X_V2
-git clone git@github.com:susy2015/SusyAnaTools.git
-git clone -b Ana_Dec9_2016_Moriond2017_updatesForSBStudies_v2 git@github.com:susy2015/SusyAnaTools.git
 ```
 
 CMS Build application:
