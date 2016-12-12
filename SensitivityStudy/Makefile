@@ -1,6 +1,6 @@
 IDIR       = .
 ODIR       = obj
-SDIR       = ../../SusyAnaTools/Tools
+SDIR       = $(CMSSW_BASE)/src/SusyAnaTools/Tools
 
 CXX        = g++
 CXXFLAGS  += -I. -std=c++0x -I$(CMSSW_BASE)/src/ -I$(LHAPDF_DATA_PATH)/../../include

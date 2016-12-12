@@ -70,7 +70,7 @@ And then hadd and move them into EOS, change the runList files in the Sensitivit
 1.To study the CS in designed search bin:
 
 ```
-./SS SSCS runList_Sensitivity_MC_SSSkimmed_v11p2_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p2_MuCS.txt
+./SS SSCS runList_Sensitivity_MC_SSSkimmed_v11p3_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p3_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p3_MuCS.txt
 ```
 
 2.To generate data card for all background:
