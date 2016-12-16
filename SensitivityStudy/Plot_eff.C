@@ -8,15 +8,23 @@
   bool do_c1=false;
   bool do_c2=false;
   bool do_c3=false;
+  bool do_c3b=false;
+  bool do_c3c=false;
+  bool do_c3d=false;
   bool do_c4=false;
   bool do_c5=false;
  
   do_c1=true;
   do_c2=true;
   do_c3=true;
+  do_c3b=true;
+  do_c3c=true;
+  do_c3d=true;
   //do_c4=true;
   do_c5=true;
  
+  const std::string pngName="";
+
   gStyle->SetPaintTextFormat("2.2f");
 
   if (do_c1)
@@ -34,7 +42,7 @@
   h2_B_ori_c1->SetYTitle("MT2 cut [GeV]");
   h2_B_ori_c1->SetStats(0);
 
-  c1->SaveAs( "c1.C" );
+  if (pngName=="") c1->SaveAs( "c1.png" );
   }
 
   if (do_c2)
@@ -52,10 +60,11 @@
   h2_B_ori_c2->SetYTitle("MT2 cut [GeV]");
   h2_B_ori_c2->SetStats(0);
 
-  c2->SaveAs( "c2.C" );
+  if (pngName=="") c2->SaveAs( "c2.png" );
   }
 
-  gStyle->SetPaintTextFormat("2.4f");
+  //gStyle->SetPaintTextFormat("2.4f");
+  gStyle->SetPaintTextFormat("2.2f");
 
   if (do_c3)
   {
@@ -72,7 +81,66 @@
   h2_B_ori_c3->SetYTitle("MT2 cut [GeV]");
   h2_B_ori_c3->SetStats(0);
 
-  c3->SaveAs( "c3.C" );
+  const std::string TotpngName="c3_"+pngName+".png";
+
+  c3->SaveAs( TotpngName.c_str() );
+  }
+
+  if (do_c3b)
+  {
+
+  TCanvas *c3b = new TCanvas("c3b", "c3b",0,51,1920,1004);
+  c3b->SetFillColor(0);
+  c3b->cd();
+  //c3b->SetLogy();
+
+  TH2F *h2_B_ori_c3b = (TH2F*)f_eff.Get("h2_SOverB2");
+  h2_B_ori_c3b->Draw("colztext");
+  h2_B_ori_c3b->SetTitle("");
+  h2_B_ori_c3b->SetXTitle("MET cut [GeV]");
+  h2_B_ori_c3b->SetYTitle("MT2 cut [GeV]");
+  h2_B_ori_c3b->SetStats(0);
+
+  const std::string TotpngName="c3b_"+pngName+".png";
+  c3b->SaveAs( TotpngName.c_str() );
+  }
+
+  if (do_c3c)
+  {
+
+  TCanvas *c3c = new TCanvas("c3c", "c3c",0,51,1920,1004);
+  c3c->SetFillColor(0);
+  c3c->cd();
+  //c3c->SetLogy();
+
+  TH2F *h2_B_ori_c3c = (TH2F*)f_eff.Get("h2_SOverB3");
+  h2_B_ori_c3c->Draw("colztext");
+  h2_B_ori_c3c->SetTitle("");
+  h2_B_ori_c3c->SetXTitle("MET cut [GeV]");
+  h2_B_ori_c3c->SetYTitle("MT2 cut [GeV]");
+  h2_B_ori_c3c->SetStats(0);
+
+  const std::string TotpngName="c3c_"+pngName+".png";
+  c3c->SaveAs( TotpngName.c_str() );
+  }
+
+  if (do_c3d)
+  {
+
+  TCanvas *c3d = new TCanvas("c3d", "c3d",0,51,1920,1004);
+  c3d->SetFillColor(0);
+  c3d->cd();
+  //c3d->SetLogy();
+
+  TH2F *h2_B_ori_c3d = (TH2F*)f_eff.Get("h2_SOverB4");
+  h2_B_ori_c3d->Draw("colztext");
+  h2_B_ori_c3d->SetTitle("");
+  h2_B_ori_c3d->SetXTitle("MET cut [GeV]");
+  h2_B_ori_c3d->SetYTitle("MT2 cut [GeV]");
+  h2_B_ori_c3d->SetStats(0);
+
+  const std::string TotpngName="c3d_"+pngName+".png";
+  c3d->SaveAs( TotpngName.c_str() );
   }
 
   if (do_c4)
@@ -90,7 +158,7 @@
   h2_B_ori_c4->SetYTitle("MT2 cut [GeV]");
   h2_B_ori_c4->SetStats(0);
 
-  c4->SaveAs( "c4.C" );
+  if (pngName=="") c4->SaveAs( "c4.png" );
   }
 
   gStyle->SetPaintTextFormat("2.2f");
@@ -110,7 +178,8 @@
   h2_B_ori_c5->SetYTitle("MT2 cut [GeV]");
   h2_B_ori_c5->SetStats(0);
 
-  c5->SaveAs( "c5.C" );
+  const std::string TotpngName="c5_"+pngName+".png";
+  c5->SaveAs( TotpngName.c_str() );
   }
 
   //gPad->Modified();
