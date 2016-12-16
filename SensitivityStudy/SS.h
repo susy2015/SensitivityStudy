@@ -45,12 +45,17 @@ class FSLHistgram
   TH2D *h2_B;
   TH2D *h2_S;
   TH2D *h2_SOverB;
+  TH2D *h2_SOverB2;
+  TH2D *h2_SOverB3;
+  TH2D *h2_SOverB4;
   TH2D *h2_Q;
   TH2D *h2_nmuCS;
 
   TH2D *h2_BMETHT;
   TH2D *h2_SMETHT;
   TH2D *h2_SOverBMETHT;
+  TH2D *h2_SOverBMETHT2;
+  TH2D *h2_SOverBMETHT3;
   TH2D *h2_QMETHT;
   TH2D *h2_nmuCSMETHT;
 
@@ -60,20 +65,30 @@ class FSLHistgram
   TH2D *h2_QMETHTtop;
   TH2D *h2_nmuCSMETHTtop;
 
+  TH2D *h2_BMT2HT;
+  TH2D *h2_SMT2HT;
+  TH2D *h2_SOverBMT2HT;
+  TH2D *h2_nmuCSMT2HT;
+
 };
 void FSLHistgram::BookHistgram(const char *outFileName)
 {
   oFile = new TFile(outFileName, "recreate");
 
-  h2_B = new TH2D("h2_B","h2_B",17,250.0,1100.0,7,200.0,550.0);
-  h2_S = new TH2D("h2_S","h2_S",17,250.0,1100.0,7,200.0,550.0);
-  h2_SOverB = new TH2D("h2_SOverB","h2_SoverB",17,250.0,1100.0,7,200.0,550.0);
-  h2_Q = new TH2D("h2_Q","h2_Q",17,250.0,1100.0,7,200.0,550.0);
-  h2_nmuCS = new TH2D("h2_nmuCS","h2_nmuCS",17,250.0,1100.0,7,200.0,550.0);
+  h2_B = new TH2D("h2_B","h2_B",17,250.0,1100.0,16,200.0,1000.0);
+  h2_S = new TH2D("h2_S","h2_S",17,250.0,1100.0,16,200.0,1000.0);
+  h2_SOverB = new TH2D("h2_SOverB","h2_SoverB",17,250.0,1100.0,16,200.0,1000.0);
+  h2_SOverB2 = new TH2D("h2_SOverB2","h2_SoverB2",17,250.0,1100.0,16,200.0,1000.0);
+  h2_SOverB3 = new TH2D("h2_SOverB3","h2_SoverB3",17,250.0,1100.0,16,200.0,1000.0);
+  h2_SOverB4 = new TH2D("h2_SOverB4","h2_SoverB4",17,250.0,1100.0,16,200.0,1000.0);
+  h2_Q = new TH2D("h2_Q","h2_Q",17,250.0,1100.0,16,200.0,1000.0);
+  h2_nmuCS = new TH2D("h2_nmuCS","h2_nmuCS",17,250.0,1100.0,16,200.0,1000.0);
 
   h2_BMETHT = new TH2D("h2_BMETHT","h2_BMETHT",17,250.0,1100.0,34,300.0,2000.0);
   h2_SMETHT = new TH2D("h2_SMETHT","h2_SMETHT",17,250.0,1100.0,34,300.0,2000.0);
   h2_SOverBMETHT = new TH2D("h2_SOverBMETHT","h2_SoverBMETHT",17,250.0,1100.0,34,300.0,2000.0);
+  h2_SOverBMETHT2 = new TH2D("h2_SOverBMETHT2","h2_SoverBMETHT2",17,250.0,1100.0,34,300.0,2000.0);
+  h2_SOverBMETHT3 = new TH2D("h2_SOverBMETHT3","h2_SoverBMETHT3",17,250.0,1100.0,34,300.0,2000.0);
   h2_QMETHT = new TH2D("h2_QMETHT","h2_QMETHT",17,250.0,1100.0,34,300.0,2000.0);
   h2_nmuCSMETHT = new TH2D("h2_nmuCSMETHT","h2_nmuCSMETHT",17,250.0,1100.0,34,300.0,2000.0);
 
@@ -82,4 +97,12 @@ void FSLHistgram::BookHistgram(const char *outFileName)
   h2_SOverBMETHTtop = new TH2D("h2_SOverBMETHTtop","h2_SoverBMETHTtop",17,250.0,1100.0,34,0.0,1700.0);
   h2_QMETHTtop = new TH2D("h2_QMETHTtop","h2_QMETHTtop",17,250.0,1100.0,34,0.0,1700.0);
   h2_nmuCSMETHTtop = new TH2D("h2_nmuCSMETHTtop","h2_nmuCSMETHTtop",17,250.0,1100.0,34,0.0,1700.0);
+
+  h2_BMT2HT = new TH2D("h2_BMT2HT","h2_BMT2HT",12,200.0,800.0,34,300.0,2000.0);
+  h2_SMT2HT = new TH2D("h2_SMT2HT","h2_SMT2HT",12,200.0,800.0,34,300.0,2000.0);
+  h2_SOverBMT2HT = new TH2D("h2_SOverBMT2HT","h2_SoverBMT2HT",12,200.0,800.0,34,300.0,2000.0);
+  //h2_QMT2HT = new TH2D("h2_QMT2HT","h2_QMT2HT",17,250.0,1100.0,34,300.0,2000.0);
+  h2_nmuCSMT2HT = new TH2D("h2_nmuCSMT2HT","h2_nmuCSMT2HT",12,200.0,800.0,34,300.0,2000.0);
+
+
 }
