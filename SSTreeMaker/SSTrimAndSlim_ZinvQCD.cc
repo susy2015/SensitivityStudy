@@ -15,7 +15,7 @@
 #include "SusyAnaTools/Tools/samples.h"
 #include "SusyAnaTools/Tools/searchBins.h"
 
-#include "SSTrimAndSlim.h"
+#include "SSTrimAndSlimCommon.h"
 
 int main(int argc, char* argv[])
 {
@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
   std::string output_str;
   //here is a little bit tricky when dealing with the slash... need to improve
   //for all the data samples and ttbar leptonic MC samples
-  std::string tag = input_str.substr(find_Nth(input_str,9,"/") + 1,find_Nth(input_str,10,"/")-find_Nth(input_str,9,"/")-1);
+  std::string tag = input_str.substr(find_Nth(input_str,10,"/") + 1,find_Nth(input_str,11,"/")-find_Nth(input_str,10,"/")-1);
   std::size_t idpos = input_str.find("stopFlatNtuples");
   std::string fileid = input_str.substr (idpos);
 
@@ -61,36 +61,44 @@ int main(int argc, char* argv[])
   selectedTree->Branch("nElectrons",&nels,"nElectrons/I");
   selectedTree->Branch("passLeptVeto",&passLeptVeto,"passLeptVeto/O");
   //AUX variables maybe useful for research
-  Int_t njets30,njets50; Double_t ht;
+  Int_t njets30,njets50; Double_t ht,htTops;
   selectedTree->Branch("nJets30",&njets30,"nJets30/I");
   selectedTree->Branch("nJets50",&njets50,"nJets50/I");
   selectedTree->Branch("ht",&ht,"ht/D");
+  selectedTree->Branch("htTops",&htTops,"htTops/D");
 
-  const std::string spec = "lostlept";
-  myBaselineVessel = new BaselineVessel(spec);
-
-  //use class NTupleReader in the SusyAnaTools/Tools/NTupleReader.h file
-  NTupleReader tr(originalTree);
+  std::shared_ptr<topTagger::type3TopTagger>type3Ptr(nullptr);
+  NTupleReader *tr=0;
   //initialize the type3Ptr defined in the customize.h
-  AnaFunctions::prepareTopTagger();
+  AnaFunctions::prepareForNtupleReader();
+  tr = new NTupleReader(originalTree, AnaConsts::activatedBranchNames);
+  const std::string spec = "lostlept";
+  BaselineVessel *myBaselineVessel = 0;
+  myBaselineVessel = new BaselineVessel(*tr, spec);
+  if( !useNewTagger ){ myBaselineVessel->SetupTopTagger(false, "Legacy_TopTagger.cfg" ); }
+  else
+  {
+    if( useLegacycfg ){ myBaselineVessel->SetupTopTagger(true, "Legacy_TopTagger.cfg" ); }
+    else{ myBaselineVessel->SetupTopTagger(true, "TopTagger.cfg" ); }
+  }
   //The passBaseline is registered here
-  tr.registerFunction(&mypassBaselineFunc);
+  tr->registerFunction(*myBaselineVessel);
 
-  while(tr.getNextEvent())
+  while(tr->getNextEvent())
   {
     /*
-    bool passLeptVeto = tr.getVar<bool>("passLeptVeto"+spec);
-    bool passnJets = tr.getVar<bool>("passnJets"+spec);
-    bool passMET = tr.getVar<bool>("passMET"+spec);
-    bool passHT = tr.getVar<bool>("passHT"+spec);
-    bool passMT2 = tr.getVar<bool>("passMT2"+spec);
-    bool passTagger = tr.getVar<bool>("passTagger"+spec);
-    bool passBJets = tr.getVar<bool>("passBJets"+spec);
-    bool passNoiseEventFilter = tr.getVar<bool>("passNoiseEventFilter"+spec);
-    bool passQCDHighMETFilter = tr.getVar<bool>("passQCDHighMETFilter"+spec);
-    bool passdPhis = tr.getVar<bool>("passdPhis"+spec);
+    bool passLeptVeto = tr->getVar<bool>("passLeptVeto"+spec);
+    bool passnJets = tr->getVar<bool>("passnJets"+spec);
+    bool passMET = tr->getVar<bool>("passMET"+spec);
+    bool passHT = tr->getVar<bool>("passHT"+spec);
+    bool passMT2 = tr->getVar<bool>("passMT2"+spec);
+    bool passTagger = tr->getVar<bool>("passTagger"+spec);
+    bool passBJets = tr->getVar<bool>("passBJets"+spec);
+    bool passNoiseEventFilter = tr->getVar<bool>("passNoiseEventFilter"+spec);
+    bool passQCDHighMETFilter = tr->getVar<bool>("passQCDHighMETFilter"+spec);
+    bool passdPhis = tr->getVar<bool>("passdPhis"+spec);
     */
-    bool passSSTrimAndSlim = tr.getVar<bool>("passBaseline"+spec);
+    bool passSSTrimAndSlim = tr->getVar<bool>("passBaseline"+spec);
     /*
     passSSTrimAndSlim = ( met > 200)
                 && passnJets
@@ -103,20 +111,21 @@ int main(int argc, char* argv[])
     if(passSSTrimAndSlim)
     {
       //searchbin variables
-      met = tr.getVar<double>("met");
-      mt2 = tr.getVar<double>("best_had_brJet_MT2"+spec);       
-      ntopjets = tr.getVar<int>("nTopCandSortedCnt"+spec);
-      nbotjets = tr.getVar<int>("cntCSVS"+spec);
+      met = tr->getVar<double>("met");
+      mt2 = tr->getVar<double>("best_had_brJet_MT2"+spec);       
+      ntopjets = tr->getVar<int>("nTopCandSortedCnt"+spec);
+      nbotjets = tr->getVar<int>("cntCSVS"+spec);
       //Muon and Electron variables
-      nmus = tr.getVar<int>("nMuons_CUT"+spec);
-      nels = tr.getVar<int>("nElectrons_CUT"+spec);
-      passLeptVeto = tr.getVar<bool>("passLeptVeto"+spec);
+      nmus = tr->getVar<int>("nMuons_CUT"+spec);
+      nels = tr->getVar<int>("nElectrons_CUT"+spec);
+      passLeptVeto = tr->getVar<bool>("passLeptVeto"+spec);
 
       //AUX variables
-      njets30 = tr.getVar<int>("cntNJetsPt30Eta24"+spec);
-      njets50 = tr.getVar<int>("cntNJetsPt50Eta24"+spec);
-      ht = tr.getVar<double>("HT"+spec);
-      //double mht = tr.getVar<double>("mht"); 
+      njets30 = tr->getVar<int>("cntNJetsPt30Eta24"+spec);
+      njets50 = tr->getVar<int>("cntNJetsPt50Eta24"+spec);
+      ht = tr->getVar<double>("HT"+spec);
+      htTops = GetHTTops( tr->getVec<TLorentzVector>("vTops"+spec) );
+      //double mht = tr->getVar<double>("mht"); 
       
       selectedTree->Fill();
     }
