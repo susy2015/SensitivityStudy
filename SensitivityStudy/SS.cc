@@ -34,8 +34,7 @@
 
 #include "SS.h"
 
-//SearchBins mySearchBins("SB_v1_2017");
-SearchBins mySearchBins("SB_59_2016");
+SearchBins mySearchBins(sb_tag);
 
 //const double Scale = 591.5/2153.736;
 //                             NJets =      1        2       3        4        5        6       7      >=8
@@ -73,8 +72,8 @@ void LoopSSCS( SSSampleWeight& mySSSampleWeight )
       //Get electron and muon for LL study
       int nElectrons = tr.getVar<int>("nElectrons");
       int nMuons = tr.getVar<int>("nMuons");
-      int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
-      //int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met, ht );
+      //int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
+      int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met, ht );
       //if( searchbin_id > 61 ) std::cout << "Get it!" << std::endl;
       if(searchbin_id<0) continue;
 
@@ -644,8 +643,8 @@ void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
       bool passLeptVeto = tr.getVar<bool>("passLeptVeto");
       if(!passLeptVeto) continue;
 
-      int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
-      //int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met, ht );
+      //int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
+      int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met, ht );
 
       if(searchbin_id<0)
       { 
@@ -745,7 +744,25 @@ void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
   //mySSDataCard.printDC_AllFiles("_69BinsLUMI2016ICHEP");
   //mySSDataCard.printDC_AllFiles("_59BinsLUMI2016ICHEP");
   //mySSDataCard.printDC_AllFiles("_59BinsLUMI2017Moriond");
-  mySSDataCard.printDC_AllFiles("_84BinsLUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_84BinsLUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T1ttttAALUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T1ttttABLUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T1ttttCALUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T1ttttBALUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T2ttAAAALUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T2ttBAAALUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T2ttABAALUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T2ttAABALUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T2ttAAABLUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T2ttAAACLUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T2ttAAAAhtLUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T1ttttABT2ttAAACLUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T1ttttABT2ttACACLUMI2017Moriond");
+  //mySSDataCard.printDC_AllFiles("_T1ttttABT2ttACACLUMI2017MoriondLooseTop");
+  //mySSDataCard.printDC_AllFiles("_T1ttttABT2ttACACLUMI2017MoriondMedium101Top");
+  //mySSDataCard.printDC_AllFiles("_T1ttttABT2ttACACLUMI2017MoriondTightTop");
+  mySSDataCard.printDC_AllFiles("_T1ttttABT2ttACACLUMI2017MoriondMedium110Top");
+
   return ;
 }
 
@@ -754,18 +771,18 @@ void LoopSignalCard( std::string RunMode )
   TChain *chain= new TChain("stopTreeMaker/SSTree");
   if(RunMode.find("T1tttt") != std::string::npos)
   { 
-    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T1tttt_FastSim_scan_stopFlatNtuples.root"); 
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p3b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T1tttt_FastSim_scan_stopFlatNtuples.root"); 
   }
   else if(RunMode.find("T2tt") != std::string::npos)
   { 
-    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_150to250_stopFlatNtuples.root");
-    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_250to350_stopFlatNtuples.root"); 
-    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_350to400_stopFlatNtuples.root"); 
-    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_400to1200_stopFlatNtuples.root"); 
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p3b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_150to250_stopFlatNtuples.root");
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p3b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_250to350_stopFlatNtuples.root"); 
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p3b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_350to400_stopFlatNtuples.root"); 
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p3b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_400to1200_stopFlatNtuples.root"); 
   }
   else if(RunMode.find("T5ttcc") != std::string::npos)
   {
-    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p2b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T5ttcc_FastSim_scan_stopFlatNtuples.root");
+    chain->Add("root://cmseos.fnal.gov//store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p3b/SSTrimAndSlimmed_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T5ttcc_FastSim_scan_stopFlatNtuples.root");
   }
   else { std::cout << "bad RunMode for signal card!" << std::endl; return ; }
 
@@ -800,8 +817,8 @@ void LoopSignalCard( std::string RunMode )
     double met = tr.getVar<double>("met");
     double ht = tr.getVar<double>("ht");
     //define the search bin id
-    int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
-    //int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met, ht );
+    //int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met );
+    int searchbin_id = mySearchBins.find_Binning_Index( nbotjets , ntopjets , mt2, met, ht );
     if(searchbin_id<0) continue;
 
     double SusyMotherMass = tr.getVar<double>("SusyMotherMass");

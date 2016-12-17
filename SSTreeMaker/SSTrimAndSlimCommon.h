@@ -8,6 +8,11 @@
 #include "SusyAnaTools/Tools/NTupleReader.h"
 #include "SusyAnaTools/Tools/baselineDef.h"
 
+bool useNewTagger = true;
+bool useLegacycfg = false;
+
+const int nth_slash_nametag_MC = 10;
+
 inline size_t find_Nth
 (
   const std::string & str ,   // where to work
@@ -39,6 +44,4 @@ inline double GetHTTops( std::vector<TLorentzVector> vTops )
   return HTTops;
 }       // -----  end of function VarPerEvent::GetnTops  -----
 
-bool useNewTagger = true;
-bool useLegacycfg = false;
 #endif

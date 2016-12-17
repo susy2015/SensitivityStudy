@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
   std::string output_str;
   //here is a little bit tricky when dealing with the slash... need to improve
   //for all the data samples and ttbar leptonic MC samples
-  std::string tag = input_str.substr(find_Nth(input_str,10,"/") + 1,find_Nth(input_str,11,"/")-find_Nth(input_str,10,"/")-1);
+  std::string tag = input_str.substr(find_Nth(input_str,nth_slash_nametag_MC,"/") + 1,find_Nth(input_str,nth_slash_nametag_MC+1,"/")-find_Nth(input_str,nth_slash_nametag_MC,"/")-1);
   std::size_t idpos = input_str.find("stopFlatNtuples");
   std::string fileid = input_str.substr (idpos);
 

@@ -4,9 +4,8 @@ void SSDataCard::fake_avg_uncs()
 {
   std::cout << "Faking syst uncs in Data card!" << std::endl;
   //SBGeometry mySBGeometry;
-  //SearchBins mySearchBins("SB_69_2016");
-  SearchBins mySearchBins("SB_59_2016");
-
+  SearchBins mySearchBins(sb_tag);
+  
   for(int i=0;i<NSB;i++)
   {
     DC_sb_MC_Data[i] = DC_sb_MC_LL[i] + DC_sb_MC_HadTau[i] + DC_sb_MC_Zinv[i] + /*DC_sb_MC_QCD[i] +*/ DC_sb_MC_TTZ[i] /*+ DC_sb_MC_Rare[i]*/; 
