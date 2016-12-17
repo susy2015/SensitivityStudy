@@ -28,7 +28,7 @@ cmake .
 make -j 8
 ## Checkout Tagtagger
 cd $CMSSW_BASE/src
-git clone -b HadStopAnaDevel_v3_Moriond2017_Dec8_2016 git@github.com:susy2015/TopTagger.git
+git clone -b HadStopAnaDevel_v4_Moriond2017_Dec17_2016 git@github.com:susy2015/TopTagger.git
 ```
 
 CMS Build application:
@@ -58,8 +58,8 @@ git clone git@github.com:susy2015/SensitivityStudy.git
 cd SensitivityStudy/SSTreeMaker
 source reset.csh
 source $CMSSW_BASE/src/SusyAnaTools/Tools/setup.csh
-$CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t DESIRED_TAG -d /uscms_data/d3/hwei/stop
-$CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t Legacy_AK4Only_v0.0.0 -f Legacy_TopTagger.cfg -d /uscms_data/d3/hwei/stop
+$CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t MVAAK8_Medium_v1.1.0 -d /uscms_data/d3/hwei/stop
+$CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t Legacy_AK4Only_v0.0.2 -f Legacy_TopTagger.cfg -d /uscms_data/d3/hwei/stop
 make
 ```
 
@@ -70,7 +70,8 @@ And then hadd and move them into EOS, change the runList files in the Sensitivit
 1.To study the CS in designed search bin:
 
 ```
-./SS SSCS runList_Sensitivity_MC_SSSkimmed_v11p3_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p3_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p3_MuCS.txt
+cd SensitivityStudy/SensitivityStudy
+./SS SSCS runList_Sensitivity_MC_SSSkimmed_v11p3b_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p3b_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p3b_MuCS.txt
 ```
 
 2.To generate data card for all background:
@@ -93,5 +94,6 @@ cd SensitivityStudy/SensitivityStudy
 4.To compare the real data card and fake data card
 
 ```
+cd SensitivityStudy/SensitivityStudy
 ./SSDataCardCompare
 ```
