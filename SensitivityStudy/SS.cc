@@ -194,7 +194,7 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
   }
 
   const int ntopcut=2;
-  const int nbcut=2;
+  const int nbcut=3;
   //const double minmetcut=250.0;
   const double minmt2cut=200.0;
   const double minHTcut=300.0;
@@ -238,13 +238,15 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       //if (nElectrons==0 && met>250.0 && ntopjets>=ntopcut && nbotjets>=nbcut)
       //if (nElectrons==0 && met>250.0 && ntopjets>=ntopcut && nbotjets==nbcut)
       //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut && met<500.0 && mt2<650.0)
-      //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut && met<600.0)
+      //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut && met<400.0 && mt2<300.0)
+      if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0 && HT<1400.0)
       //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0 && HT<1000.0)
       //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut && met<450.0 && mt2<400.0)
       //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut && mt2<550.0)
       //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut && met<550.0 && mt2<400.0)
 	//if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0)
-      if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut)
+	//if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut)
+	//if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut)
       {
 	double metcutc=250.0;
 	double mt2cutc=200.0;
@@ -366,24 +368,26 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       //if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets>=nbcut)
       bool isbench=false;
       double corrWeight=thisweight;
-      //if (StopMass==1900.0 && LSPMass==100.0) isbench=true;
-      //if (StopMass==1900.0 && LSPMass==1100.0) isbench=true;
-      //if (StopMass==1300.0 && LSPMass==1000.0) isbench=true;
-      if (StopMass==1000.0 && LSPMass==50.0) isbench=true;
-      if (StopMass==1000.0 && LSPMass==450.0) isbench=true;
-      if (StopMass==700.0 && LSPMass==450.0) isbench=true;
-      if (StopMass==450.0 && LSPMass==300.0) isbench=true;
+      if (StopMass==1900.0 && LSPMass==100.0) isbench=true;
+      if (StopMass==1900.0 && LSPMass==1100.0) isbench=true;
+      if (StopMass==1300.0 && LSPMass==1000.0) isbench=true;
+      //if (StopMass==1000.0 && LSPMass==50.0) isbench=true;
+      //if (StopMass==1000.0 && LSPMass==450.0) isbench=true;
+      //if (StopMass==700.0 && LSPMass==450.0) isbench=true;
+      //if (StopMass==450.0 && LSPMass==300.0) isbench=true;
       //if (isbench && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets>=nbcut)
       //if (isbench && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets==nbcut)
-      if (isbench && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets==nbcut)
+      //if (isbench && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets==nbcut)
+      if (isbench && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0 && HT<1400.0)
+	//if (isbench && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut)
       {
 	double metcutc=250.0;
 	double mt2cutc=200.0;
 	double HTcutc=300.0;
 	double HTtopcutc=0.0;
 
-	//if (StopMass==1900.0 && LSPMass==1100.0) corrWeight=thisweight*20136.0/20202.0;
-	//if (StopMass==1300.0 && LSPMass==1000.0) corrWeight=thisweight*0.0460525/0.00163547*20136.0/42472.0;
+	if (StopMass==1900.0 && LSPMass==1100.0) corrWeight=thisweight*20136.0/20202.0;
+	if (StopMass==1300.0 && LSPMass==1000.0) corrWeight=thisweight*0.0460525/0.00163547*20136.0/42472.0;
 	if (StopMass==1000.0 && LSPMass==450.0) corrWeight=thisweight*17885.0/15813.0;
 	if (StopMass==700.0 && LSPMass==450.0) corrWeight=thisweight/0.00615134*0.0670476*17885.0/24735.0;
 	if (StopMass==450.0 && LSPMass==300.0) corrWeight=thisweight/0.00615134*0.948333*17885.0/347312.0;
@@ -395,9 +399,9 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
   	  {
 	    if (met>metcutc+metbinc*50.0 && mt2>mt2cutc)
   	    {
-	      //if (StopMass==1900.0 && LSPMass==100.0) nSEvents[metbinc][mt2binc]+=corrWeight;
-	      //if (StopMass==1900.0 && LSPMass==1100.0) nSEvents2[metbinc][mt2binc]+=corrWeight;
-	      //if (StopMass==1300.0 && LSPMass==1000.0) nSEvents3[metbinc][mt2binc]+=corrWeight;
+	      if (StopMass==1900.0 && LSPMass==100.0) nSEvents[metbinc][mt2binc]+=corrWeight;
+	      if (StopMass==1900.0 && LSPMass==1100.0) nSEvents2[metbinc][mt2binc]+=corrWeight;
+	      if (StopMass==1300.0 && LSPMass==1000.0) nSEvents3[metbinc][mt2binc]+=corrWeight;
 	      if (StopMass==1000.0 && LSPMass==50.0) nSEvents[metbinc][mt2binc]+=corrWeight;
 	      if (StopMass==1000.0 && LSPMass==450.0) nSEvents2[metbinc][mt2binc]+=corrWeight;
 	      if (StopMass==700.0 && LSPMass==450.0) nSEvents3[metbinc][mt2binc]+=corrWeight;
@@ -427,9 +431,9 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
 	    //if (met>metcutc+metbinc*50.0 && HT<HTcutc)
 	    //if (met<metcutc+metbinc*50.0 && HT>HTcutc)
 	    {
-	      //if (StopMass==1900.0 && LSPMass==100.0) nSEventsMETHT[metbinc][HTbinc]+=corrWeight;
-	      //if (StopMass==1900.0 && LSPMass==1100.0) nSEvents2METHT[metbinc][HTbinc]+=corrWeight;
-	      //if (StopMass==1300.0 && LSPMass==1000.0) nSEvents3METHT[metbinc][HTbinc]+=corrWeight;
+	      if (StopMass==1900.0 && LSPMass==100.0) nSEventsMETHT[metbinc][HTbinc]+=corrWeight;
+	      if (StopMass==1900.0 && LSPMass==1100.0) nSEvents2METHT[metbinc][HTbinc]+=corrWeight;
+	      if (StopMass==1300.0 && LSPMass==1000.0) nSEvents3METHT[metbinc][HTbinc]+=corrWeight;
 	      if (StopMass==1000.0 && LSPMass==50.0) nSEventsMETHT[metbinc][HTbinc]+=corrWeight;
 	      if (StopMass==1000.0 && LSPMass==450.0) nSEvents2METHT[metbinc][HTbinc]+=corrWeight;
 	      if (StopMass==700.0 && LSPMass==450.0) nSEvents3METHT[metbinc][HTbinc]+=corrWeight;
@@ -962,7 +966,7 @@ int main(int argc, char* argv[])
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTWJetsToLNu"            , 0.2043,   191474 - 61199, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTWJetsToQQ"             , 0.4062,  631804 - 201494, LUMI, 1, inputFileList_MC_BG.c_str() );
 
-    //mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT300to500"  , 366800  , 54706298, LUMI, 1, inputFileList_MC_BG.c_str() );
+    ////mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT300to500"  , 366800  , 54706298, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT500to700"  , 29370   , 63337753, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT700to1000" , 6524    , 45453945, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT1000to1500", 1064    ,  15316362, LUMI, 1, inputFileList_MC_BG.c_str() );
@@ -971,12 +975,12 @@ int main(int argc, char* argv[])
 
     SSSampleWeight mySSSampleWeightSignal;
     // xsec are in https://github.com/susy2015/SusyAnaTools/blob/master/Tools/xSec.h
-    mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T2tt", 0.00615134, 17885, LUMI, 1, inputFileList_MC_SG.c_str() ); // t2tt 1000 50
+    //mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T2tt", 0.00615134, 17885, LUMI, 1, inputFileList_MC_SG.c_str() ); // t2tt 1000 50
     //mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T2tt", 0.00615134, 15813, LUMI, 1, inputFileList_MC_SG.c_str() ); // t2tt 1000 450
     //mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T2tt", 0.0670476, 24735, LUMI, 1, inputFileList_MC_SG.c_str() ); // t2tt 700 450
     //mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T2tt", 0.948333, 347312, LUMI, 1, inputFileList_MC_SG.c_str() ); // t2tt 450 300
     //mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T1tttt", 0.00163547, 0, LUMI, 1, inputFileList_MC_SG.c_str() ); // t1tttt 1900 50
-    //mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T1tttt", 0.00163547, 20136, LUMI, 1, inputFileList_MC_SG.c_str() ); // t1tttt 1900 100
+    mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T1tttt", 0.00163547, 20136, LUMI, 1, inputFileList_MC_SG.c_str() ); // t1tttt 1900 100
     //mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T1tttt", 0.00163547, 20202, LUMI, 1, inputFileList_MC_SG.c_str() ); // t1tttt 1900 1100
     //mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T1tttt", 0.0460525, 42472, LUMI, 1, inputFileList_MC_SG.c_str() ); // t1tttt 1300 1000
     //mySSSampleWeightSignal.SSSampleInfo_push_back( "SMS-T5ttcc", 1.0, 100000, LUMI, 1, inputFileList_MC_SG.c_str() ); // t5ttcc 1700 0
