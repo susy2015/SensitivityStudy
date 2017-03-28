@@ -48,7 +48,7 @@ $(ODIR)/%.o : $(IDIR)/%.cpp
 SS: $(ODIR)/SS.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/searchBins.o $(ODIR)/SSReWeighting.o $(ODIR)/SSDataCard.o $(ODIR)/SignalDataCard.o
 	$(LD) $^ $(LIBS)  -o $@
 
-SSDataCardCompare: $(ODIR)/SSDataCardCompare.o $(ODIR)/searchBins.o
+SSDataCardCompare: $(ODIR)/SSDataCardCompare.o $(ODIR)/SATException.o $(ODIR)/searchBins.o
 	$(LD) $^ $(LIBS)  -o $@
 
 clean:
