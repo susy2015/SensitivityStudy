@@ -25,11 +25,11 @@ LIBS       = $(shell root-config --glibs)
 LIBS      += -Lobj -lSusyAnaTools
 LIBS      += -L$(CMSSW_BASE)/src/TopTagger/TopTagger/test -lTopTagger
 LIBS      += -L$(OPENCV_DIRECTORY)/lib/ -lopencv_ml -lopencv_core
-MT2LIB     = -L$(CMSSW_BASE)/lib/${SCRAM_ARCH}/ -lrecipeAUXOxbridgeMT2 -L$(CMSSW_RELEASE_BASE)/lib/${SCRAM_ARCH}/ -lPhysicsToolsHeppy
+MT2LIB     = -L$(CMSSW_BASE)/lib/${SCRAM_ARCH}/ -lrecipeAUXOxbridgeMT2 #-L$(CMSSW_RELEASE_BASE)/lib/${SCRAM_ARCH}/ -lPhysicsToolsHeppy
 LHAPDFLIB  = -L$(LHAPDF_DATA_PATH)/../../lib -lLHAPDF
 FILES = $(wildcard $(SDIR)/*.cc)
 OBJS  := $(FILES:$(SDIR)/%.cc=$(ODIR)/%.o)
-PROGRAMS = SSTrimAndSlim_LLHadTau SSTrimAndSlim_ZinvQCD SSTrimAndSlim_TTZ SSTrimAndSlim_Signal SSSignalScan
+PROGRAMS = SSTrimAndSlim_LLHadTau SSTrimAndSlim_ZinvQCD SSTrimAndSlim_TTZRare SSTrimAndSlim_Signal SSSignalScan
 
 all: mkobj $(OBJS) SusyAnaTools $(PROGRAMS)
 
@@ -60,19 +60,19 @@ $(ODIR)/%.o : $(IDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CXXDEPFLAGS) -o $@ -c $<
 
 SSTrimAndSlim_LLHadTau: $(ODIR)/SSTrimAndSlim_LLHadTau.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o 
-	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
+	$(LD) $^ $(LIBS) $(MT2LIB) $(LHAPDFLIB) -o $@
 
 SSTrimAndSlim_ZinvQCD: $(ODIR)/SSTrimAndSlim_ZinvQCD.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o 
-	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
+	$(LD) $^ $(LIBS) $(MT2LIB) $(LHAPDFLIB) -o $@
 
-SSTrimAndSlim_TTZ: $(ODIR)/SSTrimAndSlim_TTZ.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o 
-	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
+SSTrimAndSlim_TTZRare: $(ODIR)/SSTrimAndSlim_TTZRare.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o 
+	$(LD) $^ $(LIBS) $(MT2LIB) $(LHAPDFLIB) -o $@
 
 SSTrimAndSlim_Signal: $(ODIR)/SSTrimAndSlim_Signal.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o 
-	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
+	$(LD) $^ $(LIBS) $(MT2LIB) $(LHAPDFLIB) -o $@
 
 SSSignalScan: $(ODIR)/SSSignalScan.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/SignalScanHistogram.o
-	$(LD) $^ $(LIBS) $(MT2LIB) -o $@
+	$(LD) $^ $(LIBS) $(MT2LIB)  $(LHAPDFLIB) -o $@
 
 clean:
 	rm -f $(IDIR)/*.a $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/*.so $(PROGRAMS) core 

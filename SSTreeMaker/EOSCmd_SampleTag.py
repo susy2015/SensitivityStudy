@@ -1,7 +1,7 @@
 import glob, os, sys
 
 d_hadd_source = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15"
-d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p3b"
+d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v11_p5d"
 #d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/SignalScan_v11"
 
 MGM = "root://cmseos.fnal.gov/"

@@ -67,8 +67,10 @@ int main(int argc, char* argv[])
   selectedTree->Branch("ht",&ht,"ht/D");
   selectedTree->Branch("htTops",&htTops,"htTops/D");
   //LL information for TTJets Wjets and singleTop
-  Bool_t isLL;
+  Bool_t isAllHad,isLL,isHadTau;
+  selectedTree->Branch("isAllHad",&isAllHad,"isAllHad/O");
   selectedTree->Branch("isLL",&isLL,"isLL/O");
+  selectedTree->Branch("isHadTau",&isHadTau,"isHadTau/O");
 
   std::shared_ptr<topTagger::type3TopTagger>type3Ptr(nullptr);
   NTupleReader *tr=0;
@@ -130,18 +132,16 @@ int main(int argc, char* argv[])
       ht = tr->getVar<double>("HT"+spec);
       htTops = GetHTTops( tr->getVec<TLorentzVector>("vTops"+spec) );
       //double mht = tr->getVar<double>("mht"); 
-      
-      //determine if LL or HadTau. be careful! we need to set passLeptVeto first
-      std::vector<int> W_emuVec = tr->getVec<int>("W_emuVec");
-      std::vector<int> W_tau_emuVec = tr->getVec<int>("W_tau_emuVec");
-      std::vector<int> emuVec_merge;
-      emuVec_merge.reserve( W_emuVec.size() + W_tau_emuVec.size() );   
-      emuVec_merge.insert( emuVec_merge.end(), W_emuVec.begin(), W_emuVec.end() );
-      emuVec_merge.insert( emuVec_merge.end(), W_tau_emuVec.begin(), W_tau_emuVec.end() );
-      int gen_emus_count = emuVec_merge.size();
-      (gen_emus_count>0 && passLeptVeto) ? isLL = true : isLL =false;
-      //if(isLL){ std::cout << "Test isLL!" << std::endl; }
 
+      //determine if LL or HadTau, or all hadronic decay
+      const std::vector<int> &W_emuVec =  tr->getVec<int>("W_emuVec");
+      const std::vector<int> &W_tau_emuVec =  tr->getVec<int>("W_tau_emuVec");
+      const std::vector<int> &W_tau_prongsVec =  tr->getVec<int>("W_tau_prongsVec");
+      isAllHad=false; isLL=false; isHadTau=false;
+      if(W_emuVec.size() !=0 || W_tau_emuVec.size() !=0){ isLL=true; }
+      else if(W_tau_prongsVec.size() !=0){ isHadTau = true; }
+      else{ isAllHad=true; }
+      
       selectedTree->Fill();
     }
     else continue;
