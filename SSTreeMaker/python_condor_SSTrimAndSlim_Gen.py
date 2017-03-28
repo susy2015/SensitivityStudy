@@ -10,77 +10,65 @@ def PrintCondorHeaderLine():
   print("#when_to_transfer_output = ON_EXIT")
   print ""
 
-def PrintTransferFileLine(directory, sampletype, isfirst, islast):
+def PrintTransferFileLine(sampletype, isfirst, islast):
   if(isfirst):
-    sys.stdout.write('transfer_input_files = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_LLHadTau, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_ZinvQCD, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_TTZ, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_Signal, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/NTuple_SSTrimAndSlim.py, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/goSSTrimAndSlim.sh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/CSVv2_ichep.csv, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TTbarNoHad_bTagEff.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/PileupHistograms_Nov17.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/Legacy_TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TrainingOutput_dR20_pt30_depth14_2016_Dec2.model, ')
-  for dirname, dirnames, filenames in os.walk(directory):
-    for filename in filenames:
-      if ( sampletype in filename ):
-        sys.stdout.write('$ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/' + filename + ', ')
-      else:
-        continue
+    sys.stdout.write('transfer_input_files = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/$ENV(CMSSW_VERSION).tar.gz, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_LLHadTau, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_ZinvQCD, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_TTZRare, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_Signal, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/NTuple_SSTrimAndSlim.py, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/goSSTrimAndSlim.sh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/allINone_ISRJets.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/ISRWeights.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/CSVv2_Moriond17_B_H.csv, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/allINone_bTagEff.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/allINone_leptonSF_Moriond17.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/PileupHistograms_0121_69p2mb_pm4p6.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/puppiCorr.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TrainingOutput_dR20_pt30_depth12_500tree_noQGL_binaryCSV_2017_Mar24.model, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/Legacy_TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt.tar.gz')
+  
   if(islast):
     print ""
     print ""
 
-def PrintCondorLogLine():
-  print ("Output = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/res/Trim_$(Process).stdout")
-  print ("Error = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/res/Trim_$(Process).stderr")
-  print ("Log = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/res/Trim_$(Process).log")
+def PrintCondorLogLine(runtype):
+  print ("Output = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/res/SSTrimAndSlim_" + runtype + "_$(Process).stdout")
+  print ("Error = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/res/SSTrimAndSlim_" + runtype + "_$(Process).stderr")
+  print ("Log = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt/res/SSTrimAndSlim_" + runtype + "_$(Process).log")
   print ("notify_user = hua.wei@cern.ch")
   print ""
 
-def PrintCondorSubmitLine(directory, runoption, sampletype):
+def PrintCondorSubmitLine(directory, sampletype, command):
   print("#### "+ sampletype +" ####")
   print ""
   for dirname, dirnames, filenames in os.walk(directory):
     for filename in filenames:
       if ( sampletype in filename ):
-        print ("arguments = $ENV(CMSSW_BASE) " + runoption + " " + filename)
+        print ("arguments = $ENV(CMSSW_VERSION) $ENV(SCRAM_ARCH) " + command + " SensitivityTxt/" + filename)
         print ("Queue")
         print ""
       else:
         continue
 
-d = "/uscms_data/d3/hwei/stop/SS/CMSSW_8_0_23/src/SensitivityStudy/SSTreeMaker/SensitivityTxt"
+d = os.environ.get('CMSSW_BASE') + "/src/SensitivityStudy/SSTreeMaker/SensitivityTxt"
+
 runtype = sys.argv[1]
 print ("#The valid run types for SS are Signal, Background! While the current run type is : " + runtype)
 
 if(runtype == "Signal"):
   PrintCondorHeaderLine()
   print("##transfer file list for " + runtype + " samples")
-  PrintTransferFileLine(d, "T1tttt", True, False)
-  PrintTransferFileLine(d, "T2tt", False, False)
-  PrintTransferFileLine(d, "T5ttcc", False, True)
-  PrintCondorLogLine()
-  PrintCondorSubmitLine(d, "Signal", "T1tttt")
-  PrintCondorSubmitLine(d, "Signal", "T2tt")
-  PrintCondorSubmitLine(d, "Signal", "T5ttcc")
-
+  PrintTransferFileLine("T1tttt",  True, False)
+  PrintTransferFileLine("T2tt"  , False, False)
+  PrintTransferFileLine("T5ttcc", False,  True)
+  PrintCondorLogLine(runtype)
+  PrintCondorSubmitLine(d, "T1tttt", runtype)
+  PrintCondorSubmitLine(d, "T2tt"  , runtype)
+  PrintCondorSubmitLine(d, "T5ttcc", runtype)
 elif(runtype == "Background"):
   PrintCondorHeaderLine()
   print("##transfer file list for " + runtype + " samples")
-  PrintTransferFileLine(d, "TTJets_", True, False)
-  PrintTransferFileLine(d, "WJetsToLNu_HT-", False, False)
-  PrintTransferFileLine(d, "ST_tW_", False, False)
-  PrintTransferFileLine(d, "ZJetsToNuNu_HT-", False, False)
-  PrintTransferFileLine(d, "QCD_HT", False, False)
-  PrintTransferFileLine(d, "TTWJets", False, False)
-  PrintTransferFileLine(d, "TTZ", False, True)
-  #PrintTransferFileLine(d, "WJetsToLNu_HT-200To400", True, False)
-  #PrintTransferFileLine(d, "ZJetsToNuNu_HT-200To400", False, False)
-  #PrintTransferFileLine(d, "QCD_HT300to500", False, True)
-
-  PrintCondorLogLine()
-  PrintCondorSubmitLine(d, "LLHadTau", "TTJets_")
-  PrintCondorSubmitLine(d, "LLHadTau", "WJetsToLNu_HT-")
-  PrintCondorSubmitLine(d, "LLHadTau", "ST_tW_")
-  PrintCondorSubmitLine(d, "ZinvQCD", "ZJetsToNuNu_HT-")
-  PrintCondorSubmitLine(d, "ZinvQCD", "QCD_HT")
-  PrintCondorSubmitLine(d, "TTZ", "TTWJets")
-  PrintCondorSubmitLine(d, "TTZ", "TTZ")
-  #PrintCondorSubmitLine(d, "LLHadTau", "WJetsToLNu_HT-200To400")
-  #PrintCondorSubmitLine(d, "ZinvQCD", "ZJetsToNuNu_HT-200To400")
-  #PrintCondorSubmitLine(d, "ZinvQCD", "QCD_HT300to500")
+  PrintTransferFileLine("TTJets_"        , True , False)
+  PrintTransferFileLine("WJetsToLNu_HT-" , False, False)
+  PrintTransferFileLine("ST_tW_"         , False, False)
+  PrintTransferFileLine("ZJetsToNuNu_HT-", False, False)
+  PrintTransferFileLine("QCD_HT"         , False, False)
+  PrintTransferFileLine("TTWJets"        , False, False)
+  PrintTransferFileLine("TTZ"            , False, True )
+  PrintCondorLogLine(runtype)
+  PrintCondorSubmitLine(d, "TTJets_"        , "LLHadTau")
+  PrintCondorSubmitLine(d, "WJetsToLNu_HT-" , "LLHadTau")
+  PrintCondorSubmitLine(d, "ST_tW_"         , "LLHadTau")
+  PrintCondorSubmitLine(d, "ZJetsToNuNu_HT-", "ZinvQCD" )
+  PrintCondorSubmitLine(d, "QCD_HT"         , "ZinvQCD" )
+  PrintCondorSubmitLine(d, "TTWJets"        , "TTZRare" )
+  PrintCondorSubmitLine(d, "TTZ"            , "TTZRare" )
 else:
   print ("#Invalid run type for SSTrimAndSlim! What the fuck is going on ??!!")
