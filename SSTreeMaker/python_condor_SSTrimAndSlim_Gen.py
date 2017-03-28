@@ -13,7 +13,6 @@ def PrintCondorHeaderLine():
 def PrintTransferFileLine(sampletype, isfirst, islast):
   if(isfirst):
     sys.stdout.write('transfer_input_files = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/$ENV(CMSSW_VERSION).tar.gz, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_LLHadTau, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_ZinvQCD, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_TTZRare, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_Signal, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/NTuple_SSTrimAndSlim.py, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/goSSTrimAndSlim.sh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/allINone_ISRJets.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/ISRWeights.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/CSVv2_Moriond17_B_H.csv, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/allINone_bTagEff.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/allINone_leptonSF_Moriond17.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/PileupHistograms_0121_69p2mb_pm4p6.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/puppiCorr.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TrainingOutput_dR20_pt30_depth12_500tree_noQGL_binaryCSV_2017_Mar24.model, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/Legacy_TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt.tar.gz')
-  
   if(islast):
     print ""
     print ""
@@ -38,7 +37,6 @@ def PrintCondorSubmitLine(directory, sampletype, command):
         continue
 
 d = os.environ.get('CMSSW_BASE') + "/src/SensitivityStudy/SSTreeMaker/SensitivityTxt"
-
 runtype = sys.argv[1]
 print ("#The valid run types for SS are Signal, Background! While the current run type is : " + runtype)
 
