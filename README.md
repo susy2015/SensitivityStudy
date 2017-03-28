@@ -58,6 +58,9 @@ Note, setup.csh not updated with new cfg file, change in local with new cfg tag
 cd SensitivityStudy/SSTreeMaker
 source reset.csh
 source $CMSSW_BASE/src/SusyAnaTools/Tools/setup.csh
+sh cache_all.sh
+tar --exclude-caches-all -zcf ${CMSSW_VERSION}.tar.gz -C ${CMSSW_BASE}/.. ${CMSSW_VERSION}
+tar -zcf SensitivityTxt.tar.gz SensitivityTxt
 make
 ```
 
