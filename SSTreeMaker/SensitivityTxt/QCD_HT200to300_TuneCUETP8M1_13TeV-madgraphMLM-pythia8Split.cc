@@ -1,0 +1,3 @@
+root://cmseos.fnal.gov//store/group/lpcsusyhad/Stop_production/Summer16_80X_Jan_2017_Ntp_v12X/QCD_HT200to300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/Summer16_80X_Jan_2017_Ntp_v12p0_QCD_HT200to300_ext1/170127_020536/0000/stopFlatNtuples_97.root
+root://cmseos.fnal.gov//store/group/lpcsusyhad/Stop_production/Summer16_80X_Jan_2017_Ntp_v12X/QCD_HT200to300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/Summer16_80X_Jan_2017_Ntp_v12p0_QCD_HT200to300_ext1/170127_020536/0000/stopFlatNtuples_98.root
+root://cmseos.fnal.gov//store/group/lpcsusyhad/Stop_production/Summer16_80X_Jan_2017_Ntp_v12X/QCD_HT200to300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/Summer16_80X_Jan_2017_Ntp_v12p0_QCD_HT200to300_ext1/170127_020536/0000/stopFlatNtuples_99.root
