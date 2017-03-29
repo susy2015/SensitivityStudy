@@ -13,7 +13,6 @@ def PrintCondorHeaderLine():
 def PrintTransferFileLine(sampletype, isfirst, islast):
   if(isfirst):
     sys.stdout.write('transfer_input_files = $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/$ENV(CMSSW_VERSION).tar.gz, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_LLHadTau, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_ZinvQCD, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_TTZRare, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SSTrimAndSlim_Signal, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/NTuple_SSTrimAndSlim.py, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/goSSTrimAndSlim.sh, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/allINone_ISRJets.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/ISRWeights.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/CSVv2_Moriond17_B_H.csv, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/allINone_bTagEff.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/allINone_leptonSF_Moriond17.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/PileupHistograms_0121_69p2mb_pm4p6.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/puppiCorr.root, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/TrainingOutput_dR20_pt30_depth12_500tree_noQGL_binaryCSV_2017_Mar24.model, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/Legacy_TopTagger.cfg, $ENV(CMSSW_BASE)/src/SensitivityStudy/SSTreeMaker/SensitivityTxt.tar.gz')
-  
   if(islast):
     print ""
     print ""
@@ -38,7 +37,6 @@ def PrintCondorSubmitLine(directory, sampletype, command):
         continue
 
 d = os.environ.get('CMSSW_BASE') + "/src/SensitivityStudy/SSTreeMaker/SensitivityTxt"
-
 runtype = sys.argv[1]
 print ("#The valid run types for SS are Signal, Background! While the current run type is : " + runtype)
 
@@ -46,11 +44,15 @@ if(runtype == "Signal"):
   PrintCondorHeaderLine()
   print("##transfer file list for " + runtype + " samples")
   PrintTransferFileLine("T1tttt",  True, False)
+  PrintTransferFileLine("T1ttbb", False, False)
   PrintTransferFileLine("T2tt"  , False, False)
+  PrintTransferFileLine("T5tttt", False, False)
   PrintTransferFileLine("T5ttcc", False,  True)
   PrintCondorLogLine(runtype)
   PrintCondorSubmitLine(d, "T1tttt", runtype)
+  PrintCondorSubmitLine(d, "T1ttbb", runtype)
   PrintCondorSubmitLine(d, "T2tt"  , runtype)
+  PrintCondorSubmitLine(d, "T5tttt", runtype)
   PrintCondorSubmitLine(d, "T5ttcc", runtype)
 elif(runtype == "Background"):
   PrintCondorHeaderLine()
@@ -61,7 +63,10 @@ elif(runtype == "Background"):
   PrintTransferFileLine("ZJetsToNuNu_HT-", False, False)
   PrintTransferFileLine("QCD_HT"         , False, False)
   PrintTransferFileLine("TTWJets"        , False, False)
-  PrintTransferFileLine("TTZ"            , False, True )
+  PrintTransferFileLine("TTZ"            , False, False)
+  PrintTransferFileLine("WW", False, False)
+  PrintTransferFileLine("WZ", False, False)
+  PrintTransferFileLine("ZZ", False, True)
   PrintCondorLogLine(runtype)
   PrintCondorSubmitLine(d, "TTJets_"        , "LLHadTau")
   PrintCondorSubmitLine(d, "WJetsToLNu_HT-" , "LLHadTau")
@@ -70,5 +75,8 @@ elif(runtype == "Background"):
   PrintCondorSubmitLine(d, "QCD_HT"         , "ZinvQCD" )
   PrintCondorSubmitLine(d, "TTWJets"        , "TTZRare" )
   PrintCondorSubmitLine(d, "TTZ"            , "TTZRare" )
+  PrintCondorSubmitLine(d, "WW", "TTZRare")   
+  PrintCondorSubmitLine(d, "WZ", "TTZRare")   
+  PrintCondorSubmitLine(d, "ZZ", "TTZRare")   
 else:
   print ("#Invalid run type for SSTrimAndSlim! What the fuck is going on ??!!")

@@ -32,7 +32,6 @@ int main(int argc, char* argv[])
 
   std::string output_str;
   //here is a little bit tricky when dealing with the slash... need to improve
-  //for all the data samples and ttbar leptonic MC samples
   std::string tag = input_str.substr(find_Nth(input_str,10,"/") + 1,find_Nth(input_str,11,"/")-find_Nth(input_str,10,"/")-1);
   std::size_t idpos = input_str.find("stopFlatNtuples");
   std::string fileid = input_str.substr (idpos);
@@ -42,26 +41,17 @@ int main(int argc, char* argv[])
 
   TChain *originalTree = new TChain("stopTreeMaker/AUX");
   originalTree->Add(input_str.c_str());
-  //originalTree->SetBranchStatus("*", 1);
    
   std::shared_ptr<topTagger::type3TopTagger>type3Ptr(nullptr);
   NTupleReader *tr=0;
-  //initialize the type3Ptr defined in the customize.h
   AnaFunctions::prepareForNtupleReader();
   tr = new NTupleReader(originalTree, AnaConsts::activatedBranchNames);
-  const std::string spec = "lostlept";
-  BaselineVessel *myBaselineVessel = 0;
-  myBaselineVessel = new BaselineVessel(*tr, spec, "fastsim");
-  myBaselineVessel->toptaggerCfgFile = "Example_TopTagger.cfg";
-  //The passBaseline is registered here
-  tr->registerFunction(*myBaselineVessel);
 
   SignalScanHistgram mySignalScanHistgram;
   mySignalScanHistgram.BookHistgram( (output_str).c_str() );
 
   while(tr->getNextEvent())
   {
-    bool passSSTrimAndSlim = tr->getVar<bool>("passBaseline"+spec);
     double SusyMotherMass = tr->getVar<double>("SusyMotherMass");
     double SusyLSPMass    = tr->getVar<double>("SusyLSPMass");
     (mySignalScanHistgram.h_totEvt_xSusyMotherMass_ySusyLSPMass)->Fill(SusyMotherMass,SusyLSPMass,1);

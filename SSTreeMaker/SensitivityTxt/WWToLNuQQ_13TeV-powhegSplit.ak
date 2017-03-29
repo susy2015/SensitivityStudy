@@ -1,0 +1,5 @@
+root://cmseos.fnal.gov//store/group/lpcsusyhad/Stop_production/Summer16_80X_Jan_2017_Ntp_v12X/WWToLNuQQ_13TeV-powheg/Summer16_80X_Jan_2017_Ntp_v12p0_WWToLNuQQ_ext1/170130_214354/0000/stopFlatNtuples_29.root
+root://cmseos.fnal.gov//store/group/lpcsusyhad/Stop_production/Summer16_80X_Jan_2017_Ntp_v12X/WWToLNuQQ_13TeV-powheg/Summer16_80X_Jan_2017_Ntp_v12p0_WWToLNuQQ_ext1/170130_214354/0000/stopFlatNtuples_3.root
+root://cmseos.fnal.gov//store/group/lpcsusyhad/Stop_production/Summer16_80X_Jan_2017_Ntp_v12X/WWToLNuQQ_13TeV-powheg/Summer16_80X_Jan_2017_Ntp_v12p0_WWToLNuQQ_ext1/170130_214354/0000/stopFlatNtuples_30.root
+root://cmseos.fnal.gov//store/group/lpcsusyhad/Stop_production/Summer16_80X_Jan_2017_Ntp_v12X/WWToLNuQQ_13TeV-powheg/Summer16_80X_Jan_2017_Ntp_v12p0_WWToLNuQQ_ext1/170130_214354/0000/stopFlatNtuples_31.root
+root://cmseos.fnal.gov//store/group/lpcsusyhad/Stop_production/Summer16_80X_Jan_2017_Ntp_v12X/WWToLNuQQ_13TeV-powheg/Summer16_80X_Jan_2017_Ntp_v12p0_WWToLNuQQ_ext1/170130_214354/0000/stopFlatNtuples_32.root

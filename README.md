@@ -58,42 +58,46 @@ Note, setup.csh not updated with new cfg file, change in local with new cfg tag
 cd SensitivityStudy/SSTreeMaker
 source reset.csh
 source $CMSSW_BASE/src/SusyAnaTools/Tools/setup.csh
+sh cache_all.sh
+tar --exclude-caches-all -zcf ${CMSSW_VERSION}.tar.gz -C ${CMSSW_BASE}/.. ${CMSSW_VERSION}
+tar -zcf SensitivityTxt.tar.gz SensitivityTxt
 make
 ```
 
 Manually script:
 ```
 $CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t MVAAK8_Tight_noQGL_binaryCSV_v1.0.2 -d /uscms_data/d3/hwei/stop
-$CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t Legacy_AK4Only_v0.0.2 -f Legacy_TopTagger.cfg -d /uscms_data/d3/hwei/stop
+$CMSSW_BASE/src/TopTagger/Tools/getTaggerCfg.sh -t Legacy_AK4Only_v0.1.1 -f Legacy_TopTagger.cfg -d /uscms_data/d3/hwei/stop
 ```
 
 Then run the type of MC you want to get SSTree(In priciple all of them!)
 
 And then hadd and move them into EOS, change the runList files in the SensitivityStudy/SensitivityStudy directory
 
-1.To study the CS in designed search bin:
+1.To study the single Mu CS in designed search bin:
 
 ```
 cd SensitivityStudy/SensitivityStudy
-./SS SSCS runList_Sensitivity_MC_SSSkimmed_v11p5d_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p5d_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p5d_MuCS.txt
+./SS SSCS filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_BG.txt filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_SG.txt filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_MuCS.txt
+make
 ```
 
-2.To generate data card for all background:
+2.To generate data card for all backgrounds:
 
 ```
 cd SensitivityStudy/SensitivityStudy
-./SS SSAllMC runList_Sensitivity_MC_SSSkimmed_v11p5d_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p5d_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p5d_MuCS.txt
+./SS SSAllMC filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_BG.txt filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_SG.txt filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_MuCS.txt
 ```
 
 3.To generate data card for all signal points:
 
 ```
 cd SensitivityStudy/SensitivityStudy
-./SS SignalCardT2tt runList_Sensitivity_MC_SSSkimmed_v11p5d_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p5d_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p5d_MuCS.txt
-./SS SignalCardT1tttt runList_Sensitivity_MC_SSSkimmed_v11p5d_BG.txt runList_Sensitivity_MC_SSSkimmed_v11p5d_SG.txt runList_Sensitivity_MC_SSSkimmed_v11p5d_MuCS.txt
+./SS SignalCardT2tt filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_BG.txt filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_SG.txt filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_MuCS.txt
+./SS SignalCardT1tttt filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_BG.txt filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_SG.txt filelist/runList_Sensitivity_MC_SSSkimmed_v11p5d_MuCS.txt
 ```
 
-4.To compare the real data card and fake data card
+4.To compare the real data card and fake data card(FIXME)
 
 ```
 cd SensitivityStudy/SensitivityStudy

@@ -36,7 +36,6 @@
 
 SearchBins mySearchBins(sb_tag);
 
-//const double Scale = 591.5/2153.736;
 //                             NJets =      1        2       3        4        5        6       7      >=8
 const double NJetRweightingFactor[8] = {1.02845,1.08559,1.06879,0.922173,0.871796,0.99674,0.993756,0.539612};//2016 ICHEP, v8 MC and v9 data, 12.9 fb-1
 //const double NJetRweightingFactor[8] = {0.926542,1.03995,0.919711,0.723581,0.869969,0.95682,0.584418,0.874059};//2016 Moriond
@@ -48,7 +47,7 @@ void LoopSSCS( SSSampleWeight& mySSSampleWeight )
   std::vector<SSSampleInfo>::iterator iter_SSSampleInfos;
 
   double mucs[NSB] = {0}, elcs[NSB]={0}, mucs_NMC[NSB] = {0}, elcs_NMC[NSB]={0};
-  std::cout << "Let's do sensitivity study: " << std::endl;
+  std::cout << "Let's do sensitivity study in CS: " << std::endl;
   
   for(iter_SSSampleInfos = mySSSampleWeight.SSSampleInfos.begin(); iter_SSSampleInfos != mySSSampleWeight.SSSampleInfos.end(); iter_SSSampleInfos++)
   {    
@@ -79,7 +78,7 @@ void LoopSSCS( SSSampleWeight& mySSSampleWeight )
 
       if( ((*iter_SSSampleInfos).Tag).find("TTJets") != std::string::npos )
       {
-        double TTJetsSF = 0.8;
+        double TTJetsSF = 0.8;//FIXME
         //Counting the muon control sample
         if (nElectrons == 0 && nMuons == 1)
         {
@@ -117,16 +116,14 @@ void LoopSSCS( SSSampleWeight& mySSSampleWeight )
   return ;
 }
 
-void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeightSignal)
+void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeightSignal)//FIXME
 {
-
   // TFile *pre_trim_file = pre_trim_file = new TFile("signalScan_SMS-T2tt_forHua.root");
   //TFile *pre_trim_file = pre_trim_file = new TFile("signalScan_SMS-T1tttt_forHua.root");
  
   //TH1D * h1_thisSig_totEntries = (TH1D*) pre_trim_file->Get("totEntries_1300_1000");
   //double thisSig_totEntries = h1_thisSig_totEntries->GetBinContent(1);
   //std::cout << "totEntries_1000_50 = " << thisSig_totEntries << std::endl;
-
 
   //clock to monitor the run time
   size_t t0 = clock();
@@ -157,7 +154,6 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
   double nBGEventsMT2HT[nmt2bin][nHTbin];
   double nmuCSEventsMT2HT[nmt2bin][nHTbin];
   double nSEventsMT2HT[nmt2bin][nHTbin];
-
 
   for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
   {
@@ -205,15 +201,12 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
   {    
     //use class NTupleReader in the SusyAnaTools/Tools/NTupleReader.h file
     NTupleReader tr((*iter_SSSampleInfos).chain);
-
     double thisweight = (*iter_SSSampleInfos).weight;
     std::cout <<"Sample Type: "<< (*iter_SSSampleInfos).Tag << "; Weight: " << thisweight << std::endl;
-
 
     while(tr.getNextEvent())
     {
       if(tr.getEvtNum()%20000 == 0) std::cout << tr.getEvtNum() << "\t" << ((clock() - t0)/1000000.0) << std::endl;
-
       //searchbin variables
       int ntopjets = tr.getVar<int>("nTop");
       int nbotjets = tr.getVar<int>("nBot");
@@ -230,7 +223,6 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
 
       bool passLeptVeto = tr.getVar<bool>("passLeptVeto");
       //if(!passLeptVeto) continue;
-
       //std::cout << "ntopjets = " << ntopjets << std::endl;
       //if (passLeptVeto && ntopjets==1 && nbotjets==1)
       //if (nElectrons==0 && ntopjets==ntopcut && nbotjets==nbcut)
@@ -244,68 +236,65 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut && met<450.0 && mt2<400.0)
       //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut && mt2<550.0)
       //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut && met<550.0 && mt2<400.0)
-	//if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0)
-	//if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut)
-	//if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut)
+      //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0)
+      //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets==nbcut)
+      //if (nElectrons==0 && met>250.0 && ntopjets==ntopcut && nbotjets>=nbcut)
       {
-	double metcutc=250.0;
-	double mt2cutc=200.0;
-	double HTcutc=300.0;
-	double HTtopcutc=0.0;
+        double metcutc=250.0;
+        double mt2cutc=200.0;
+        double HTcutc=300.0;
+        double HTtopcutc=0.0;
 
-	for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
-	{
-	  mt2cutc=minmt2cut+mt2binc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-	  {
-	    if (met>metcutc+metbinc*50.0 && mt2>mt2cutc)
-	    {
-	      if (passLeptVeto) nBGEvents[metbinc][mt2binc]+=thisweight;
-	      if (nMuons==1) nmuCSEvents[metbinc][mt2binc]+=thisweight;
-	    }
-	  }
+        for(int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+        {
+          mt2cutc=minmt2cut+mt2binc*50.0;
+          for (int metbinc=0;metbinc<nmetbin;++metbinc)
+          {
+            if (met>metcutc+metbinc*50.0 && mt2>mt2cutc)
+            {
+              if (passLeptVeto) nBGEvents[metbinc][mt2binc]+=thisweight;
+              if (nMuons==1) nmuCSEvents[metbinc][mt2binc]+=thisweight;
+            }
+          }
 
-	  for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
-	  {
-	    if (HT>minHTcut+HTbinc*50.0 && mt2>mt2cutc)
-	    {
-	      if (passLeptVeto) nBGEventsMT2HT[mt2binc][HTbinc]+=thisweight;
-	      if (nMuons==1) nmuCSEventsMT2HT[mt2binc][HTbinc]+=thisweight;
-	    }
-	  }
+          for(int HTbinc=0;HTbinc<nHTbin;++HTbinc)
+          {
+            if (HT>minHTcut+HTbinc*50.0 && mt2>mt2cutc)
+            {
+              if (passLeptVeto) nBGEventsMT2HT[mt2binc][HTbinc]+=thisweight;
+              if (nMuons==1) nmuCSEventsMT2HT[mt2binc][HTbinc]+=thisweight;
+            }
+          }
+        }
 
-	}
+        for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
+        {
+          HTcutc=minHTcut+HTbinc*50.0;
+          for (int metbinc=0;metbinc<nmetbin;++metbinc)
+          {
+            if (met>metcutc+metbinc*50.0 && HT>HTcutc)
+            //if (met<metcutc+metbinc*50.0 && HT<HTcutc)
+            //if (met>metcutc+metbinc*50.0 && HT<HTcutc)
+            //if (met<metcutc+metbinc*50.0 && HT>HTcutc)
+            {
+              if (passLeptVeto) nBGEventsMETHT[metbinc][HTbinc]+=thisweight;
+              if (nMuons==1) nmuCSEventsMETHT[metbinc][HTbinc]+=thisweight;
+            }
+          }
+        }
 
-	for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
-	{
-	  HTcutc=minHTcut+HTbinc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-	  {
-	    if (met>metcutc+metbinc*50.0 && HT>HTcutc)
-	    //if (met<metcutc+metbinc*50.0 && HT<HTcutc)
-	    //if (met>metcutc+metbinc*50.0 && HT<HTcutc)
-	    //if (met<metcutc+metbinc*50.0 && HT>HTcutc)
-	    {
-	      if (passLeptVeto) nBGEventsMETHT[metbinc][HTbinc]+=thisweight;
-	      if (nMuons==1) nmuCSEventsMETHT[metbinc][HTbinc]+=thisweight;
-	    }
-	  }
-	}
-
-	for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
-	{
-	  HTtopcutc=minHTtopcut+HTbinc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-	  {
-	    if (met>metcutc+metbinc*50.0 && HTtop>HTtopcutc)
-	    {
-	      if (passLeptVeto) nBGEventsMETHTtop[metbinc][HTbinc]+=thisweight;
-	      if (nMuons==1) nmuCSEventsMETHTtop[metbinc][HTbinc]+=thisweight;
-	    }
-	  }
-	}
-
-
+        for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
+        {
+          HTtopcutc=minHTtopcut+HTbinc*50.0;
+          for (int metbinc=0;metbinc<nmetbin;++metbinc)
+          {
+            if (met>metcutc+metbinc*50.0 && HTtop>HTtopcutc)
+            {
+              if (passLeptVeto) nBGEventsMETHTtop[metbinc][HTbinc]+=thisweight;
+              if (nMuons==1) nmuCSEventsMETHTtop[metbinc][HTbinc]+=thisweight;
+            }
+          }
+        }
       }
     }//end of inner loop
   }//end of Samples loop
@@ -317,19 +306,16 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
   {    
     //use class NTupleReader in the SusyAnaTools/Tools/NTupleReader.h file
     NTupleReader tr((*iter_SSSampleInfosSignal).chain);
-
     double thisweight = (*iter_SSSampleInfosSignal).weight;
     std::cout <<"Sample Type: "<< (*iter_SSSampleInfosSignal).Tag << "; Weight: " << thisweight << std::endl;
 
-
-//  for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
-//  {
-//    for (int metbinc=0;metbinc<nmetbin;++metbinc)
-//    {
-//      std::cout << "nSEvents[" << metbinc << "][" << mt2binc << "] = " << nSEvents[mt2binc][metbinc] << std::endl;
-//    }
-//  }
-
+    //for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+    //{
+    //  for (int metbinc=0;metbinc<nmetbin;++metbinc)
+    //  {
+    //    std::cout << "nSEvents[" << metbinc << "][" << mt2binc << "] = " << nSEvents[mt2binc][metbinc] << std::endl;
+    //  }
+    //}
 
     while(tr.getNextEvent())
     {
@@ -356,7 +342,7 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       //std::cout << "ntopjets = " << ntopjets << std::endl;
       //if (StopMass==1900.0 && LSPMass==50.0 && nMuons==0 && nElectrons==0 && ntopjets==ntopcut && nbotjets==nbcut)
       //if (StopMass==1300.0 && LSPMass==1000.0 && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets==nbcut)
-	//if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets>=nbcut)
+  //if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets>=nbcut)
       //if (StopMass==1300.0 && LSPMass==1000.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut)
       //if (StopMass==1300.0 && LSPMass==1000.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0 && HT<1000.0)
       //if (StopMass==450.0 && LSPMass==300.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets==nbcut)
@@ -364,7 +350,7 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       //if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets==nbcut && met<550.0 && mt2<400.0)
       //if (StopMass==700.0 && LSPMass==450.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets==nbcut && met<500.0 && mt2<650.0)
       //if (StopMass==1000.0 && LSPMass==50.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets==nbcut && met<600.0)
-	//if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0)
+  //if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0)
       //if (StopMass==1900.0 && LSPMass==100.0 && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets>=nbcut)
       bool isbench=false;
       double corrWeight=thisweight;
@@ -379,116 +365,107 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       //if (isbench && met>250.0 && passLeptVeto && ntopjets>=ntopcut && nbotjets==nbcut)
       //if (isbench && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets==nbcut)
       if (isbench && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut && met<450.0 && HT<1400.0)
-	//if (isbench && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut)
+  //if (isbench && met>250.0 && passLeptVeto && ntopjets==ntopcut && nbotjets>=nbcut)
       {
-	double metcutc=250.0;
-	double mt2cutc=200.0;
-	double HTcutc=300.0;
-	double HTtopcutc=0.0;
+        double metcutc=250.0;
+        double mt2cutc=200.0;
+        double HTcutc=300.0;
+        double HTtopcutc=0.0;
 
-	if (StopMass==1900.0 && LSPMass==1100.0) corrWeight=thisweight*20136.0/20202.0;
-	if (StopMass==1300.0 && LSPMass==1000.0) corrWeight=thisweight*0.0460525/0.00163547*20136.0/42472.0;
-	if (StopMass==1000.0 && LSPMass==450.0) corrWeight=thisweight*17885.0/15813.0;
-	if (StopMass==700.0 && LSPMass==450.0) corrWeight=thisweight/0.00615134*0.0670476*17885.0/24735.0;
-	if (StopMass==450.0 && LSPMass==300.0) corrWeight=thisweight/0.00615134*0.948333*17885.0/347312.0;
+        if (StopMass==1900.0 && LSPMass==1100.0) corrWeight=thisweight*20136.0/20202.0;
+        if (StopMass==1300.0 && LSPMass==1000.0) corrWeight=thisweight*0.0460525/0.00163547*20136.0/42472.0;
+        if (StopMass==1000.0 && LSPMass==450.0) corrWeight=thisweight*17885.0/15813.0;
+        if (StopMass==700.0 && LSPMass==450.0) corrWeight=thisweight/0.00615134*0.0670476*17885.0/24735.0;
+        if (StopMass==450.0 && LSPMass==300.0) corrWeight=thisweight/0.00615134*0.948333*17885.0/347312.0;
 
-	for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
-	{
-	  mt2cutc=minmt2cut+mt2binc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-  	  {
-	    if (met>metcutc+metbinc*50.0 && mt2>mt2cutc)
-  	    {
-	      if (StopMass==1900.0 && LSPMass==100.0) nSEvents[metbinc][mt2binc]+=corrWeight;
-	      if (StopMass==1900.0 && LSPMass==1100.0) nSEvents2[metbinc][mt2binc]+=corrWeight;
-	      if (StopMass==1300.0 && LSPMass==1000.0) nSEvents3[metbinc][mt2binc]+=corrWeight;
-	      if (StopMass==1000.0 && LSPMass==50.0) nSEvents[metbinc][mt2binc]+=corrWeight;
-	      if (StopMass==1000.0 && LSPMass==450.0) nSEvents2[metbinc][mt2binc]+=corrWeight;
-	      if (StopMass==700.0 && LSPMass==450.0) nSEvents3[metbinc][mt2binc]+=corrWeight;
-	      if (StopMass==450.0 && LSPMass==300.0) nSEvents4[metbinc][mt2binc]+=corrWeight;
-	      //if (thisweight>10.0) std::cout << "Warning: thisweight = " << thisweight << std::endl;
-	      //if (nSEvents[metbinc][mt2binc]>1000.0) std::cout << "Warning: nSEvents[" << metbinc << "][" << mt2binc << "] = " << nSEvents[metbinc][mt2binc] << std::endl;
-	    }
-  	  }
+        for(int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+        {
+          mt2cutc=minmt2cut+mt2binc*50.0;
+          for(int metbinc=0;metbinc<nmetbin;++metbinc)
+          {
+            if(met>metcutc+metbinc*50.0 && mt2>mt2cutc)
+            {
+              if (StopMass==1900.0 && LSPMass==100.0) nSEvents[metbinc][mt2binc]+=corrWeight;
+              if (StopMass==1900.0 && LSPMass==1100.0) nSEvents2[metbinc][mt2binc]+=corrWeight;
+              if (StopMass==1300.0 && LSPMass==1000.0) nSEvents3[metbinc][mt2binc]+=corrWeight;
+              if (StopMass==1000.0 && LSPMass==50.0) nSEvents[metbinc][mt2binc]+=corrWeight;
+              if (StopMass==1000.0 && LSPMass==450.0) nSEvents2[metbinc][mt2binc]+=corrWeight;
+              if (StopMass==700.0 && LSPMass==450.0) nSEvents3[metbinc][mt2binc]+=corrWeight;
+              if (StopMass==450.0 && LSPMass==300.0) nSEvents4[metbinc][mt2binc]+=corrWeight;
+              //if (thisweight>10.0) std::cout << "Warning: thisweight = " << thisweight << std::endl;
+              //if (nSEvents[metbinc][mt2binc]>1000.0) std::cout << "Warning: nSEvents[" << metbinc << "][" << mt2binc << "] = " << nSEvents[metbinc][mt2binc] << std::endl;
+            }
+          }
 
-	  for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
-	  {
-	    if (HT>minHTcut+HTbinc*50.0 && mt2>mt2cutc)
-  	    {
-	      nSEventsMT2HT[mt2binc][HTbinc]+=corrWeight;
-	    }
-	  }
+          for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
+          {
+            if (HT>minHTcut+HTbinc*50.0 && mt2>mt2cutc)
+            {
+              nSEventsMT2HT[mt2binc][HTbinc]+=corrWeight;
+            }
+          }
+        }
+        for(int HTbinc=0;HTbinc<nHTbin;++HTbinc)
+        {
+          HTcutc=minHTcut+HTbinc*50.0;
+          for(int metbinc=0;metbinc<nmetbin;++metbinc)
+          {
+            if (met>metcutc+metbinc*50.0 && HT>HTcutc)
+            //if (met<metcutc+metbinc*50.0 && HT<HTcutc)
+            //if (met>metcutc+metbinc*50.0 && HT<HTcutc)
+            //if (met<metcutc+metbinc*50.0 && HT>HTcutc)
+            {
+              if (StopMass==1900.0 && LSPMass==100.0) nSEventsMETHT[metbinc][HTbinc]+=corrWeight;
+              if (StopMass==1900.0 && LSPMass==1100.0) nSEvents2METHT[metbinc][HTbinc]+=corrWeight;
+              if (StopMass==1300.0 && LSPMass==1000.0) nSEvents3METHT[metbinc][HTbinc]+=corrWeight;
+              if (StopMass==1000.0 && LSPMass==50.0) nSEventsMETHT[metbinc][HTbinc]+=corrWeight;
+              if (StopMass==1000.0 && LSPMass==450.0) nSEvents2METHT[metbinc][HTbinc]+=corrWeight;
+              if (StopMass==700.0 && LSPMass==450.0) nSEvents3METHT[metbinc][HTbinc]+=corrWeight;
+              //if (StopMass==450.0 && LSPMass==300.0) nSEvents4METHT[metbinc][HTbinc]+=corrWeight;
+            }
+          }
+        }
 
-  	}
-
-	for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
-	{
-	  HTcutc=minHTcut+HTbinc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-	  {
-	    if (met>metcutc+metbinc*50.0 && HT>HTcutc)
-	    //if (met<metcutc+metbinc*50.0 && HT<HTcutc)
-	    //if (met>metcutc+metbinc*50.0 && HT<HTcutc)
-	    //if (met<metcutc+metbinc*50.0 && HT>HTcutc)
-	    {
-	      if (StopMass==1900.0 && LSPMass==100.0) nSEventsMETHT[metbinc][HTbinc]+=corrWeight;
-	      if (StopMass==1900.0 && LSPMass==1100.0) nSEvents2METHT[metbinc][HTbinc]+=corrWeight;
-	      if (StopMass==1300.0 && LSPMass==1000.0) nSEvents3METHT[metbinc][HTbinc]+=corrWeight;
-	      if (StopMass==1000.0 && LSPMass==50.0) nSEventsMETHT[metbinc][HTbinc]+=corrWeight;
-	      if (StopMass==1000.0 && LSPMass==450.0) nSEvents2METHT[metbinc][HTbinc]+=corrWeight;
-	      if (StopMass==700.0 && LSPMass==450.0) nSEvents3METHT[metbinc][HTbinc]+=corrWeight;
-	      //if (StopMass==450.0 && LSPMass==300.0) nSEvents4METHT[metbinc][HTbinc]+=corrWeight;
-	    }
-	  }
-	}
-
-	for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
-	{
-	  HTtopcutc=minHTtopcut+HTbinc*50.0;
-	  for (int metbinc=0;metbinc<nmetbin;++metbinc)
-	  {
-	    if (met>metcutc+metbinc*50.0 && HTtop>HTtopcutc)
-	    {
-	      nSEventsMETHTtop[metbinc][HTbinc]+=corrWeight;
-	    }
-	  }
-	}
-
-
+        for(int HTbinc=0;HTbinc<nHTbin;++HTbinc)
+        {
+          HTtopcutc=minHTtopcut+HTbinc*50.0;
+          for(int metbinc=0;metbinc<nmetbin;++metbinc)
+          {
+            if(met>metcutc+metbinc*50.0 && HTtop>HTtopcutc)
+            {
+              nSEventsMETHTtop[metbinc][HTbinc]+=corrWeight;
+            }
+          }
+        }
       }
-
     }//end of inner loop
   }//end of Samples loop
 
-
   //std::cout << "nBGEvents[0] = " << nBGEvents[0] << std::endl;
   //std::cout << "nSEvents[0] = " << nSEvents[0] << std::endl;
-
-  // debug (cout)
-  //  for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+  //debug (cout)
+  //for (int mt2binc=0;mt2binc<nmt2bin;++mt2binc)
+  //{
+  //  for (int metbinc=0;metbinc<nmetbin;++metbinc)
   //  {
-//    for (int metbinc=0;metbinc<nmetbin;++metbinc)
-//   {
-//      std::cout << "B[" << metbinc << "] = " << nBGEvents[metbinc][mt2binc] << std::endl;
-//    }
-//    std::cout << std::endl;
-//
-//    for (int metbinc=0;metbinc<nmetbin;++metbinc)
-//    {
-//      std::cout << "S[" << metbinc << "] = " << nSEvents[metbinc][mt2binc] << std::endl;
-//    }
-//    std::cout << std::endl;
-//
-//    for (int metbinc=0;metbinc<nmetbin;++metbinc)
-//    {
-//      if (nBGEvents[metbinc][mt2binc]>0)
-//      {
-//	const double sb=nSEvents[metbinc][mt2binc]/nBGEvents[metbinc][mt2binc];
-//	std::cout << "S/B[" << metbinc << "] = " << sb << std::endl;
-//      }
-//      else std::cout << "S/B[" << metbinc << "] = 0" << std::endl;
-//    }
-//  }
+  //    std::cout << "B[" << metbinc << "] = " << nBGEvents[metbinc][mt2binc] << std::endl;
+  //  }
+  //  std::cout << std::endl;
+  //  for (int metbinc=0;metbinc<nmetbin;++metbinc)
+  //  {
+  //    std::cout << "S[" << metbinc << "] = " << nSEvents[metbinc][mt2binc] << std::endl;
+  //  }
+  //  std::cout << std::endl;
+  //  for (int metbinc=0;metbinc<nmetbin;++metbinc)
+  //  {
+  //    if (nBGEvents[metbinc][mt2binc]>0)
+  //    {
+  //      const double sb=nSEvents[metbinc][mt2binc]/nBGEvents[metbinc][mt2binc];
+  //      std::cout << "S/B[" << metbinc << "] = " << sb << std::endl;
+  //    }
+  //    else std::cout << "S/B[" << metbinc << "] = 0" << std::endl;
+  //  }
+  //}
 
   FSLHistgram myFSLHistgram;
   myFSLHistgram.BookHistgram( (dir_out + "FSLHistgram.root").c_str() );
@@ -503,24 +480,24 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       const double sb2=nSEvents2[metbinc][mt2binc]/std::sqrt(nSEvents2[metbinc][mt2binc]+nBGEvents[metbinc][mt2binc]+0.1*0.1*nSEvents2[metbinc][mt2binc]*nSEvents2[metbinc][mt2binc]+0.3*0.3*nBGEvents[metbinc][mt2binc]*nBGEvents[metbinc][mt2binc]+1.5);
       const double sb3=nSEvents3[metbinc][mt2binc]/std::sqrt(nSEvents3[metbinc][mt2binc]+nBGEvents[metbinc][mt2binc]+0.1*0.1*nSEvents3[metbinc][mt2binc]*nSEvents3[metbinc][mt2binc]+0.3*0.3*nBGEvents[metbinc][mt2binc]*nBGEvents[metbinc][mt2binc]+1.5);
       const double sb4=nSEvents4[metbinc][mt2binc]/std::sqrt(nSEvents4[metbinc][mt2binc]+nBGEvents[metbinc][mt2binc]+0.1*0.1*nSEvents4[metbinc][mt2binc]*nSEvents4[metbinc][mt2binc]+0.3*0.3*nBGEvents[metbinc][mt2binc]*nBGEvents[metbinc][mt2binc]+1.5);
-      if (nBGEvents[metbinc][mt2binc]>0)
+      if(nBGEvents[metbinc][mt2binc]>0)
       {
-	//const double sb=nSEvents[metbinc][mt2binc]/nBGEvents[metbinc][mt2binc];
-	const double qstat=2.0*(std::sqrt(nSEvents[metbinc][mt2binc]+nBGEvents[metbinc][mt2binc])-std::sqrt(nBGEvents[metbinc][mt2binc]));
-	myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,sb);
-	myFSLHistgram.h2_SOverB2->SetBinContent(metbinc+1,mt2binc+1,sb2);
-	myFSLHistgram.h2_SOverB3->SetBinContent(metbinc+1,mt2binc+1,sb3);
-	myFSLHistgram.h2_SOverB4->SetBinContent(metbinc+1,mt2binc+1,sb4);
-	myFSLHistgram.h2_Q->SetBinContent(metbinc+1,mt2binc+1,qstat);
+        //const double sb=nSEvents[metbinc][mt2binc]/nBGEvents[metbinc][mt2binc];
+        const double qstat=2.0*(std::sqrt(nSEvents[metbinc][mt2binc]+nBGEvents[metbinc][mt2binc])-std::sqrt(nBGEvents[metbinc][mt2binc]));
+        myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,sb);
+        myFSLHistgram.h2_SOverB2->SetBinContent(metbinc+1,mt2binc+1,sb2);
+        myFSLHistgram.h2_SOverB3->SetBinContent(metbinc+1,mt2binc+1,sb3);
+        myFSLHistgram.h2_SOverB4->SetBinContent(metbinc+1,mt2binc+1,sb4);
+        myFSLHistgram.h2_Q->SetBinContent(metbinc+1,mt2binc+1,qstat);
       }
       else
       {
-	//myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,0.0);
-	myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,sb);
-	myFSLHistgram.h2_SOverB2->SetBinContent(metbinc+1,mt2binc+1,sb2);
-	myFSLHistgram.h2_SOverB3->SetBinContent(metbinc+1,mt2binc+1,sb3);
-	myFSLHistgram.h2_SOverB4->SetBinContent(metbinc+1,mt2binc+1,sb4);
-	myFSLHistgram.h2_Q->SetBinContent(metbinc+1,mt2binc+1,0.0);
+        //myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,0.0);
+        myFSLHistgram.h2_SOverB->SetBinContent(metbinc+1,mt2binc+1,sb);
+        myFSLHistgram.h2_SOverB2->SetBinContent(metbinc+1,mt2binc+1,sb2);
+        myFSLHistgram.h2_SOverB3->SetBinContent(metbinc+1,mt2binc+1,sb3);
+        myFSLHistgram.h2_SOverB4->SetBinContent(metbinc+1,mt2binc+1,sb4);
+        myFSLHistgram.h2_Q->SetBinContent(metbinc+1,mt2binc+1,0.0);
       }
     }
 
@@ -532,19 +509,18 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       const double sb=nSEventsMT2HT[mt2binc][HTbinc]/std::sqrt(nSEventsMT2HT[mt2binc][HTbinc]+nBGEventsMT2HT[mt2binc][HTbinc]+0.1*0.1*nSEventsMT2HT[mt2binc][HTbinc]*nSEventsMT2HT[mt2binc][HTbinc]+0.3*0.3*nBGEventsMT2HT[mt2binc][HTbinc]*nBGEventsMT2HT[mt2binc][HTbinc]+1.5);
       if (nBGEventsMT2HT[mt2binc][HTbinc]>0)
       {
-	//const double sb=nSEvents[mt2binc][HTbinc]/nBGEvents[mt2binc][HTbinc];
-	//const double qstat=2.0*(std::sqrt(nSEvents[mt2binc][HTbinc]+nBGEvents[mt2binc][HTbinc])-std::sqrt(nBGEvents[mt2binc][HTbinc]));
-	myFSLHistgram.h2_SOverBMT2HT->SetBinContent(mt2binc+1,HTbinc+1,sb);
-	//myFSLHistgram.h2_Q->SetBinContent(mt2binc+1,HTbinc+1,qstat);
+        //const double sb=nSEvents[mt2binc][HTbinc]/nBGEvents[mt2binc][HTbinc];
+        //const double qstat=2.0*(std::sqrt(nSEvents[mt2binc][HTbinc]+nBGEvents[mt2binc][HTbinc])-std::sqrt(nBGEvents[mt2binc][HTbinc]));
+        myFSLHistgram.h2_SOverBMT2HT->SetBinContent(mt2binc+1,HTbinc+1,sb);
+        //myFSLHistgram.h2_Q->SetBinContent(mt2binc+1,HTbinc+1,qstat);
       }
       else
       {
-	//myFSLHistgram.h2_SOverB->SetBinContent(mt2binc+1,HTbinc+1,0.0);
-	myFSLHistgram.h2_SOverBMT2HT->SetBinContent(mt2binc+1,HTbinc+1,sb);
-	//myFSLHistgram.h2_Q->SetBinContent(mt2binc+1,HTbinc+1,0.0);
+        //myFSLHistgram.h2_SOverB->SetBinContent(mt2binc+1,HTbinc+1,0.0);
+        myFSLHistgram.h2_SOverBMT2HT->SetBinContent(mt2binc+1,HTbinc+1,sb);
+        //myFSLHistgram.h2_Q->SetBinContent(mt2binc+1,HTbinc+1,0.0);
       }
     }
-
   }
 
   for (int HTbinc=0;HTbinc<nHTbin;++HTbinc)
@@ -559,20 +535,20 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       const double sb3=nSEvents3METHT[metbinc][HTbinc]/std::sqrt(nSEvents3METHT[metbinc][HTbinc]+nBGEventsMETHT[metbinc][HTbinc]+0.1*0.1*nSEvents3METHT[metbinc][HTbinc]*nSEvents3METHT[metbinc][HTbinc]+0.3*0.3*nBGEventsMETHT[metbinc][HTbinc]*nBGEventsMETHT[metbinc][HTbinc]+1.5);
       if (nBGEventsMETHT[metbinc][HTbinc]>0)
       {
-	//const double sb=nSEventsMETHT[metbinc][HTbinc]/nBGEventsMETHT[metbinc][HTbinc];
-	const double qstat=2.0*(std::sqrt(nSEventsMETHT[metbinc][HTbinc]+nBGEventsMETHT[metbinc][HTbinc])-std::sqrt(nBGEventsMETHT[metbinc][HTbinc]));
-	myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,sb);
-	myFSLHistgram.h2_SOverBMETHT2->SetBinContent(metbinc+1,HTbinc+1,sb2);
-	myFSLHistgram.h2_SOverBMETHT3->SetBinContent(metbinc+1,HTbinc+1,sb3);
-	myFSLHistgram.h2_QMETHT->SetBinContent(metbinc+1,HTbinc+1,qstat);
+        //const double sb=nSEventsMETHT[metbinc][HTbinc]/nBGEventsMETHT[metbinc][HTbinc];
+        const double qstat=2.0*(std::sqrt(nSEventsMETHT[metbinc][HTbinc]+nBGEventsMETHT[metbinc][HTbinc])-std::sqrt(nBGEventsMETHT[metbinc][HTbinc]));
+        myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,sb);
+        myFSLHistgram.h2_SOverBMETHT2->SetBinContent(metbinc+1,HTbinc+1,sb2);
+        myFSLHistgram.h2_SOverBMETHT3->SetBinContent(metbinc+1,HTbinc+1,sb3);
+        myFSLHistgram.h2_QMETHT->SetBinContent(metbinc+1,HTbinc+1,qstat);
       }
       else
       {
-	//myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,0.0);
-	myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,sb);
-	myFSLHistgram.h2_SOverBMETHT2->SetBinContent(metbinc+1,HTbinc+1,sb2);
-	myFSLHistgram.h2_SOverBMETHT3->SetBinContent(metbinc+1,HTbinc+1,sb3);
-	myFSLHistgram.h2_QMETHT->SetBinContent(metbinc+1,HTbinc+1,0.0);
+        //myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,0.0);
+        myFSLHistgram.h2_SOverBMETHT->SetBinContent(metbinc+1,HTbinc+1,sb);
+        myFSLHistgram.h2_SOverBMETHT2->SetBinContent(metbinc+1,HTbinc+1,sb2);
+        myFSLHistgram.h2_SOverBMETHT3->SetBinContent(metbinc+1,HTbinc+1,sb3);
+        myFSLHistgram.h2_QMETHT->SetBinContent(metbinc+1,HTbinc+1,0.0);
       }
     }
   }
@@ -588,25 +564,23 @@ void LoopDSB( SSSampleWeight& mySSSampleWeight , SSSampleWeight& mySSSampleWeigh
       const double sb=nSEventsMETHTtop[metbinc][HTbinc]/std::sqrt(nSEventsMETHTtop[metbinc][HTbinc]+nBGEventsMETHTtop[metbinc][HTbinc]+0.1*nSEventsMETHTtop[metbinc][HTbinc]*0.1*nSEventsMETHTtop[metbinc][HTbinc]+0.3*0.3*nBGEventsMETHTtop[metbinc][HTbinc]*nBGEventsMETHTtop[metbinc][HTbinc]+1.5);
       if (nBGEventsMETHTtop[metbinc][HTbinc]>0)
       {
-	//S/B
-	//const double sb=nSEventsMETHTtop[metbinc][HTbinc]/nBGEventsMETHTtop[metbinc][HTbinc];
-	const double qstat=2.0*(std::sqrt(nSEventsMETHTtop[metbinc][HTbinc]+nBGEventsMETHTtop[metbinc][HTbinc])-std::sqrt(nBGEventsMETHTtop[metbinc][HTbinc]));
-	myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,sb);
-	myFSLHistgram.h2_QMETHTtop->SetBinContent(metbinc+1,HTbinc+1,qstat);
+        //S/B
+        //const double sb=nSEventsMETHTtop[metbinc][HTbinc]/nBGEventsMETHTtop[metbinc][HTbinc];
+        const double qstat=2.0*(std::sqrt(nSEventsMETHTtop[metbinc][HTbinc]+nBGEventsMETHTtop[metbinc][HTbinc])-std::sqrt(nBGEventsMETHTtop[metbinc][HTbinc]));
+        myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,sb);
+        myFSLHistgram.h2_QMETHTtop->SetBinContent(metbinc+1,HTbinc+1,qstat);
       }
       else
       {
-	myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,sb);
-	//myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,0.0);
-	myFSLHistgram.h2_QMETHTtop->SetBinContent(metbinc+1,HTbinc+1,0.0);
+        myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,sb);
+        //myFSLHistgram.h2_SOverBMETHTtop->SetBinContent(metbinc+1,HTbinc+1,0.0);
+        myFSLHistgram.h2_QMETHTtop->SetBinContent(metbinc+1,HTbinc+1,0.0);
       }
     }
   }
 
-
   (myFSLHistgram.oFile)->Write();
   (myFSLHistgram.oFile)->Close();
-
   return ;
 }
 
@@ -703,9 +677,9 @@ void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
       }
       if( ((*iter_SSSampleInfos).Tag).find("ZJetsToNuNu_HT") != std::string::npos )
       {
-        double RNorm = 0.783;  
+        double RNorm = 1;  
         int nJets30 = tr.getVar<int>("nJets30"); double njetRWF = 1;
-        nJets30<8 ? njetRWF = NJetRweightingFactor[nJets30-1] : njetRWF = NJetRweightingFactor[7];    
+        //nJets30<8 ? njetRWF = NJetRweightingFactor[nJets30-1] : njetRWF = NJetRweightingFactor[7];    
         mySSDataCard.DC_sb_MC_Zinv[searchbin_id] += thisweight*njetRWF*RNorm; 
         //effective number of event from Joe, we just have 2 type of weight, ZJetsToNuNu_HT-400To600 and ZJetsToNuNu_HT-600ToInf
         mySSDataCard.DC_sb_MC_Zinv_cs_up[searchbin_id]+=thisweight*njetRWF*RNorm; mySSDataCard.DC_sb_MC_Zinv_cs_dn[searchbin_id]+=thisweight*njetRWF*RNorm*thisweight*njetRWF*RNorm;
@@ -714,7 +688,7 @@ void LoopSSAllMC( SSSampleWeight& mySSSampleWeight )
       { 
         mySSDataCard.DC_sb_MC_QCD[searchbin_id] += thisweight; 
       }
-      //TTZ, becareful to the negative prediction
+      //TTZ and Rare, becareful to the negative prediction
       if( ((*iter_SSSampleInfos).Tag).find("TTZTo") != std::string::npos )
       { 
         bool isNegativeWeight = false; isNegativeWeight = tr.getVar<bool>("isNegativeWeight");
@@ -934,7 +908,7 @@ int main(int argc, char* argv[])
     LoopSSCS( mySSSampleWeightCS );
     return 0;
   }
-  else if( RunMode == "DSB" )
+  else if( RunMode == "DSB" )//FIXME
   {
     double TTbar_SingleLept_BR = 0.43930872; // 2*W_Lept_BR*(1-W_Lept_BR)
     double TTbar_DiLept_BR = 0.10614564; // W_Lept_BR^2
@@ -998,12 +972,12 @@ int main(int argc, char* argv[])
 
     //sample needed in the basic check loop
     SSSampleWeight mySSSampleWeightAllMC;
+
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "_TTJets_SingleLeptFromT_"   , 831.76*0.5*TTbar_SingleLept_BR, 53057043, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "_TTJets_SingleLeptFromTbar_", 831.76*0.5*TTbar_SingleLept_BR, 60494823, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTJets_DiLept"              , 831.76*TTbar_DiLept_BR        , 30682233, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "ST_tW_top"               ,   35.6,    998400    , LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "ST_tW_antitop"           ,   35.6,    985000    , LUMI, 1, inputFileList_MC_BG.c_str() );
- 
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-200To400"   ,   359.7,      19591498, LUMI, 1.21, inputFileList_MC_BG.c_str() );   
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-400To600"   ,   48.91,       7432746, LUMI, 1.21, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "_WJetsToLNu_HT-600To800"   ,   12.05,      18088165, LUMI, 1.21, inputFileList_MC_BG.c_str() );
@@ -1018,12 +992,6 @@ int main(int argc, char* argv[])
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-1200To2500", 0.0974*3,        513471, LUMI, 1.23, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "_ZJetsToNuNu_HT-2500ToInf" ,0.00230*3,        405752, LUMI, 1.23, inputFileList_MC_BG.c_str() );
 
-    //Be careful! TTZ has negative weight issue!!
-    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTZToLLNuNu"             , 0.2529, 1744167 - 635909, LUMI, 1, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTZToQQ"                 , 0.5297,  550282 - 199118, LUMI, 1, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTWJetsToLNu"            , 0.2043,   191474 - 61199, LUMI, 1, inputFileList_MC_BG.c_str() );
-    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTWJetsToQQ"             , 0.4062,  631804 - 201494, LUMI, 1, inputFileList_MC_BG.c_str() );
-
     //mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT300to500"  , 366800  , 54706298, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT500to700"  , 29370   , 19199088, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT700to1000" , 6524    , 29294258, LUMI, 1, inputFileList_MC_BG.c_str() );
@@ -1031,10 +999,11 @@ int main(int argc, char* argv[])
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT1500to2000", 121.5   ,  7803965, LUMI, 1, inputFileList_MC_BG.c_str() );
     mySSSampleWeightAllMC.SSSampleInfo_push_back( "QCD_HT2000toInf" , 25.42   ,  6007777, LUMI, 1, inputFileList_MC_BG.c_str() );
 
-    //mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T1tttt_mGluino-1200_mLSP-800",  0.0856418,  147194, LUMI, 1, inputFileList_MC_SG.c_str() );
-    //mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T1tttt_mGluino-1500_mLSP-100",  0.0141903,  103140, LUMI, 1, inputFileList_MC_SG.c_str() );
-    //mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T2tt_mStop-500_mLSP-325"     ,  0.51848  ,  388207, LUMI, 1, inputFileList_MC_SG.c_str() );
-    //mySSSampleWeightAllMC.SSSampleInfo_push_back( "SMS-T2tt_mStop-850_mLSP-100"     ,  0.0189612,  240685, LUMI, 1, inputFileList_MC_SG.c_str() );
+    //Be careful! TTZ/Rare has negative weight issue!!
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTZToLLNuNu"             , 0.2529, 1744167 - 635909, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTZToQQ"                 , 0.5297,  550282 - 199118, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTWJetsToLNu"            , 0.2043,   191474 - 61199, LUMI, 1, inputFileList_MC_BG.c_str() );
+    mySSSampleWeightAllMC.SSSampleInfo_push_back( "TTWJetsToQQ"             , 0.4062,  631804 - 201494, LUMI, 1, inputFileList_MC_BG.c_str() );
 
     LoopSSAllMC( mySSSampleWeightAllMC );
     return 0;
@@ -1048,6 +1017,5 @@ int main(int argc, char* argv[])
     std::cout << "Invalide RunMode!!" << std::endl;
     return 0;
   }
-
   return 0;
 }
