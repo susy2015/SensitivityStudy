@@ -5,6 +5,7 @@ split -l 20 SMS-T2tt_mStop-250to350_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt S
 split -l 20 SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.
 split -l 20 SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.
 split -l 20 SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.
+split -l 20 SMS-T5ttcc_mGluino1750to2300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt SMS-T5ttcc_mGluino1750to2300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.
 split -l 20 SMS-T5tttt_dM175_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt SMS-T5tttt_dM175_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.
 
 rm SMS-T1ttbb_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt               
@@ -14,4 +15,5 @@ rm SMS-T2tt_mStop-250to350_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt
 rm SMS-T2tt_mStop-350to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt
 rm SMS-T2tt_mStop-400to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt
 rm SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt
+rm SMS-T5ttcc_mGluino1750to2300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt
 rm SMS-T5tttt_dM175_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt
