@@ -1,8 +1,8 @@
 import glob, os, sys
 
 d_hadd_source = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15"
-d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v12v13_p5"
-#d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/SignalScan_v12v13"
+#d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/Sensitivity_MC_v12v13_p5"
+d_final_target = "/store/group/lpcsusyhad/hua/Skimmed_2015Nov15/SignalScan_v12v13"
 
 MGM = "root://cmseos.fnal.gov/"
 
@@ -15,6 +15,7 @@ sample_tag_list_SSTrimAndSlim = [
 "SSTrimAndSlimmed_Summer16_80X_Jan_2017_Ntp_v12p0_SMS-T2tt_FastSim_scan_350to400_stopFlatNtuples_",
 "SSTrimAndSlimmed_Summer16_80X_Jan_2017_Ntp_v12p0_SMS-T2tt_FastSim_scan_400to1200_stopFlatNtuples_",
 "SSTrimAndSlimmed_Summer16_80X_Mar_2017_Ntp_v13p0_SMS-T5ttcc_FastSim_scan_stopFlatNtuples_",
+"SSTrimAndSlimmed_Summer16_80X_Mar_2017_Ntp_v13p0_SMS-T5ttcc_FastSim_scan_1750to2300_stopFlatNtuples_",
 "SSTrimAndSlimmed_Summer16_80X_Mar_2017_Ntp_v13p0_SMS-T5tttt_dM175_FastSim_scan_stopFlatNtuples_",
 #LLHadTau
 "SSTrimAndSlimmed_Summer16_80X_Jan_2017_Ntp_v12p0_TTJets_SingleLeptFromT_stopFlatNtuples_",
@@ -111,6 +112,7 @@ sample_tag_list_SSSignalScan = [
 "SSSignalScan_Summer16_80X_Jan_2017_Ntp_v12p0_SMS-T2tt_FastSim_scan_350to400_stopFlatNtuples_",
 "SSSignalScan_Summer16_80X_Jan_2017_Ntp_v12p0_SMS-T2tt_FastSim_scan_400to1200_stopFlatNtuples_",
 "SSSignalScan_Summer16_80X_Mar_2017_Ntp_v13p0_SMS-T5ttcc_FastSim_scan_stopFlatNtuples_",
+"SSSignalScan_Summer16_80X_Mar_2017_Ntp_v13p0_SMS-T5ttcc_FastSim_scan_1750to2300_stopFlatNtuples_",
 "SSSignalScan_Summer16_80X_Mar_2017_Ntp_v13p0_SMS-T5tttt_dM175_FastSim_scan_stopFlatNtuples_",
 #"SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T1tttt_FastSim_scan_stopFlatNtuples_",
 #"SSSignalScan_Spring16_80X_Nov_2016_Ntp_v11p0_new_IDs_SMS-T2tt_FastSim_scan_150to250_stopFlatNtuples_",

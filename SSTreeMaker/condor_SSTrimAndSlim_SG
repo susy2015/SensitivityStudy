@@ -708,3 +708,15 @@ Queue
 arguments = $ENV(CMSSW_VERSION) $ENV(SCRAM_ARCH) Signal SensitivityTxt/SMS-T5ttcc_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ar
 Queue
 
+arguments = $ENV(CMSSW_VERSION) $ENV(SCRAM_ARCH) Signal SensitivityTxt/SMS-T5ttcc_mGluino1750to2300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.aa
+Queue
+
+arguments = $ENV(CMSSW_VERSION) $ENV(SCRAM_ARCH) Signal SensitivityTxt/SMS-T5ttcc_mGluino1750to2300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ab
+Queue
+
+arguments = $ENV(CMSSW_VERSION) $ENV(SCRAM_ARCH) Signal SensitivityTxt/SMS-T5ttcc_mGluino1750to2300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ac
+Queue
+
+arguments = $ENV(CMSSW_VERSION) $ENV(SCRAM_ARCH) Signal SensitivityTxt/SMS-T5ttcc_mGluino1750to2300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8Split.ad
+Queue
+
